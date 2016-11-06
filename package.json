@@ -8,9 +8,17 @@
   },
   "author": "Saksham Saxena",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sakshamsaxena/uzay.git"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongodb": "^2.2.11"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
   }
 }
