@@ -17,9 +17,9 @@ app.get('/', function(req, res) {
 app.use('/blog', blog);
 app.use('/comment', comment);
 
-/* Render all other routes as Forbidden Error */
+/* Render all other routes as HTTP 404 Not Found Error */
 app.use(function(req, res) {
-	res.status(403).send({});
+	res.status(404).send({});
 })
 
 /* Listen */

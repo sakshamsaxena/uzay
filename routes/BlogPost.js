@@ -3,7 +3,7 @@
 	Created by Saksham Saxena (saksham_saxena@outlook.com) on 6th November 2016
 	If you're seeing a more updated version, then this must probably be live on the internet!
 	* Look Ma! More than 1 viewers! *
-*/ 
+*/
 
 var express = require('express');
 var BlogPost = express.Router();
@@ -24,8 +24,23 @@ BlogPost.get('/', function(req, res) {
 /**
 	Public route to fetch blog posts of a particular page.
 */
-BlogPost.get('/:page', function(req, res) {
-	res.send('You are on Page ' + req.params.page);
+BlogPost.get('/pages/:page', function(req, res) {
+
+	var page = req.params.page;
+
+	// Checks the input against regex for 1-9999
+	var pattern = /^([1-9][0-9]{0,3})$/g;
+
+	if (pattern.test(page)) {
+		// Query the database
+		res.send({
+			data: page
+		})
+	} else {
+		// Send a HTTP 404 Not Found Error
+		res.status(404).send("page error");
+	}
+
 });
 
 /**
@@ -33,8 +48,27 @@ BlogPost.get('/:page', function(req, res) {
 	Uses pagination. 
 	Can additionally mention page to fetch from specific page.
 */
-BlogPost.get('/:tag/:page', function(req, res) {
-	res.send('You are browsing "' + req.params.tag + '" tagged posts on Page ' + req.params.page)
+BlogPost.get('/tags/:tag/:page', function(req, res) {
+
+	var tag = req.params.tag;
+	var page = req.params.page;
+
+	// Checks the input against regex for 1-9999
+	var patternPage = /^([1-9][0-9]{0,3})$/g;
+	// Checks the input against regex for words(or phrases separated by '-')
+	var patternTag = /^[a-z]+$|^[a-z]+[-][a-z]+$/g;
+
+	if (patternPage.test(page) && patternTag.test(tag)) {
+		// Query the database
+		res.send({
+			"page": page,
+			"tag": tag
+		})
+	} else {
+		// Send a HTTP 404 Not Found Error
+		res.status(404).send("tag error");
+	}
+
 });
 
 /**
