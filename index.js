@@ -17,6 +17,11 @@ app.get('/', function(req, res) {
 app.use('/blog', blog);
 app.use('/comment', comment);
 
+/* Render all other routes as Forbidden Error */
+app.use(function(req, res) {
+	res.status(403).send({});
+})
+
 /* Listen */
 app.listen(3000, function() {
 	console.log('Example app listening on port 3000!')
