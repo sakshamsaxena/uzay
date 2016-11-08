@@ -17,7 +17,9 @@ function AuthenticateVisitor(req, res, next) {
 
 /**
 	Public route to fetch all comments of a certain blog post.
-	Does not use pagination (considered light).
+
+	GET /:postID
+
 */
 CommentPost.get('/:postID/', function(req, res) {
 	res.send('You are on viewing comments of Post ' + req.params.postID);
@@ -25,6 +27,8 @@ CommentPost.get('/:postID/', function(req, res) {
 
 /**
 	Private route to post a comment to a certain blog post.
+
+	POST /:postID
 */
 CommentPost.post('/:postID/', AuthenticateVisitor, function(req, res) {
 	res.send('Comment published successfullt on post ' + req.params.postID);
