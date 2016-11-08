@@ -24,6 +24,30 @@ BlogPost.get('/', function(req, res) {
 });
 
 /**
+	Public route to fetch particular blog post.
+
+	GET  /posts/:postName
+
+*/
+BlogPost.get('/posts/:postName', function(req, res) {
+	
+	var name = req.params.postName;
+	name = name.split("-");
+	name = name.join("");
+	var pattern = /^[a-z]+$/g;
+
+	// Checks the input
+	if(pattern.test(name)) {
+		// Query the database
+		res.send(req.params.postName + " is viewed here.")
+	}
+	else {
+		// Send a HTTP 404 Not Found Error
+		res.status(404).send("ERROR : Bad Post Name.");
+	}
+});
+
+/**
 	Public route to fetch blog posts. Uses pagination.
 
 	GET  /pages/:page
