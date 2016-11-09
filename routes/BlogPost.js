@@ -103,6 +103,26 @@ BlogPost.get('/tags/:tag/:page', function(req, res) {
 });
 
 /**
+	Private route to upvote a blog post. 
+
+	PUT /upvote/:postName
+
+*/
+BlogPost.put('/upvote/:postName', AuthenticateBlogger, function(req, res) {
+	res.send('Upvoted !');
+});
+
+/**
+	Private route to upvote a blog post. 
+
+	PUT /downvote/:postName
+
+*/
+BlogPost.put('/downvote/:postName', AuthenticateBlogger, function(req, res) {
+	res.send('Downvoted !');
+});
+
+/**
 	Private route to publish blog post. 
 
 	POST /new

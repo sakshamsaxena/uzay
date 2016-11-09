@@ -21,16 +21,47 @@ function AuthenticateVisitor(req, res, next) {
 	GET /:postID
 
 */
-CommentPost.get('/:postID/', function(req, res) {
+CommentPost.get('/:postID', function(req, res) {
 	res.send('You are on viewing comments of Post ' + req.params.postID);
+});
+
+/**
+	Private route to upvote a blog post. 
+
+	PUT /upvote/:commentID
+
+*/
+CommentPost.put('/upvote/:commentID', AuthenticateBlogger, function(req, res) {
+	res.send('Comment Upvoted !');
+});
+
+/**
+	Private route to upvote a blog post. 
+
+	PUT /downvote/:commentID
+
+*/
+CommentPost.put('/downvote/:commentID', AuthenticateBlogger, function(req, res) {
+	res.send('Comment Downvoted !');
 });
 
 /**
 	Private route to post a comment to a certain blog post.
 
-	POST /:postID
+	POST /new
 */
-CommentPost.post('/:postID/', AuthenticateVisitor, function(req, res) {
+CommentPost.post('/new', AuthenticateVisitor, function(req, res) {
+	// Need postID
+	res.send('Comment published successfullt on post ' + req.params.postID);
+});
+
+/**
+	Private route to post a reply to a comment on a certain blog post.
+
+	POST /reply
+*/
+CommentPost.post('/reply', AuthenticateVisitor, function(req, res) {
+	// Need postID and CommentID (of existing parent)
 	res.send('Comment published successfullt on post ' + req.params.postID);
 });
 
