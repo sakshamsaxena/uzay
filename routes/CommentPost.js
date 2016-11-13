@@ -10,7 +10,7 @@ var CommentPost = express.Router();
 
 /* Route specific Middlewares */
 function AuthenticateVisitor(req, res, next) {
-	next();
+	
 }
 
 /* Routes goes here*/
@@ -31,7 +31,7 @@ CommentPost.get('/:postID', function(req, res) {
 	PUT /upvote/:commentID
 
 */
-CommentPost.put('/upvote/:commentID', AuthenticateBlogger, function(req, res) {
+CommentPost.put('/upvote/:commentID', AuthenticateVisitor, function(req, res) {
 	res.send('Comment Upvoted !');
 });
 
@@ -41,7 +41,7 @@ CommentPost.put('/upvote/:commentID', AuthenticateBlogger, function(req, res) {
 	PUT /downvote/:commentID
 
 */
-CommentPost.put('/downvote/:commentID', AuthenticateBlogger, function(req, res) {
+CommentPost.put('/downvote/:commentID', AuthenticateVisitor, function(req, res) {
 	res.send('Comment Downvoted !');
 });
 

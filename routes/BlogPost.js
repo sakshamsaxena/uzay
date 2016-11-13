@@ -5,12 +5,43 @@
 	* Look Ma! More than 1 viewers! *
 */
 
+var fs = require('fs');
+var path = require('path');
 var express = require('express');
 var BlogPost = express.Router();
 
 /* Route specific Middlewares */
 function AuthenticateBlogger(req, res, next) {
-	next();
+	// Require the voodoo
+	var md5 = require('blueimp-md5');
+	var base64 = require('base-64');
+
+	// Hash and encode the passphrase
+	var key = md5(req.headers.key);
+	var receivedKey = base64.encode(key);
+
+	var actualKey = null;
+
+	new Promise(function(resolve, reject) {
+		// Get the passphrase
+		fs.readFile(path.resolve(__dirname, '..', 'config/config.json'), 'utf-8', function(err, data) {
+			if (err)
+				reject(err);
+			else {
+				actualKey = JSON.parse(data).key;
+				resolve(actualKey);
+			}
+		})
+	}).then(function(actualKey) {
+		// TODO : Create a function to handle database
+		if (receivedKey === actualKey)
+			console.log("Legit.");
+		else
+			console.error("Duck you !");
+		next();
+	}).catch(function(err) {
+		console.error(err)
+	});
 }
 
 /**
@@ -30,18 +61,17 @@ BlogPost.get('/', function(req, res) {
 
 */
 BlogPost.get('/posts/:postName', function(req, res) {
-	
+
 	var name = req.params.postName;
 	name = name.split("-");
 	name = name.join("");
 	var pattern = /^[a-z]+$/g;
 
 	// Checks the input
-	if(pattern.test(name)) {
+	if (pattern.test(name)) {
 		// Query the database
 		res.send(req.params.postName + " is viewed here.")
-	}
-	else {
+	} else {
 		// Send a HTTP 404 Not Found Error
 		res.status(404).send("ERROR : Bad Post Name.");
 	}
@@ -90,8 +120,7 @@ BlogPost.get('/tags/:tag/:page', function(req, res) {
 		if (patternPage.test(page)) {
 			// Query the database
 			res.send("You are viewing the blog posts tagged under '" + tag + "' on it's " + page + " page.");
-		}
-		else {
+		} else {
 			// Send a HTTP 404 Not Found Error
 			res.status(404).send("ERROR: Bad Page Number.");
 		}
@@ -103,22 +132,22 @@ BlogPost.get('/tags/:tag/:page', function(req, res) {
 });
 
 /**
-	Private route to upvote a blog post. 
+	Public route to upvote a blog post. 
 
 	PUT /upvote/:postName
 
 */
-BlogPost.put('/upvote/:postName', AuthenticateBlogger, function(req, res) {
+BlogPost.put('/upvote/:postName', function(req, res) {
 	res.send('Upvoted !');
 });
 
 /**
-	Private route to upvote a blog post. 
+	Public route to upvote a blog post. 
 
 	PUT /downvote/:postName
 
 */
-BlogPost.put('/downvote/:postName', AuthenticateBlogger, function(req, res) {
+BlogPost.put('/downvote/:postName', function(req, res) {
 	res.send('Downvoted !');
 });
 
@@ -129,7 +158,7 @@ BlogPost.put('/downvote/:postName', AuthenticateBlogger, function(req, res) {
 
 */
 BlogPost.post('/new', AuthenticateBlogger, function(req, res) {
-	res.send('Published yay!');
+	res.send();
 });
 
 module.exports = BlogPost;
