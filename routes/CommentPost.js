@@ -10,7 +10,17 @@ var CommentPost = express.Router();
 
 /* Route specific Middlewares */
 function AuthenticateVisitor(req, res, next) {
-	
+
+	// Get the basic stuff.
+	var alias = req.body.alias;
+	var ipAddress = req.ip;
+	var email = (req.body.email === undefined) ? false : req.body.email;
+
+	// Run alias through DB
+	// (in the callback)
+			// (alias exists) Check the IP of that alias. On false match, Respond with a request for email.
+			// (alias absent) Respond with a request for email.
+	next();
 }
 
 /* Routes goes here*/
@@ -26,22 +36,22 @@ CommentPost.get('/:postID', function(req, res) {
 });
 
 /**
-	Private route to upvote a blog post. 
+	Public route to upvote a comment. 
 
 	PUT /upvote/:commentID
 
 */
-CommentPost.put('/upvote/:commentID', AuthenticateVisitor, function(req, res) {
+CommentPost.put('/upvote/:commentID', function(req, res) {
 	res.send('Comment Upvoted !');
 });
 
 /**
-	Private route to upvote a blog post. 
+	Public route to upvote a comment.
 
 	PUT /downvote/:commentID
 
 */
-CommentPost.put('/downvote/:commentID', AuthenticateVisitor, function(req, res) {
+CommentPost.put('/downvote/:commentID', function(req, res) {
 	res.send('Comment Downvoted !');
 });
 
@@ -62,7 +72,7 @@ CommentPost.post('/new', AuthenticateVisitor, function(req, res) {
 */
 CommentPost.post('/reply', AuthenticateVisitor, function(req, res) {
 	// Need postID and CommentID (of existing parent)
-	res.send('Comment published successfullt on post ' + req.params.postID);
+	res.send('Comment published successfullt on post ' + req.body.postID);
 });
 
 module.exports = CommentPost;
