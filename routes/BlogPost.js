@@ -20,28 +20,14 @@ function AuthenticateBlogger(req, res, next) {
 	var key = md5(req.headers.key);
 	var receivedKey = base64.encode(key);
 
-	var actualKey = null;
+	var actualKey = require('../config/config.js').BloggerKey;
 
-	new Promise(function(resolve, reject) {
-		// Get the passphrase
-		fs.readFile(path.resolve(__dirname, '..', 'config/config.json'), 'utf-8', function(err, data) {
-			if (err)
-				reject(err);
-			else {
-				actualKey = JSON.parse(data).key;
-				resolve(actualKey);
-			}
-		})
-	}).then(function(actualKey) {
-		// TODO : Create a function to handle database
-		if (receivedKey === actualKey)
-			console.log("Legit.");
-		else
-			console.error("Duck you !");
-		next();
-	}).catch(function(err) {
-		console.error(err)
-	});
+	// TODO : Create a function to handle database
+	if (receivedKey === actualKey)
+		console.log("Legit.");
+	else
+		console.error("Duck you !");
+	next();
 }
 
 /**
