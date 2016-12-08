@@ -1,17 +1,23 @@
 /* Required modules */
-var app = require('express')();
+var path = require('path');
+var express = require('express');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var blog = require('./routes/BlogPost.js');
 var comment = require('./routes/CommentPost.js');
 
+var app = express();
+
 /* Basic Middlewares */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 /* Routes */
 app.get('/', function(req, res) {
-	res.send('Hello World')
+	res.render('Admin');
 });
 
 app.use('/blog', blog);
