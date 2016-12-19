@@ -1,8 +1,45 @@
 /* Form Styles goes here*/
 body {
-	font-family: 'Raleway'
+	font-family: 'Raleway';
+	background-image: url("./Background.jpg");
+	background-position: 62% 30%;
 }
 
-h2 {
-	font-family: 'Lobster', cursive;
+h1 {
+	font-size: 4em;
+	color: white;
+}
+
+.meat {
+	margin-top: 2em;
+	padding: 2rem;
+	background: rgba(219,231,255,0.2) !important;
+}
+
+input[type="text"] {
+	font-size: 1em;
+	margin-bottom: 6rem
+}
+
+.input-field label {
+	font-size: 1.2em;
+	font-weight: 300;
+	color: white;
+}
+
+.input-field label.active {
+	font-size: 1.2em;
+}
+
+.input-field {
+	margin-bottom: 2rem
+}
+
+.input-field .materialize-textarea {
+	font-size: 1.5rem
+}
+
+button[type="submit"] {
+	display: block;
+	margin: 0.1em auto;
 }
