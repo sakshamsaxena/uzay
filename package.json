@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -w",
-    "postinstall": "node ./config/postinstall.js"
+    "postinstall": "node ./config/postinstall.js && node index.js"
   },
   "author": "Saksham Saxena",
   "license": "MIT",
