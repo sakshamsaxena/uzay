@@ -23,10 +23,16 @@ function AuthenticateBlogger(req, res, next) {
 	var actualKey = require('../config/config.js').BloggerKey;
 
 	// TODO : Create a function to handle database
-	if (receivedKey === actualKey)
+	if (receivedKey === actualKey) {
 		console.log("Legit.");
-	else
+		console.log(req.body.title);
+		console.log(req.body.content);
+		res.status(200);
+	} else {
 		console.error("Duck you !");
+		res.status(404);
+	}
+
 	next();
 }
 

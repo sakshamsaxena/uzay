@@ -20,12 +20,12 @@ h1 {
 
 input[type="text"] {
     font-size: 1em;
-    margin-bottom: 6rem;
 }
 
 input[type="text"],
 textarea {
-    color: black !important
+    color: black !important;
+    margin-bottom: 3rem;
 }
 
 .input-field label {
@@ -35,7 +35,7 @@ textarea {
 }
 
 .input-field label.active {
-    font-size: 1.2em;
+    font-size: 0.8em;
     color: black !important;
 }
 
@@ -44,7 +44,7 @@ textarea {
 }
 
 .input-field .materialize-textarea {
-    font-size: 1.5rem
+    font-size: 1.5rem;
 }
 
 .input-field .materialize-textarea:focus,

@@ -10,7 +10,6 @@ html
 		link(href="CSS/Style.css", rel="stylesheet")
 		script(src="https://code.jquery.com/jquery-2.1.1.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
-		script(src="JS/Script.js")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 	body
 		block content
@@ -18,11 +17,16 @@ html
 			.main.container
 				.row
 					.col-md-6.col-md-offset-3.meat.card
-						form.card-content(method='POST' action='/')
+						form.card-content(method='POST', autocomplete='off')
+							div.input-field
+								input#key.form-control(type='text', name='key')
+								label(for="key") Key
 							div.input-field
 								input#title.form-control(type='text', name='title')
 								label(for="title") Title
 							div.input-field
 								textarea#content.materialize-textarea(name='content')
 								label(for="content") Post
-						button.btn.btn-primary(type='submit') Post
+							h2.center.hidden Didn't go well !
+						button#submit.btn.btn-primary(type='submit') Post
+		script(src="JS/Script.js")
