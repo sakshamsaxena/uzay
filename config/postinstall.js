@@ -29,11 +29,11 @@ function genKey(key) {
 
 function updateKey(key) {
 
-	var data = fs.readFileSync("config.sample.js", "ascii");
+	var data = fs.readFileSync("./config/config.sample.js", "ascii");
 	data = data.replace("key-to-post-to-blog", key);
 
-	fs.writeFile("config.js", data, "utf8", function(args) {
-		exec("rm config.sample.js", function(err, stdout, stderr) {
+	fs.writeFile("./config/config.js", data, "utf8", function(args) {
+		exec("rm ./config/config.sample.js", function(err, stdout, stderr) {
 			if (err)
 				throw new Error(stdout)
 			if (stderr)
