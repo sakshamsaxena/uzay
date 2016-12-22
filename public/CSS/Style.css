@@ -1,45 +1,59 @@
 /* Form Styles goes here*/
+
 body {
-	font-family: 'Raleway';
-	background-image: url("./Background.jpg");
-	background-position: 62% 30%;
+    font-family: 'Raleway';
+    background-image: url("./Background.jpg");
+    background-position: center 0%;
+    background-attachment: fixed
 }
 
 h1 {
-	font-size: 4em;
-	color: white;
+    font-size: 4em;
+    color: black;
 }
 
 .meat {
-	margin-top: 2em;
-	padding: 2rem;
-	background: rgba(219,231,255,0.2) !important;
+    margin-top: 2em;
+    padding: 2rem;
+    background: rgba(232, 232, 232, 0.5) !important;
 }
 
 input[type="text"] {
-	font-size: 1em;
-	margin-bottom: 6rem
+    font-size: 1em;
+    margin-bottom: 6rem;
+}
+
+input[type="text"],
+textarea {
+    color: black !important
 }
 
 .input-field label {
-	font-size: 1.2em;
-	font-weight: 300;
-	color: white;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: black
 }
 
 .input-field label.active {
-	font-size: 1.2em;
+    font-size: 1.2em;
+    color: black !important;
 }
 
 .input-field {
-	margin-bottom: 2rem
+    margin-bottom: 2rem;
 }
 
 .input-field .materialize-textarea {
-	font-size: 1.5rem
+    font-size: 1.5rem
+}
+
+.input-field .materialize-textarea:focus,
+.input-field input:focus {
+    border-bottom: 1px solid #337ab7 !important;
+    box-shadow: 0 1px 0 0 #337ab7 !important;
 }
 
 button[type="submit"] {
-	display: block;
-	margin: 0.1em auto;
+    display: block;
+    margin: 0.1em auto;
 }
