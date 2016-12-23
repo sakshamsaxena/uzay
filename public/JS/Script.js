@@ -12,7 +12,7 @@ $("#submit").click(function(event) {
 	tags = tags.split(";");
 	tags = tags.map(function (e) {
 		var ele = e.trim();
-		ele = ele.replace(" ", "-");
+		ele = ele.replace(/ /g, "-");
 		ele = ele.toLowerCase();
 		return ele;
 	});

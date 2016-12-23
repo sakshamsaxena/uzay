@@ -11,7 +11,7 @@ const rl = readline.createInterface({
 var newKey = null;
 var name = null;
 
-rl.question("Hi !\nWhat would you like to keep your Author name as ?\nAuthor :", function(args) {
+rl.question("Hi !\nWhat would you like to keep your Author name as ?\nAuthor : ", function(args) {
 	name = args;
 	rl.question("Set up a unqiue key to identify you as a blogger.\nKey : ", function(args) {
 		newKey = args;
@@ -40,7 +40,7 @@ function updateConfig() {
 	fs.writeFile("./config/config.js", data, "utf8", function(args) {
 		exec("rm ./config/config.sample.js", function(err, stdout, stderr) {
 			if (err)
-				throw new Error(stdout)
+				throw new Error(err)
 			if (stderr)
 				throw new Error(stderr)
 			console.log(stdout, "All done !");

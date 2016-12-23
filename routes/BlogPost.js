@@ -8,7 +8,9 @@
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
+var MongoClient = require('mongodb').MongoClient;
 var BlogPost = express.Router();
+const config = require('../config/config.js');
 
 /* Route specific Middlewares */
 function AuthenticateBlogger(req, res, next) {
@@ -20,13 +22,41 @@ function AuthenticateBlogger(req, res, next) {
 	var key = md5(req.headers.key);
 	var receivedKey = base64.encode(key);
 
-	var actualKey = require('../config/config.js').BloggerKey;
+	var actualKey = config.BloggerKey;
 
-	// TODO : Create a function to handle database
+	// The database part
+	var url = 'mongodb://localhost:27017/uzay';
+
+	function insertPost(db, cb) {
+		
+		var collection = db.collection('blog');
+
+		collection.insertOne({
+			title			: req.body.title,
+			author			: config.Author,
+			date			: (new Date()).getTime(),
+			tags			: req.body.tags,
+			content			: req.body.content,
+			commentCount	: 0,
+			upvotes			: 0,
+			downvotes		: 0
+		}, function (err, res) {
+			if (!err) console.log("Inserted !", res.ops);
+		})
+	}
+
 	if (receivedKey === actualKey) {
-		console.log("Legit.");
-		console.log(req.body);	
-		res.status(200);
+		
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+
+			console.log("Connected successfully to server");
+
+			insertPost(db, function() {
+				db.close();
+				res.status(200);
+			});
+		});
 	} else {
 		console.error("Duck you !");
 		res.status(404);
