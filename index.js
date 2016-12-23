@@ -16,10 +16,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 /* Routes */
+
 app.get('/', function(req, res) {
+	res.render('Home');
+});
+app.get('/admin', function(req, res) {
 	res.render('Admin');
 });
-
 app.use('/blog', blog);
 app.use('/comment', comment);
 

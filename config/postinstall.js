@@ -9,12 +9,16 @@ const rl = readline.createInterface({
 });
 
 var newKey = null;
+var name = null;
 
-rl.question("Set up a unqiue key to identify you as a blogger.\nKey : ", function(args) {
-	newKey = args;
-	var BloggerKey = genKey(newKey);
-	updateKey(BloggerKey);
-	rl.close();
+rl.question("Hi ! What would you like to keep your Author name as ?", function(args) {
+	name = args;
+	rl.question("Set up a unqiue key to identify you as a blogger.\nKey : ", function(args) {
+		newKey = args;
+		newKey = genKey(newKey);
+		updateConfig();
+		rl.close();
+	});
 });
 
 function genKey(key) {
@@ -27,10 +31,11 @@ function genKey(key) {
 	return key;
 }
 
-function updateKey(key) {
+function updateConfig() {
 
 	var data = fs.readFileSync("./config/config.sample.js", "ascii");
-	data = data.replace("key-to-post-to-blog", key);
+	data = data.replace("key-to-post-to-blog", newKey);
+	data = data.replace("blog-post-author", name);
 
 	fs.writeFile("./config/config.js", data, "utf8", function(args) {
 		exec("rm ./config/config.sample.js", function(err, stdout, stderr) {

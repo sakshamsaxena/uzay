@@ -5,8 +5,17 @@ $("#submit").click(function(event) {
 	// Get the values
 
 	var title = $("#title").val();
+	var tags = $("#tags").val();
 	var post = $("#content").val();
 	var authKey = $("#key").val();
+
+	tags = tags.split(";");
+	tags = tags.map(function (e) {
+		var ele = e.trim();
+		ele = ele.replace(" ", "-");
+		ele = ele.toLowerCase();
+		return ele;
+	});
 
 	// Make the request
 
@@ -21,7 +30,8 @@ $("#submit").click(function(event) {
 		},
 		data: {
 			title: title,
-			content: post
+			content: post,
+			tags : tags
 		},
 		statusCode: {
 			200: function() {

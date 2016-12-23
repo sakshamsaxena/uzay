@@ -13,23 +13,4 @@ html
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 	body
 		block content
-			h1.center Write away !
-			.main.container
-				.row
-					.col-md-6.col-md-offset-3.meat.card
-						form.card-content(method='POST', autocomplete='off')
-							div.input-field
-								input#key.form-control(type='text', name='key')
-								label(for="key") Key
-							div.input-field
-								input#title.form-control(type='text', name='title')
-								label(for="title") Title
-							div.input-field
-								input#tags.form-control(type='text', name='tags')
-								label(for="tags") Tags (semicolon separated)
-							div.input-field
-								textarea#content.materialize-textarea(name='content')
-								label(for="content") Post
-							h2.center.hidden Didn't go well !
-						button#submit.btn.btn-primary(type='submit') Post
-		script(src="JS/Script.js")
+			h1.center This is home !

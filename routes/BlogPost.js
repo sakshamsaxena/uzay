@@ -25,8 +25,7 @@ function AuthenticateBlogger(req, res, next) {
 	// TODO : Create a function to handle database
 	if (receivedKey === actualKey) {
 		console.log("Legit.");
-		console.log(req.body.title);
-		console.log(req.body.content);
+		console.log(req.body);	
 		res.status(200);
 	} else {
 		console.error("Duck you !");
