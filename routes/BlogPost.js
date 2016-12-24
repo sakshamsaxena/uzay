@@ -10,7 +10,9 @@ var path = require('path');
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var BlogPost = express.Router();
-const config = require('../config/config.js');
+var config = require('../config/config.js');
+
+var url = 'mongodb://localhost:27017/uzay';
 
 /* Route specific Middlewares */
 function AuthenticateBlogger(req, res, next) {
@@ -25,7 +27,6 @@ function AuthenticateBlogger(req, res, next) {
 	var actualKey = config.BloggerKey;
 
 	// The database part
-	var url = 'mongodb://localhost:27017/uzay';
 
 	function insertPost(db, cb) {
 
@@ -80,10 +81,11 @@ BlogPost.get('/', function(req, res) {
 
 		console.log("Connected successfully to server");
 
+		db.collection('blog').find({ $query: {}, $orderby: { postId: -1 } }).toArray(function(err, data) {
+			res.status(200).json(data);
+		})
 
 	});
-
-	res.send('You are viewing the blog.');
 });
 
 /**
