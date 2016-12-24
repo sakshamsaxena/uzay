@@ -43,7 +43,7 @@ function AuthenticateBlogger(req, res, next) {
 				upvotes: 0,
 				downvotes: 0
 			}, function(err, res) {
-				if (!err) console.log("Inserted !", res.ops);
+				if (!err) console.log("Inserted !\n", res.ops);
 			})
 		});
 	}
@@ -53,16 +53,16 @@ function AuthenticateBlogger(req, res, next) {
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
 
-			console.log("Connected successfully to server");
+			console.log("Connected successfully to server for blog entry");
 
 			insertPost(db, function() {
 				db.close();
-				res.status(200);
+				res.status(200).end();
 			});
 		});
 	} else {
 		console.error("Duck you !");
-		res.status(404);
+		res.status(404).end();
 	}
 
 	next();
@@ -79,9 +79,10 @@ BlogPost.get('/', function(req, res) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
 
-		console.log("Connected successfully to server");
+		console.log("Connected successfully to server to get all posts");
 
 		db.collection('blog').find({ $query: {}, $orderby: { postId: -1 } }).toArray(function(err, data) {
+			db.close();
 			res.status(200).json(data);
 		})
 
@@ -91,12 +92,12 @@ BlogPost.get('/', function(req, res) {
 /**
 	Public route to fetch particular blog post.
 
-	GET  /posts/:postName
+	GET  /posts/:postId
 
 */
-BlogPost.get('/posts/:postName', function(req, res) {
+BlogPost.get('/posts/:postId', function(req, res) {
 
-	var name = req.params.postName;
+	var name = req.params.postId;
 	name = name.split("-");
 	name = name.join("");
 	var pattern = /^[a-z]+$/g;
@@ -104,7 +105,7 @@ BlogPost.get('/posts/:postName', function(req, res) {
 	// Checks the input
 	if (pattern.test(name)) {
 		// Query the database
-		res.send(req.params.postName + " is viewed here.")
+		res.send(req.params.postId + " is viewed here.")
 	} else {
 		// Send a HTTP 404 Not Found Error
 		res.status(404).send("ERROR : Bad Post Name.");
@@ -168,21 +169,47 @@ BlogPost.get('/tags/:tag/:page', function(req, res) {
 /**
 	Public route to upvote a blog post. 
 
-	PUT /upvote/:postName
+	PUT /upvote/:postId
 
 */
-BlogPost.put('/upvote/:postName', function(req, res) {
-	res.send('Upvoted !');
+BlogPost.put('/upvote/:postId', function(req, res) {
+
+	var post = parseInt(req.params.postId);
+
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+
+		console.log("Connected successfully to server for Upvotes");
+
+		db.collection('blog').updateOne({ "postId": post }, { $inc: { "upvotes": 1 } }, function(err, data) {
+			db.close();
+			res.status(200).end();
+		})
+
+	});
 });
 
 /**
 	Public route to upvote a blog post. 
 
-	PUT /downvote/:postName
+	PUT /downvote/:postId
 
 */
-BlogPost.put('/downvote/:postName', function(req, res) {
-	res.send('Downvoted !');
+BlogPost.put('/downvote/:postId', function(req, res) {
+
+	var post = parseInt(req.params.postId);
+
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+
+		console.log("Connected successfully to server for Downvotes");
+
+		db.collection('blog').updateOne({ "postId": post }, { $inc: { "downvotes": 1 } }, function(err, data) {
+			db.close();
+			res.status(200).end();
+		})
+
+	});
 });
 
 /**
