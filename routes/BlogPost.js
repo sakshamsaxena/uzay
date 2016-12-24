@@ -28,25 +28,27 @@ function AuthenticateBlogger(req, res, next) {
 	var url = 'mongodb://localhost:27017/uzay';
 
 	function insertPost(db, cb) {
-		
-		var collection = db.collection('blog');
 
-		collection.insertOne({
-			title			: req.body.title,
-			author			: config.Author,
-			date			: (new Date()).getTime(),
-			tags			: req.body.tags,
-			content			: req.body.content,
-			commentCount	: 0,
-			upvotes			: 0,
-			downvotes		: 0
-		}, function (err, res) {
-			if (!err) console.log("Inserted !", res.ops);
-		})
+		var collection = db.collection('blog');
+		collection.count({}, function(err, count) {
+			collection.insertOne({
+				postId: count + 1,
+				title: req.body.title,
+				author: config.Author,
+				date: (new Date()).getTime(),
+				tags: req.body.tags,
+				content: req.body.content,
+				commentCount: 0,
+				upvotes: 0,
+				downvotes: 0
+			}, function(err, res) {
+				if (!err) console.log("Inserted !", res.ops);
+			})
+		});
 	}
 
 	if (receivedKey === actualKey) {
-		
+
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
 
@@ -72,6 +74,15 @@ function AuthenticateBlogger(req, res, next) {
 
 */
 BlogPost.get('/', function(req, res) {
+
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+
+		console.log("Connected successfully to server");
+
+
+	});
+
 	res.send('You are viewing the blog.');
 });
 
