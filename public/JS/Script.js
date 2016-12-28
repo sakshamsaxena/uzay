@@ -9,8 +9,9 @@ $("#submit").click(function(event) {
 	var post = $("#content").val();
 	var authKey = $("#key").val();
 
+	(tags.lastIndexOf(";") === tags.length - 1) ? tags = tags.substr(0, tags.length - 1) : tags = tags;
 	tags = tags.split(";");
-	tags = tags.map(function (e) {
+	tags = tags.map(function(e) {
 		var ele = e.trim();
 		ele = ele.replace(/ /g, "-");
 		ele = ele.toLowerCase();
@@ -31,7 +32,7 @@ $("#submit").click(function(event) {
 		data: {
 			title: title,
 			content: post,
-			tags : tags
+			tags: tags
 		},
 		statusCode: {
 			200: function() {
