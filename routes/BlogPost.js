@@ -43,7 +43,8 @@ function AuthenticateBlogger(req, res, next) {
 				upvotes: 0,
 				downvotes: 0
 			}, function(err, res) {
-				if (!err) console.log("Inserted !\n", res.ops);
+				if (err) throw err;
+				console.log("Inserted !\n", res.ops);
 			})
 		});
 	}
@@ -81,7 +82,7 @@ BlogPost.get('/', function(req, res) {
 
 		console.log("Connected successfully to server to get all posts");
 
-		db.collection('blog').find({ $query: {}, $orderby: { postId: -1 } }).limit(5)
+		db.collection('blog').find({}).sort({ postId: -1 }).limit(5)
 			.toArray(function(err, data) {
 				if (err) throw err;
 				db.close();
@@ -135,7 +136,7 @@ BlogPost.get('/pages/:page', function(req, res) {
 
 			console.log("Connected successfully to server to get " + page + " of post");
 
-			db.collection('blog').find({ $query: {}, $orderby: { postId: -1 } }).skip(cursor).limit(5)
+			db.collection('blog').find({}).sort({ postId: -1 }).skip(cursor).limit(5)
 				.toArray(function(err, data) {
 					if (err) throw err;
 					db.close();
@@ -198,6 +199,7 @@ BlogPost.put('/upvote/:postId', function(req, res) {
 		console.log("Connected successfully to server for Upvotes");
 
 		db.collection('blog').updateOne({ "postId": post }, { $inc: { "upvotes": 1 } }, function(err, data) {
+			if (err) throw err;
 			db.close();
 			res.status(200).end();
 		})
@@ -221,6 +223,7 @@ BlogPost.put('/downvote/:postId', function(req, res) {
 		console.log("Connected successfully to server for Downvotes");
 
 		db.collection('blog').updateOne({ "postId": post }, { $inc: { "downvotes": 1 } }, function(err, data) {
+			if (err) throw err;
 			db.close();
 			res.status(200).end();
 		})

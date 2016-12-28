@@ -1,6 +1,6 @@
 # Uzay
 
-Uzay is a neatly written API using Express to serve as the basic backend for my personal blog. 
+Uzay is a neatly written API using Express and Mongo (^3.2) to serve as the basic backend for my personal blog. 
 
 ### Features
 
