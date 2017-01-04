@@ -94,6 +94,29 @@ BlogPost.get('/', function(req, res) {
 });
 
 /**
+	Public route to fetch latest blog post. 
+
+	GET  /latest 
+
+*/
+BlogPost.get('/latest', function(req, res) {
+
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+
+		console.log("Connected successfully to server to get latest post");
+
+		db.collection('blog').find({}).sort({ postId: -1 }).limit(1)
+			.toArray(function(err, data) {
+				if (err) throw err;
+				db.close();
+				res.status(200).json(data);
+			})
+
+	});
+});
+
+/**
 	Public route to fetch particular blog post.
 
 	GET  /posts/:postId
