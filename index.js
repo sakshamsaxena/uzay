@@ -19,9 +19,6 @@ app.set('json spaces', 4);
 /* Routes */
 
 app.get('/', function(req, res) {
-	res.render('Home');
-});
-app.get('/admin', function(req, res) {
 	res.render('Admin');
 });
 app.use('/blog', blog);
@@ -34,7 +31,7 @@ app.use(function(req, res) {
 
 /* Listen */
 app.listen(3000, function() {
-	console.log('Example app listening on port 3000!')
+	console.log('Uzay live on port 3000!')
 });
 
 module.exports = app;

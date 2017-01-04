@@ -39,6 +39,7 @@ function AuthenticateBlogger(req, res, next) {
 				date: (new Date()).getTime(),
 				tags: req.body.tags,
 				content: req.body.content,
+				url: req.get('host') + '/blog/posts/' + parseInt(count + 1),
 				commentCount: 0,
 				upvotes: 0,
 				downvotes: 0
