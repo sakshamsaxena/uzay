@@ -38,12 +38,6 @@ function updateConfig() {
 	data = data.replace("blog-post-author", name);
 
 	fs.writeFile("./config/config.js", data, "utf8", function(args) {
-		exec("rm ./config/config.sample.js", function(err, stdout, stderr) {
-			if (err)
-				throw new Error(err)
-			if (stderr)
-				throw new Error(stderr)
-			console.log(stdout, "All done !");
-		})
+		console.log(stdout, "All done !\n\nLaunching Uzay ...\n");
 	});
 }

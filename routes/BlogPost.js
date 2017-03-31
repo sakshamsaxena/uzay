@@ -36,7 +36,7 @@ function AuthenticateBlogger(req, res, next) {
 				postId: count + 1,
 				title: req.body.title,
 				author: config.Author,
-				date: (new Date()).getTime(),
+				date: Date(),
 				tags: req.body.tags,
 				content: req.body.content,
 				url: req.get('host') + '/blog/posts/' + parseInt(count + 1),
