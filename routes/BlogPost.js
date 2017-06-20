@@ -61,6 +61,7 @@ function votePost(post, vote, cb) {
 		})
 	});
 }
+
 /**
 	Public route to fetch all blog posts. 
 
@@ -78,7 +79,7 @@ BlogPost.get('/', function(req, res) {
 /**
 	Public route to fetch blog posts, all sorts.
 
-	GET  /posts?tag=tagName&len=howManyPostsToShow&fetch=latest|single|multiple[&id=postId,][&from=offsetCount&len=numberOfPostsToFetch]
+	GET  /posts?[tag=tagName,&]fetch=latest|single|multiple[&id=postId,][&from=offsetCount&len=numberOfPostsToFetch]
 
 */
 BlogPost.get('/posts', function(req, res) {
@@ -133,7 +134,7 @@ BlogPost.get('/posts', function(req, res) {
 	PUT /votePost?vote=up|down&post=postId
 
 */
-BlogPost.put('/votePost', function(req, res) {
+BlogPost.get('/votePost', function(req, res) {
 	var Q, postId, vote;
 
 	Q = req.query;
