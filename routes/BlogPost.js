@@ -1,8 +1,6 @@
 /*
 	BlogPost.js
 	Created by Saksham Saxena (saksham_saxena@outlook.com) on 6th November 2016
-	If you're seeing a more updated version, then this must probably be live on the internet!
-	* Look Ma! More than 1 viewers! *
 */
 
 var fs = require('fs');
@@ -14,8 +12,8 @@ var config = require('../config/config.js');
 
 var url = 'mongodb://localhost:27017/uzay';
 
-/* Route specific Middlewares */
 function AuthenticateBlogger(req, res, next) {
+
 	// Require the voodoo
 	var md5 = require('blueimp-md5');
 	var base64 = require('base-64');
@@ -24,50 +22,33 @@ function AuthenticateBlogger(req, res, next) {
 	var key = md5(req.headers.key);
 	var receivedKey = base64.encode(key);
 
+	// This is the actual key
 	var actualKey = config.BloggerKey;
 
-	// The database part
-
-	function insertPost(db, cb) {
-
-		var collection = db.collection('blog');
-		collection.count({}, function(err, count) {
-			collection.insertOne({
-				postId: count + 1,
-				title: req.body.title,
-				author: config.Author,
-				date: Date(),
-				tags: req.body.tags,
-				content: req.body.content,
-				url: req.get('host') + '/blog/posts/' + parseInt(count + 1),
-				commentCount: 0,
-				upvotes: 0,
-				downvotes: 0
-			}, function(err, res) {
-				if (err) throw err;
-				console.log("Inserted !\n", res.ops);
-			})
-		});
-	}
-
+	// Write the post to database if the keys match
 	if (receivedKey === actualKey) {
-
-		MongoClient.connect(url, function(err, db) {
-			if (err) throw err;
-			console.log("Connected successfully to server for blog entry");
-			insertPost(db, function() {
-				db.close();
-				res.status(200).end();
-			});
-		});
+		next();
 	} else {
 		console.error("Duck you !");
 		res.status(404).end();
 	}
-
-	next();
 }
 
+function getPosts(find, sort, limit, cb) {
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+		console.log("Connected successfully to server to get all posts");
+		db.collection('blog')
+			.find(find)
+			.sort(sort)
+			.limit(limit)
+			.toArray(function(err, data) {
+				if (err) throw err;
+				db.close();
+				cb(data);
+			});
+	});
+}
 /**
 	Public route to fetch all blog posts. 
 
@@ -76,18 +57,10 @@ function AuthenticateBlogger(req, res, next) {
 */
 BlogPost.get('/', function(req, res) {
 
-	MongoClient.connect(url, function(err, db) {
-		if (err) throw err;
-		console.log("Connected successfully to server to get all posts");
-		db.collection('blog')
-			.find({})
-			.sort({ postId: -1 })
-			.toArray(function(err, data) {
-				if (err) throw err;
-				db.close();
-				res.status(200).json(data);
-			});
+	getPosts({}, { postId: -1 }, 0, function(data) {
+		res.status(200).json(data);
 	});
+
 });
 
 /**
@@ -109,70 +82,32 @@ BlogPost.get('/posts', function(req, res) {
 	// Checks the input against regex for words(or phrases separated by '-')
 	var patternTag = /^[a-z]+$|^[a-z]+[-][a-z]+$/g;
 	taggedPosts = (patternTag.test(tag) && length) ? true : false;
-	
+
 	latestPost = (Q.fetch === 'latest') ? true : false;
 	singlePost = (Q.fetch === 'single') ? true : false;
 	multiplePosts = (Q.fetch === 'multiple') ? true : false;
 
 	if (latestPost) {
-		MongoClient.connect(url, function(err, db) {
-			if (err) throw err;
-			console.log("Connected successfully to server to get latest post");
-			db.collection('blog')
-				.find({})
-				.sort({ postId: -1 })
-				.limit(1)
-				.toArray(function(err, data) {
-					if (err) throw err;
-					db.close();
-					res.status(200).json(data);
-				});
+		getPosts({}, { postId: -1 }, 1, function(data) {
+			res.status(200).json(data);
 		});
 	}
 
 	if (singlePost) {
-		MongoClient.connect(url, function(err, db) {
-			if (err) throw err;
-			console.log("Connected successfully to server to get " + id + " post");
-			db.collection('blog')
-				.find({ postId: id })
-				.toArray(function(err, data) {
-					if (err) throw err;
-					db.close();
-					res.status(200).json(data);
-				});
+		getPosts({ postId: id }, { $natural: 1 }, 0, function(data) {
+			res.status(200).json(data);
 		});
 	}
 
 	if (multiplePosts) {
-		MongoClient.connect(url, function(err, db) {
-			if (err) throw err;
-			console.log("Connected successfully to server to get " + page + " of post");
-			db.collection('blog')
-				.find({ postId: { $gte: offset } })
-				.sort({ postId: -1 })
-				.limit(length)
-				.toArray(function(err, data) {
-					if (err) throw err;
-					db.close();
-					res.status(200).json(data);
-				});
+		getPosts({ postId: { $gte: offset } }, { postId: -1 }, length, , function(data) {
+			res.status(200).json(data);
 		});
 	}
 
 	if (taggedPosts) {
-		MongoClient.connect(url, function(err, db) {
-			if (err) throw err;
-			console.log("Connected successfully to server to get " + tag + " tag");
-			db.collection('blog')
-				.find({ tags: tag })
-				.sort({ postId: -1 })
-				.limit(length)
-				.toArray(function(err, data) {
-					if (err) throw err;
-					db.close();
-					res.status(200).json(data);
-				});
+		getPosts({ tags: tag }, { postId: -1 }, length, function(data) {
+			res.status(200).json(data);
 		});
 	} else {
 		// Send a HTTP 404 Not Found Error
@@ -235,7 +170,30 @@ BlogPost.put('/downvote/:postId', function(req, res) {
 
 */
 BlogPost.post('/new', AuthenticateBlogger, function(req, res) {
-	res.send();
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+		console.log("Connected successfully to server for blog entry");
+		var collection = db.collection('blog');
+		collection.count({}, function(err, count) {
+			collection.insertOne({
+				postId: count + 1,
+				title: req.body.title,
+				author: config.Author,
+				date: Date(),
+				tags: req.body.tags,
+				content: req.body.content,
+				url: req.get('host') + '/blog/posts?fetch=single&postId=' + (count + 1),
+				commentCount: 0,
+				upvotes: 0,
+				downvotes: 0
+			}, function(err, r) {
+				if (err) throw err;
+				console.log("Inserted !\n", r.ops);
+				db.close();
+				res.status(200).end();
+			})
+		});
+	});
 });
 
 module.exports = BlogPost;
