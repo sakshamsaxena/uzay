@@ -49,6 +49,18 @@ function getPosts(find, sort, limit, cb) {
 			});
 	});
 }
+
+function votePost(post, vote, cb) {
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+		console.log("Connected successfully to server for Downvotes");
+		db.collection('blog').updateOne({ "postId": post }, { $inc: { vote: 1 } }, function(err, data) {
+			if (err) throw err;
+			db.close();
+			cb();
+		})
+	});
+}
 /**
 	Public route to fetch all blog posts. 
 
@@ -74,10 +86,10 @@ BlogPost.get('/posts', function(req, res) {
 	var Q, id, offset, tag, length, latestPost, singlePost, multiplePosts;
 
 	Q = req.query;
-	id = Q.id;
 	tag = Q.tag;
-	length = Q.len;
-	offset = Q.from;
+	id = parseInt(Q.id);
+	length = parseInt(Q.len);
+	offset = parseInt(Q.from);
 
 	// Checks the input against regex for words(or phrases separated by '-')
 	var patternTag = /^[a-z]+$|^[a-z]+[-][a-z]+$/g;
@@ -116,50 +128,20 @@ BlogPost.get('/posts', function(req, res) {
 });
 
 /**
-	Public route to upvote a blog post. 
+	Public route to vote a blog post. 
 
-	PUT /upvote/:postId
-
-*/
-BlogPost.put('/upvote/:postId', function(req, res) {
-
-	var post = parseInt(req.params.postId);
-
-	MongoClient.connect(url, function(err, db) {
-		if (err) throw err;
-
-		console.log("Connected successfully to server for Upvotes");
-
-		db.collection('blog').updateOne({ "postId": post }, { $inc: { "upvotes": 1 } }, function(err, data) {
-			if (err) throw err;
-			db.close();
-			res.status(200).end();
-		})
-
-	});
-});
-
-/**
-	Public route to upvote a blog post. 
-
-	PUT /downvote/:postId
+	PUT /votePost?vote=up|down&post=postId
 
 */
-BlogPost.put('/downvote/:postId', function(req, res) {
+BlogPost.put('/votePost', function(req, res) {
+	var Q, postId, vote;
 
-	var post = parseInt(req.params.postId);
+	Q = req.query;
+	vote = Q.vote+"votes";
+	postId = parseInt(Q.post);
 
-	MongoClient.connect(url, function(err, db) {
-		if (err) throw err;
-
-		console.log("Connected successfully to server for Downvotes");
-
-		db.collection('blog').updateOne({ "postId": post }, { $inc: { "downvotes": 1 } }, function(err, data) {
-			if (err) throw err;
-			db.close();
-			res.status(200).end();
-		})
-
+	votePost(postId, vote, function() {
+		res.status(200).end();
 	});
 });
 
