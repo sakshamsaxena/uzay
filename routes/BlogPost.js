@@ -37,7 +37,6 @@ function AuthenticateBlogger(req, res, next) {
 function getPosts(find, sort, limit, cb) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
-		console.log("Connected successfully to server to get all posts");
 		db.collection('blog')
 			.find(find)
 			.sort(sort)
@@ -53,7 +52,6 @@ function getPosts(find, sort, limit, cb) {
 function votePost(post, vote, cb) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
-		console.log("Connected successfully to server for Downvotes");
 		db.collection('blog').updateOne({ "postId": post }, { $inc: { vote: 1 } }, function(err, data) {
 			if (err) throw err;
 			db.close();
@@ -87,18 +85,18 @@ BlogPost.get('/posts', function(req, res) {
 	var Q, id, offset, tag, length, latestPost, singlePost, multiplePosts;
 
 	Q = req.query;
-	tag = Q.tag;
+	tag = (Q.tag == undefined) ? '' : Q.tag;
 	id = parseInt(Q.id);
-	length = parseInt(Q.len);
+	length = (parseInt(Q.len) == undefined) ? 0 : parseInt(Q.len);
 	offset = parseInt(Q.from);
 
 	// Checks the input against regex for words(or phrases separated by '-')
 	var patternTag = /^[a-z]+$|^[a-z]+[-][a-z]+$/g;
-	taggedPosts = (patternTag.test(tag) && length) ? true : false;
 
-	latestPost = (Q.fetch === 'latest') ? true : false;
-	singlePost = (Q.fetch === 'single') ? true : false;
-	multiplePosts = (Q.fetch === 'multiple') ? true : false;
+	taggedPosts = (patternTag.test(tag) == true) ? true : false;
+	latestPost = (Q.fetch == 'latest') ? true : false;
+	singlePost = (Q.fetch == 'single') ? true : false;
+	multiplePosts = (Q.fetch == 'multiple') ? true : false;
 
 	if (latestPost) {
 		getPosts({}, { postId: -1 }, 1, function(data) {
@@ -113,7 +111,7 @@ BlogPost.get('/posts', function(req, res) {
 	}
 
 	if (multiplePosts) {
-		getPosts({ postId: { $gte: offset } }, { postId: -1 }, length, , function(data) {
+		getPosts({ postId: { $gte: offset } }, { postId: -1 }, length, function(data) {
 			res.status(200).json(data);
 		});
 	}
@@ -122,9 +120,10 @@ BlogPost.get('/posts', function(req, res) {
 		getPosts({ tags: tag }, { postId: -1 }, length, function(data) {
 			res.status(200).json(data);
 		});
-	} else {
-		// Send a HTTP 404 Not Found Error
-		res.status(404).send("ERROR: Bad URL");
+	}
+
+	if (!taggedPosts && !multiplePosts && !singlePost && !latestPost) {
+		res.status(400).send("Bad URL");
 	}
 });
 
@@ -138,7 +137,7 @@ BlogPost.get('/votePost', function(req, res) {
 	var Q, postId, vote;
 
 	Q = req.query;
-	vote = Q.vote+"votes";
+	vote = Q.vote + "votes";
 	postId = parseInt(Q.post);
 
 	votePost(postId, vote, function() {

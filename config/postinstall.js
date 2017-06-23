@@ -37,7 +37,8 @@ function updateConfig() {
 	data = data.replace("key-to-post-to-blog", newKey);
 	data = data.replace("blog-post-author", name);
 
-	fs.writeFile("./config/config.js", data, "utf8", function(args) {
-		console.log(stdout, "All done !\n\nLaunching Uzay ...\n");
+	fs.writeFile("./config/config.js", data, "utf8", function(err) {
+		if (err) throw err;
+		console.log("All done !\n\nLaunching Uzay ...\n");
 	});
 }

@@ -4,7 +4,7 @@
   "description": "API to serve the blog at Zirve",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w",
+    "test": "mocha",
     "postinstall": "node ./config/postinstall.js && node index.js"
   },
   "author": "Saksham Saxena",

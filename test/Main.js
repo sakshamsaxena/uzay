@@ -37,13 +37,13 @@ describe('Blog Route Tests', function() {
 
 	it('should get few posts of a certain tag', function(done) {
 		request(app)
-			.get('/blog/posts?tag=foo-bar-baz&len=2')
+			.get('/blog/posts?tag=foo&len=2')
 			.expect(200, done);
 	});
 
 	it('should get all posts of a certain tag', function(done) {
 		request(app)
-			.get('/blog/posts?tag=foo-bar-baz')
+			.get('/blog/posts?tag=foo')
 			.expect(200, done);
 	});
 
