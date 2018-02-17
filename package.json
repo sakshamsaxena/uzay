@@ -1,7 +1,7 @@
 {
   "name": "uzay",
   "version": "1.0.0",
-  "description": "API to serve the blog at Zirve",
+  "description": "Blog API",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -19,6 +19,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongodb": "^2.2.11",
+    "mongoose": "^5.0.6",
     "pug": "^2.0.0-beta6"
   },
   "devDependencies": {

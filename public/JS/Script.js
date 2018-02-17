@@ -2,13 +2,12 @@
 
 $("#submit").click(function(event) {
 	console.log("Submit triggered");
-	// Get the values
 
+	// Get the values
 	var title = $("#title").val();
-	var tags = $("#tags").val();
 	var post = $("#content").val();
 	var authKey = $("#key").val();
-
+	var tags = $("#tags").val();
 	(tags.lastIndexOf(";") === tags.length - 1) ? tags = tags.substr(0, tags.length - 1) : tags = tags;
 	tags = tags.split(";");
 	tags = tags.map(function(e) {
@@ -19,7 +18,6 @@ $("#submit").click(function(event) {
 	});
 
 	// Make the request
-
 	$.ajax({
 		method: "POST",
 		url: "/blog/new",
@@ -42,6 +40,7 @@ $("#submit").click(function(event) {
 			404: function() {
 				$("#submit").text("Post").removeAttr("disabled");
 				$("h2.hidden").removeClass("hidden");
+				$(".meat").append("<h2 class='center'>Something went wrong !</h2>");
 			}
 		}
 	});
