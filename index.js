@@ -1,5 +1,4 @@
 /* Require Modules */
-const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -7,14 +6,14 @@ const bodyParser = require('body-parser');
 const blog = require('./routes/Blog.js');
 const comment = require('./routes/Comment.js');
 const user = require('./routes/User.js');
-const permalink = require('./routes/Permalink.js')
+const permalink = require('./routes/Permalink.js');
 
 /* Our App! */
 const app = express();
 
 /* Basic Middlewares */
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.set('json spaces', 4);
 
 /* Routes */
@@ -26,8 +25,8 @@ app.use(function(req, res) {
 
 // Enable CORS
 app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
 
@@ -39,7 +38,7 @@ app.use('/Permalink', permalink);
 
 /* Listen */
 app.listen(3000, function() {
-	console.log('Uzay live on port 3000!')
+	console.log('Uzay live on port 3000!');
 });
 
 module.exports = app;

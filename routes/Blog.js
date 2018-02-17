@@ -56,7 +56,7 @@ function votePost(post, vote, cb) {
 			if (err) throw err;
 			db.close();
 			cb();
-		})
+		});
 	});
 }
 
@@ -173,7 +173,7 @@ BlogPost.post('/new', AuthenticateBlogger, function(req, res) {
 				console.log("Inserted !\n", r.ops);
 				db.close();
 				res.status(200).end();
-			})
+			});
 		});
 	});
 });
