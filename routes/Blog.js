@@ -1,6 +1,6 @@
 /*
-	BlogPost.js
-	Created by Saksham Saxena (saksham_saxena@outlook.com) on 6th November 2016
+	Blog.js
+	Created by Saksham Saxena (saksham_saxena@outlook.com) on 17th February 2018
 */
 
 var fs = require('fs');

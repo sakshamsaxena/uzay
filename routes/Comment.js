@@ -1,8 +1,6 @@
 /*
-	CommentPost.js
-	Created by Saksham Saxena (saksham_saxena@outlook.com) on 6th November 2016
-	If you're seeing a more updated version, then this must probably be live on the internet!
-	* Look Ma! More than 1 viewers! *
+	Comment.js
+	Created by Saksham Saxena (saksham_saxena@outlook.com) on 17th February 2018
 */
 
 var express = require('express');

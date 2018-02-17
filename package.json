@@ -1,7 +1,7 @@
 {
   "name": "uzay",
   "version": "1.0.0",
-  "description": "Blog API",
+  "description": "Uzay is a Node.js and MongoDB based modern blog engine.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -19,8 +19,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongodb": "^2.2.11",
-    "mongoose": "^5.0.6",
-    "pug": "^2.0.0-beta6"
+    "mongoose": "^5.0.6"
   },
   "devDependencies": {
     "mocha": "^3.1.2",
