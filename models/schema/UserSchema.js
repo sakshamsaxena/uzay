@@ -9,10 +9,11 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 let userSchema = {
 	_id : ObjectId,
-	CanBlog : Boolean,
-	CanComment : Boolean,
 	Alias : String,
-	Passphrase : String
+	Passphrase : String,
+	Email : String,
+	VerificationToken : String,
+	Verified : Boolean
 };
 
 module.exports = new Schema(userSchema);

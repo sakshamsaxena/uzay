@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "postinstall": "node ./config/postinstall.js && node index.js"
+    "postinstall": "cp config/config.sample.js config/config.js",
+    "start": "node index.js"
   },
   "author": "Saksham Saxena",
   "license": "MIT",

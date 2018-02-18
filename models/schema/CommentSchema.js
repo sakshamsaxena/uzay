@@ -11,12 +11,12 @@ let commentSchema = {
 	_id : ObjectId,
 	PostID : ObjectId,
 	UserID : ObjectId,
-	ParentCommentID : ObjectId,
-	Children : Number,
+	ParentCommentID : {type : ObjectId, default : null},
+	Children : {type : Number, default : 0},
 	Permalink : String,
 	Content: String,
-	Likes : Number,
-	Dislikes : Number,
+	Likes : {type : Number, default : 0},
+	Dislikes : {type : Number, default : 0},
 	PublishDate : {
 		type : Date,
 		default : Date.now

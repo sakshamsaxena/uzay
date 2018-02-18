@@ -12,11 +12,11 @@ let blogSchema = {
 	UserID : ObjectId,
 	Title : String,
 	Tags : [{type : String}],
-	Views : Number,
+	Views : {type : Number, default : 1},
 	Permalink : String,
 	Content: String,
-	Likes : Number,
-	Dislikes : Number,
+	Likes : {type : Number, default : 0},
+	Dislikes : {type : Number, default : 0},
 	PublishDate : {
 		type : Date,
 		default : Date.now

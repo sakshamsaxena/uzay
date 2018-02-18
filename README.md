@@ -14,7 +14,9 @@ cd uzay
 npm install
 ```
 
-That's it really ! It'll install, configure, and deploy too in the same go !
+Once installed, edit the ```config.js``` suitably. 
+
+Run the server with ```npm start```.
 
 ### License
 
