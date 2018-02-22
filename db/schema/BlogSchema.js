@@ -4,8 +4,7 @@
 
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-
-const ObjectId = mongoose.Schema.Types.ObjectId;
+let ObjectId = mongoose.Schema.Types.ObjectId;
 
 let blogSchema = {
 	_id : ObjectId,
