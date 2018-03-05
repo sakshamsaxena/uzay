@@ -9,3 +9,5 @@ let userSchema = require('../UserSchema.js');
 mongoose.connect(config.MongoURL);
 
 let UserModel = mongoose.model('User', userSchema);
+
+module.exports = UserModel;

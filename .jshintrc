@@ -13,5 +13,6 @@
   "unused": "vars",
   "esversion": 6,
   "predef": ["Promise"],
-  "node": true
+  "node": true,
+  "mocha": true
 }

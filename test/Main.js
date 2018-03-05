@@ -16,5 +16,5 @@ describe('Blog Route Tests', function() {
 			.get('/blog/')
 			.expect(200, done);
 	});
-	
+
 });

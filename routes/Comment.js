@@ -2,19 +2,18 @@
 	Comment.js
 */
 
-var config = require('../config/config.js');
 var express = require('express');
 var Comment = express.Router();
 
 /**
-	Public route to fetch a resource. 
+	Public route to fetch a resource.
 
-	GET  / 
+	GET  /
 
 */
 
 Comment.get('/', function(req, res) {
-	
+
 });
 
 module.exports = Comment;

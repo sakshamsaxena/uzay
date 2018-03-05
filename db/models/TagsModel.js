@@ -9,3 +9,5 @@ let tagsSchema = require('../TagsSchema.js');
 mongoose.connect(config.MongoURL);
 
 let TagModel = mongoose.model('Tag', tagsSchema);
+
+module.exports = TagModel;

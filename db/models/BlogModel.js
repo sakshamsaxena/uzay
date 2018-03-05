@@ -9,3 +9,5 @@ let blogSchema = require('../BlogSchema.js');
 mongoose.connect(config.MongoURL);
 
 let BlogPostModel = mongoose.model('BlogPost', blogSchema);
+
+module.exports = BlogPostModel;

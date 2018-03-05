@@ -6,19 +6,21 @@ module.exports = function(grunt) {
 				jshintrc: '.jshintrc'
 			},
 			target: [
-				'config/**/*.js',
-				'models/**/*.js',
+				'payload/**/*.js',
+				'config/config.sample.js',
 				'routes/**/*.js',
 				'test/**/*.js',
+				'db/**/*.js',
 				'./*.js'
 			]
 		},
 		jscs: {
 			src: [
-				'config/**/*.js',
-				'models/**/*.js',
+				'payload/**/*.js',
+				'config/config.sample.js',
 				'routes/**/*.js',
 				'test/**/*.js',
+				'db/**/*.js',
 				'./*.js'
 			],
 			options: {
@@ -27,7 +29,9 @@ module.exports = function(grunt) {
 			}
 		}
 	});
+
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-jscs');
+
 	grunt.registerTask('default', ['jshint', 'jscs']);
 };
