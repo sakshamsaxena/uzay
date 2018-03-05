@@ -8,4 +8,4 @@ let tagsSchema = require('../TagsSchema.js');
 
 mongoose.connect(config.MongoURL);
 
-let Tag = mongoose.model('Tag', tagsSchema);
+let TagModel = mongoose.model('Tag', tagsSchema);
