@@ -11,9 +11,8 @@ let blogSchema = {
 	UserID: ObjectId,
 	Title: String,
 	Tags: [{type: String}],
-	Views: {type: Number, default: 1},
-	Permalink: String,
 	Content: String,
+	Views: {type: Number, default: 1},
 	Likes: {type: Number, default: 0},
 	Dislikes: {type: Number, default: 0},
 	PublishDate: {

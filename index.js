@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 /* Require Routes */
 const blog = require('./routes/Blog.js');
 const comment = require('./routes/Comment.js');
-const user = require('./routes/User.js');
 const permalink = require('./routes/Permalink.js');
+const search = require('./routes/Search.js');
+const user = require('./routes/User.js');
 
 /* Our App! */
 const app = express();
@@ -33,8 +34,9 @@ app.use(function(req, res, next) {
 // Application Routes
 app.use('/Blog', blog);
 app.use('/Comment', comment);
-app.use('/User', user);
 app.use('/Permalink', permalink);
+app.use('/Search', search);
+app.use('/User', user);
 
 /* Listen */
 app.listen(3000, function() {

@@ -11,6 +11,7 @@ let userSchema = {
 	Alias: String,
 	Passphrase: String,
 	Email: String,
+	Bio: String,
 	Age: Number,
 	Country: String,
 	Verified: Boolean,

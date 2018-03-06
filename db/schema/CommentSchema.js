@@ -12,7 +12,6 @@ let commentSchema = {
 	UserID: ObjectId,
 	ParentCommentID: {type: ObjectId, default: null},
 	Children: {type: Number, default: 0},
-	Permalink: String,
 	Content: String,
 	Likes: {type: Number, default: 0},
 	Dislikes: {type: Number, default: 0},
