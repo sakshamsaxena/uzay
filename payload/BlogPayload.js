@@ -1,5 +1,5 @@
 /*
-	JSON Payload for a Blog Post(s) Resource
+	JSON Response for a Blog Post
 */
 
 const Payload = {
@@ -30,6 +30,9 @@ const Payload = {
 	Tags: [{
 		'TagName': '',
 		'Permalink': ''
+	}],
+	Comments: [{
+		/* Single Level Comment Payload */
 	}]
 };
 

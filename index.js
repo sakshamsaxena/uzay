@@ -33,7 +33,6 @@ app.use(function(req, res, next) {
 
 // Application Routes
 app.use('/Blog', blog);
-app.use('/Comment', comment);
 app.use('/Permalink', permalink);
 app.use('/Search', search);
 app.use('/User', user);
