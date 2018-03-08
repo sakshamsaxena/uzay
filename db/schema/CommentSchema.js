@@ -8,7 +8,7 @@ let ObjectId = mongoose.Schema.Types.ObjectId;
 
 let commentSchema = {
 	_id: ObjectId,
-	PostID: ObjectId,
+	PostID: Number,
 	UserID: ObjectId,
 	ParentCommentID: {type: ObjectId, default: null},
 	Children: {type: Number, default: 0},

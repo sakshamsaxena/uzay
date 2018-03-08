@@ -7,7 +7,7 @@ let Schema = mongoose.Schema;
 let ObjectId = mongoose.Schema.Types.ObjectId;
 
 let blogSchema = {
-	_id: ObjectId,
+	_id: Number,
 	UserID: ObjectId,
 	Title: String,
 	Tags: [{type: String}],

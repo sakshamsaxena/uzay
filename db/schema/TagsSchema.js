@@ -9,7 +9,7 @@ let ObjectId = mongoose.Schema.Types.ObjectId;
 let tagsSchema = {
 	_id: ObjectId,
 	Tag: String,
-	Posts: [{type: ObjectId}]
+	Posts: [{type: Number}]
 };
 
 module.exports = new Schema(tagsSchema);

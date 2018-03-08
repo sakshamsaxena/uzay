@@ -4,4 +4,4 @@
 
 const Payload = {};
 
-module.exportd = Payload;
+module.exports = Payload;

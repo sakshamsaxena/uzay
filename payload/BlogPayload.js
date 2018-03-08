@@ -3,7 +3,7 @@
 */
 
 const Payload = {
-	BlogPost: {
+	Post: {
 		'Title': '',
 		'PublishDate': '',
 		'Content': '',
@@ -17,7 +17,7 @@ const Payload = {
 		'Country': '',
 		'IsVerified': ''
 	},
-	Misc: {
+	Meta: {
 		'BlogID': '',
 		'Permalink': '',
 		'TwitterSharer': '',
@@ -36,4 +36,4 @@ const Payload = {
 	}]
 };
 
-module.exportd = Payload;
+module.exports = Payload;
