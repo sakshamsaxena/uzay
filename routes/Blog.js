@@ -87,4 +87,36 @@ BlogPost.get('/user/:alias', function(req, res) {
 
 });
 
+/**
+	POST /id/:id/comment
+
+	Posts a comment to the blog post with ID :id. Data Fields are :
+	- Content
+		Format: String
+*/
+
+BlogPost.post('/id/:id/comment', function(req, res) {
+
+});
+
+/**
+	PATCH /id/:id/like
+
+	Increments a like on the blog post with ID :id.
+*/
+
+BlogPost.patch('/id/:id/like', function(req, res) {
+
+});
+
+/**
+	PATCH /id/:id/dislike
+
+	Increments a dislike on the blog post with ID :id.
+*/
+
+BlogPost.patch('/id/:id/dislike', function(req, res) {
+
+});
+
 module.exports = BlogPost;
