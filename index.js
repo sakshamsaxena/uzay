@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 
 /* Require Routes */
 const blog = require('./routes/Blog.js');
-const comment = require('./routes/Comment.js');
 const permalink = require('./routes/Permalink.js');
 const search = require('./routes/Search.js');
 const user = require('./routes/User.js');
