@@ -4,6 +4,9 @@
 
 var express = require('express');
 var BlogPost = express.Router();
+var BlogPostModel = require('../db/models/BlogModel.js');
+var BlogPostPayload = require('../payload/BlogPayload.js');
+var CommentPayload = require('../payload/CommentPayload.js');
 
 /**
 	GET  /id/:id[?params=value]
@@ -16,7 +19,54 @@ var BlogPost = express.Router();
 */
 
 BlogPost.get('/id/:id', function(req, res) {
-	res.send('/Blog' + req.url);
+
+	var options = req.query;
+	var params = req.params;
+	var blogID = params.id;
+
+	var doc = BlogPostModel.GetBlogPostByID(blogID);
+	//var user = UserModel.GetUserByID(doc.UserID);
+	var user = {};
+	var comments = null;
+	var CommentCount = 0;
+
+	// if(options.includeComments === undefined || options.includeComments === true){
+	// 	comments = CommentModel.GetCommentsByBlogPostID(blogID);
+	// 	CommentCount = comments.length;
+	// 	comments = ArrangeComments(comments);
+	// }
+
+	var json = BlogPostPayload;
+	
+	json.Post.Title = doc.Title;
+	json.Post.PublishDate = doc.PublishDate;
+	json.Post.Content = doc.Content;
+	json.Post.Alias = user.Alias;
+
+	json.User.ID = user._id;
+	json.User.ProfileURL = '/User/' + user.Alias;
+	json.User.Bio = user.Bio;
+	json.User.Age = user.Age;
+	json.User.Country = user.Country;
+	json.User.Verified = user.Verified;
+
+	json.Meta.BlogID = doc._id;
+	json.Meta.BlogURL = '/Blog/id/' + doc._id;
+	json.Meta.Likes = doc.Likes;
+	json.Meta.Dislikes = doc.Dislikes;
+	json.Meta.Views = doc.Views;
+	json.Meta.CommentCount = CommentCount;
+
+	json.Tags = [];
+	for (var i = 0; i < doc.Tags.length; i++) {
+		json.Tags.push({
+			'TagName': doc.Tags[i],
+			'BrowseURL': '/Blog/tags/' + doc.Tags[i]
+		});
+	}
+
+	res.json(json);
+
 });
 
 /**

@@ -4,7 +4,7 @@
 
 let config = require('../../config/config.js');
 let mongoose = require('mongoose');
-let tagsSchema = require('../TagsSchema.js');
+let tagsSchema = require('../schema/TagsSchema.js');
 
 mongoose.connect(config.MongoURL);
 

@@ -20,8 +20,6 @@ const Payload = {
 	Meta: {
 		'BlogID': '',
 		'BlogURL': '',
-		'TwitterSharer': '',
-		'FaceBookSharer': '',
 		'Likes': '',
 		'Dislikes': '',
 		'Views': '',
@@ -32,7 +30,7 @@ const Payload = {
 		'BrowseURL': ''
 	}],
 	Comments: [{
-		/* Single Level Comment Payload */
+		/* Comment Payload */
 	}]
 };
 
