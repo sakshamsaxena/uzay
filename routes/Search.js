@@ -6,14 +6,14 @@ var express = require('express');
 var Search = express.Router();
 
 /**
-	Public route to search for a resource
-
 	GET  /
+
+	TODO : Write this!
 
 */
 
 Search.get('/', function(req, res) {
-
+	res.send('Search team is tired.');
 });
 
 module.exports = Search;

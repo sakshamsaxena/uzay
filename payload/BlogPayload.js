@@ -11,7 +11,7 @@ const Payload = {
 	},
 	User: {
 		'ID': '',
-		'Permalink': '',
+		'ProfileURL': '',
 		'Bio': '',
 		'Age': '',
 		'Country': '',
@@ -19,7 +19,7 @@ const Payload = {
 	},
 	Meta: {
 		'BlogID': '',
-		'Permalink': '',
+		'BlogURL': '',
 		'TwitterSharer': '',
 		'FaceBookSharer': '',
 		'Likes': '',
@@ -29,7 +29,7 @@ const Payload = {
 	},
 	Tags: [{
 		'TagName': '',
-		'Permalink': ''
+		'BrowseURL': ''
 	}],
 	Comments: [{
 		/* Single Level Comment Payload */

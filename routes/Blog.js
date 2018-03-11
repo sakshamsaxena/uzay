@@ -16,7 +16,7 @@ var BlogPost = express.Router();
 */
 
 BlogPost.get('/id/:id', function(req, res) {
-
+	res.send('/Blog' + req.url);
 });
 
 /**
@@ -50,7 +50,7 @@ BlogPost.get('/id/:id', function(req, res) {
 */
 
 BlogPost.get('/tag/:tag', function(req, res) {
-
+	res.send('/Blog' + req.url);
 });
 
 /**
@@ -84,7 +84,17 @@ BlogPost.get('/tag/:tag', function(req, res) {
 */
 
 BlogPost.get('/user/:alias', function(req, res) {
+	res.send('/Blog' + req.url);
+});
 
+/**
+	GET /id/:id/comment/:cid
+
+	Gets a comment with ID :cid of the blog post with ID :id.
+*/
+
+BlogPost.get('/id/:id/comment/:cid', function(req, res) {
+	res.send('/Blog' + req.url);
 });
 
 /**
@@ -96,7 +106,7 @@ BlogPost.get('/user/:alias', function(req, res) {
 */
 
 BlogPost.post('/id/:id/comment', function(req, res) {
-
+	res.send('/Blog' + req.url);
 });
 
 /**
@@ -106,7 +116,7 @@ BlogPost.post('/id/:id/comment', function(req, res) {
 */
 
 BlogPost.patch('/id/:id/like', function(req, res) {
-
+	res.send('/Blog' + req.url);
 });
 
 /**
@@ -116,7 +126,7 @@ BlogPost.patch('/id/:id/like', function(req, res) {
 */
 
 BlogPost.patch('/id/:id/dislike', function(req, res) {
-
+	res.send('/Blog' + req.url);
 });
 
 module.exports = BlogPost;

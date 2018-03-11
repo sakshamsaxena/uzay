@@ -10,7 +10,7 @@ const Payload = {
 	},
 	User: {
 		'ID': '',
-		'Permalink': '',
+		'ProfileURL': '',
 		'Bio': '',
 		'Age': '',
 		'Country': '',
@@ -20,8 +20,8 @@ const Payload = {
 		'CommentID': '',
 		'BlogID': '',
 		'ParentCommentID': '',
+		'CommentURL': '',
 		'ChildrenCount': '',
-		'Permalink': '',
 		'Likes': '',
 		'Dislikes': ''
 	},

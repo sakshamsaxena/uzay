@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 
 /* Require Routes */
 const blog = require('./routes/Blog.js');
-const permalink = require('./routes/Permalink.js');
 const search = require('./routes/Search.js');
 const user = require('./routes/User.js');
 
@@ -18,11 +17,6 @@ app.set('json spaces', 4);
 
 /* Routes */
 
-// Render all other routes as HTTP 404 Not Found Error
-app.use(function(req, res) {
-	res.status(404).send({});
-});
-
 // Enable CORS
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -32,9 +26,13 @@ app.use(function(req, res, next) {
 
 // Application Routes
 app.use('/Blog', blog);
-app.use('/Permalink', permalink);
 app.use('/Search', search);
 app.use('/User', user);
+
+// Render all other routes as HTTP 404 Not Found Error
+app.use(function(req, res) {
+	res.status(404).send('Ain\'t no path like this.');
+});
 
 /* Listen */
 app.listen(3000, function() {
