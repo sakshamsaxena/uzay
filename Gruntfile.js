@@ -9,8 +9,9 @@ module.exports = function(grunt) {
 				'payload/**/*.js',
 				'config/config.sample.js',
 				'routes/**/*.js',
+				'models/**/*.js',
+				'schema/**/*.js',
 				'test/**/*.js',
-				'db/**/*.js',
 				'./*.js'
 			]
 		},
@@ -19,8 +20,9 @@ module.exports = function(grunt) {
 				'payload/**/*.js',
 				'config/config.sample.js',
 				'routes/**/*.js',
+				'models/**/*.js',
+				'schema/**/*.js',
 				'test/**/*.js',
-				'db/**/*.js',
 				'./*.js'
 			],
 			options: {

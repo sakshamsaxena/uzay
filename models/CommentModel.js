@@ -2,7 +2,7 @@
 	Comment Model
 */
 
-let config = require('../../config/config.js');
+let config = require('../config/config.js');
 let mongoose = require('mongoose');
 let commentSchema = require('../schema/CommentSchema.js');
 

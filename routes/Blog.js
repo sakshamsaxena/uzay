@@ -3,10 +3,13 @@
 */
 
 var express = require('express');
+var mongoose = require('mongoose');
+var config = require('../config/config.js');
+var BlogPostModel = require('../models/BlogModel.js');
+var UserModel = require('../models/UserModel.js');
+var CommentModel = require('../models/CommentModel.js');
+
 var BlogPost = express.Router();
-var BlogPostModel = require('../db/models/BlogModel.js');
-var BlogPostPayload = require('../payload/BlogPayload.js');
-var CommentPayload = require('../payload/CommentPayload.js');
 
 /**
 	GET  /id/:id[?params=value]
@@ -14,59 +17,43 @@ var CommentPayload = require('../payload/CommentPayload.js');
 	Public route to fetch a resource by id. Options are :
 	- includeComments
 		Default: true
-		Format: Boolean
+		Format: String
 		Options: true|false
 */
 
 BlogPost.get('/id/:id', function(req, res) {
 
-	var options = req.query;
-	var params = req.params;
-	var blogID = params.id;
+	// Prepare Parameters
+	var id = req.params.id;
+	var includeComments = true;
 
-	var doc = BlogPostModel.GetBlogPostByID(blogID);
-	//var user = UserModel.GetUserByID(doc.UserID);
-	var user = {};
-	var comments = null;
-	var CommentCount = 0;
-
-	// if(options.includeComments === undefined || options.includeComments === true){
-	// 	comments = CommentModel.GetCommentsByBlogPostID(blogID);
-	// 	CommentCount = comments.length;
-	// 	comments = ArrangeComments(comments);
-	// }
-
-	var json = BlogPostPayload;
-	
-	json.Post.Title = doc.Title;
-	json.Post.PublishDate = doc.PublishDate;
-	json.Post.Content = doc.Content;
-	json.Post.Alias = user.Alias;
-
-	json.User.ID = user._id;
-	json.User.ProfileURL = '/User/' + user.Alias;
-	json.User.Bio = user.Bio;
-	json.User.Age = user.Age;
-	json.User.Country = user.Country;
-	json.User.Verified = user.Verified;
-
-	json.Meta.BlogID = doc._id;
-	json.Meta.BlogURL = '/Blog/id/' + doc._id;
-	json.Meta.Likes = doc.Likes;
-	json.Meta.Dislikes = doc.Dislikes;
-	json.Meta.Views = doc.Views;
-	json.Meta.CommentCount = CommentCount;
-
-	json.Tags = [];
-	for (var i = 0; i < doc.Tags.length; i++) {
-		json.Tags.push({
-			'TagName': doc.Tags[i],
-			'BrowseURL': '/Blog/tags/' + doc.Tags[i]
-		});
+	if (req.query.includeComments === 'false') {
+		includeComments = false;
 	}
 
-	res.json(json);
+	// Variables to persist Data
+	var resultSet = {};
 
+	// Connect here
+	mongoose.connect(config.MongoURL);
+
+	// Run Queries
+	BlogPostModel.GetBlogPostByID(id)
+		.then(function(blogData) {
+			resultSet.blog = blogData;
+			return UserModel.GetUserByID(blogData.UserID);
+		})
+		.then(function(userData) {
+			resultSet.user = userData;
+			return CommentModel.GetCommentsByPostID(id, includeComments);
+		})
+		.then(function(commentData) {
+			resultSet.comments = commentData;
+			mongoose.connection.close();
+			var json = BlogPostModel.GeneratePayload(resultSet);
+			res.send(json);
+		})
+		.end();
 });
 
 /**
@@ -75,7 +62,7 @@ BlogPost.get('/id/:id', function(req, res) {
 	Public route to fetch all posts by a tag. Filters are :
 	- includeComments
 		Default: false
-		Format: Boolean
+		Format: String
 		Options: true|false
 	- startDate
 		Default: 01012018
@@ -109,7 +96,7 @@ BlogPost.get('/tag/:tag', function(req, res) {
 	Public route to fetch all posts by a user. Filters are :
 	- includeComments
 		Default: false
-		Format: Boolean
+		Format: String
 		Options: true|false
 	- startDate
 		Default: 01012018
