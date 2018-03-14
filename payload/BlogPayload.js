@@ -4,30 +4,29 @@
 
 const Payload = {
 	Post: {
-		'Title': '',
-		'PublishDate': '',
-		'Content': '',
-		'Alias': ''
+		Title: '',
+		Alias: '',
+		PublishDate: '',
+		Content: ''
 	},
 	User: {
-		'ID': '',
-		'ProfileURL': '',
-		'Bio': '',
-		'Age': '',
-		'Country': '',
-		'IsVerified': ''
+		ID: '',
+		ProfileURL: '',
+		Age: '',
+		Country: '',
+		IsVerified: ''
 	},
 	Meta: {
-		'BlogID': '',
-		'BlogURL': '',
-		'Likes': '',
-		'Dislikes': '',
-		'Views': '',
-		'CommentsCount': ''
+		BlogID: '',
+		BlogURL: '',
+		Likes: '',
+		Dislikes: '',
+		Views: '',
+		CommentsCount: ''
 	},
 	Tags: [{
-		'TagName': '',
-		'BrowseURL': ''
+		TagName: '',
+		BrowseURL: ''
 	}],
 	Comments: [{
 		/* Comment Payload */

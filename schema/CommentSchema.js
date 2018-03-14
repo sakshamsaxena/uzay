@@ -10,11 +10,23 @@ let commentSchema = {
 	_id: ObjectId,
 	PostID: Number,
 	UserID: ObjectId,
-	ParentCommentID: {type: ObjectId, default: null},
-	Children: {type: Number, default: 0},
+	ParentCommentID: {
+		type: ObjectId,
+		default: null
+	},
+	Children: {
+		type: Number,
+		default: 0
+	},
 	Content: String,
-	Likes: {type: Number, default: 0},
-	Dislikes: {type: Number, default: 0},
+	Likes: {
+		type: Number,
+		default: 0
+	},
+	Dislikes: {
+		type: Number,
+		default: 0
+	},
 	PublishDate: {
 		type: Date,
 		default: Date.now

@@ -16,10 +16,22 @@ let userSchema = {
 	Country: String,
 	Verified: Boolean,
 	VerificationToken: String,
-	LikedPosts: [{type: Number}],
-	DislikedPosts: [{type: Number}],
-	LikedComments: [{type: Number}],
-	DislikedComments: [{type: Number}]
+	CreatedOn: {
+		type: Date,
+		default: Date.now
+	},
+	LikedPosts: [{
+		type: Number
+	}],
+	DislikedPosts: [{
+		type: Number
+	}],
+	LikedComments: [{
+		type: Number
+	}],
+	DislikedComments: [{
+		type: Number
+	}]
 };
 
 module.exports = new Schema(userSchema);

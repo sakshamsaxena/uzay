@@ -4,26 +4,24 @@
 
 const Payload = {
 	Post: {
-		'Alias': '',
-		'PublishDate': '',
-		'Content': ''
+		Alias: '',
+		PublishDate: '',
+		Content: ''
 	},
 	User: {
-		'ID': '',
-		'ProfileURL': '',
-		'Bio': '',
-		'Age': '',
-		'Country': '',
-		'IsVerified': ''
+		ID: '',
+		ProfileURL: '',
+		Age: '',
+		Country: '',
+		IsVerified: ''
 	},
 	Meta: {
-		'CommentID': '',
-		'BlogID': '',
-		'ParentCommentID': '',
-		'CommentURL': '',
-		'ChildrenCount': '',
-		'Likes': '',
-		'Dislikes': ''
+		CommentID: '',
+		BlogID: '',
+		ParentCommentID: '',
+		ChildrenCount: '',
+		Likes: '',
+		Dislikes: ''
 	},
 	Replies: [{
 		/* Single Level Child Comment Payloads */
