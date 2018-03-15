@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 
 /* Require Routes */
 const blog = require('./routes/Blog.js');
-const search = require('./routes/Search.js');
 const user = require('./routes/User.js');
 
 /* Our App! */
@@ -26,7 +25,6 @@ app.use(function(req, res, next) {
 
 // Application Routes
 app.use('/Blog', blog);
-app.use('/Search', search);
 app.use('/User', user);
 
 // Render all other routes as HTTP 404 Not Found Error

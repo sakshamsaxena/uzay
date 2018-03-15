@@ -12,6 +12,10 @@ Also, since Uzay uses Mongo DB, you must have it [installed](https://docs.mongod
 git clone https://github.com/YOUR_USERNAME/uzay.git
 cd uzay
 npm install
+mongoimport --db uzay --collection blogposts --file samples/blogposts.json
+mongoimport --db uzay --collection commentposts --file samples/commentposts.json
+mongoimport --db uzay --collection users --file samples/users.json
+mongoimport --db uzay --collection tags --file samples/tags.json
 ```
 
 Once installed, edit the ```config.js``` suitably. 

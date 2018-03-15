@@ -20,6 +20,10 @@ let userSchema = {
 		type: Date,
 		default: Date.now
 	},
+	LastModifiedOn: {
+		type: Date,
+		default: Date.now
+	},
 	LikedPosts: [{
 		type: Number
 	}],
