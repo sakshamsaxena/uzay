@@ -3,6 +3,10 @@
 */
 
 var express = require('express');
+var mongoose = require('mongoose');
+var config = require('../config/config.js');
+var UserModel = require('../models/UserModel.js');
+
 var User = express.Router();
 var Resources = express.Router({mergeParams: true});
 
@@ -11,11 +15,29 @@ User.use('/:alias', Resources);
 /**
 	GET /:alias
 
-	Public route to get basic details of a user.
+	Public route to get user information.
 */
 
 User.get('/:alias', function(req, res) {
 
+	// Prepare parameters
+	var alias = req.params.alias;
+
+	// Variables to persist Data
+	var resultSet = {};
+
+	// Connect here
+	mongoose.connect(config.MongoURL);
+
+	// Run Queries
+	UserModel.GetUserByAlias(alias)
+		.then(function(userData) {
+			resultSet = userData;
+			mongoose.connection.close();
+			var json = UserModel.GenerateUserInfoPayload(resultSet);
+			res.send(json);
+		})
+		.end();
 });
 
 /**
@@ -24,10 +46,10 @@ User.get('/:alias', function(req, res) {
 	Public route to fetch all liked content by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -54,10 +76,10 @@ Resources.get('/liked', function(req, res) {
 	Public route to fetch all liked blog posts by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -84,10 +106,10 @@ Resources.get('/liked/posts', function(req, res) {
 	Public route to fetch all liked comments by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -114,10 +136,10 @@ Resources.get('/liked/comments', function(req, res) {
 	Public route to fetch all disliked content by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -144,10 +166,10 @@ Resources.get('/disliked', function(req, res) {
 	Public route to fetch all disliked blog posts by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -174,10 +196,10 @@ Resources.get('/disliked/posts', function(req, res) {
 	Public route to fetch all disliked comments by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -204,10 +226,10 @@ Resources.get('/disliked/comments', function(req, res) {
 	Public route to fetch all blog posts authored by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -234,10 +256,10 @@ Resources.get('/posts', function(req, res) {
 	Public route to fetch all comments authored by a user. Filters are :
 	- startDate
 		Default: 01012018
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: DDMMYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number

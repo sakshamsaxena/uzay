@@ -8,9 +8,9 @@ let userSchema = require('../schema/UserSchema.js');
 let User = mongoose.model('User', userSchema);
 let UserModel = {};
 
-UserModel.GetUserByID = function(id) {
+UserModel.GetUserByAlias = function(alias) {
 
-	return User.findById(id).exec();
+	return User.findOne({Alias: alias}).exec();
 
 };
 

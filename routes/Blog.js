@@ -57,7 +57,7 @@ BlogPost.get('/id/:id', function(req, res) {
 });
 
 /**
-	GET  /tags/:tag[?params=value]
+	GET  /tag/:tag[?params=value]
 
 	Public route to fetch all posts by a tag. Filters are :
 	- includeComments
@@ -66,10 +66,10 @@ BlogPost.get('/id/:id', function(req, res) {
 		Options: true|false
 	- startDate
 		Default: 01012018
-		Format: MMDDYYYY
+		Format: YYYYMMDD
 	- endDate
 		Default: Current Date
-		Format: MMDDYYYY
+		Format: YYYYMMDD
 	- limit
 		Default: 20
 		Format: Number
@@ -87,41 +87,7 @@ BlogPost.get('/id/:id', function(req, res) {
 */
 
 BlogPost.get('/tag/:tag', function(req, res) {
-	res.send('/Blog' + req.url);
-});
 
-/**
-	GET  /user/:alias[?params=value]
-
-	Public route to fetch all posts by a user. Filters are :
-	- includeComments
-		Default: false
-		Format: String
-		Options: true|false
-	- startDate
-		Default: 01012018
-		Format: DDMMYYYY
-	- endDate
-		Default: Current Date
-		Format: DDMMYYYY
-	- limit
-		Default: 20
-		Format: Number
-	- offset
-		Default: 0
-		Format: Number
-	- orderBy
-		Default: Date
-		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
-	- direction
-		Default: D
-		Format: String
-		Options: D|A
-*/
-
-BlogPost.get('/user/:alias', function(req, res) {
-	res.send('/Blog' + req.url);
 });
 
 /**
