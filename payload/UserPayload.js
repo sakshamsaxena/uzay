@@ -12,8 +12,14 @@ const Payload = {
 		Country: '',
 		Verified: '',
 		ProfileURL: '',
-		CreatedAt: '',
-		LastModified: ''
+		BlogPostsURL: '',
+		CommentsURL: '',
+		LikedPostsURL: '',
+		DislikedPostsURL: '',
+		LikedCommentsURL: '',
+		DislikedCommentsURL: '',
+		CreatedOn: '',
+		LastModifiedOn: ''
 	},
 	Content: {
 		BlogPosts: '',

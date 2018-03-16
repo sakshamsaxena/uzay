@@ -2,8 +2,8 @@
 	User.js
 */
 
+var m = require('mongoose');
 var express = require('express');
-var mongoose = require('mongoose');
 var config = require('../config/config.js');
 var UserModel = require('../models/UserModel.js');
 
@@ -24,20 +24,24 @@ User.get('/:alias', function(req, res) {
 	var alias = req.params.alias;
 
 	// Variables to persist Data
-	var resultSet = {};
+	var Payload = null;
 
 	// Connect here
-	mongoose.connect(config.MongoURL);
+	m.connect(config.MongoURL);
 
 	// Run Queries
 	UserModel.GetUserByAlias(alias)
 		.then(function(userData) {
-			resultSet = userData;
-			mongoose.connection.close();
-			var json = UserModel.GenerateUserInfoPayload(resultSet);
-			res.send(json);
-		})
-		.end();
+
+			// Generate Payload from data
+			Payload = UserModel.GenerateUserInfoPayload(userData);
+
+			// Close connection (important!)
+			m.connection.close();
+
+			// Send response
+			res.send(Payload);
+		});
 });
 
 /**
