@@ -9,6 +9,7 @@ Uzay is a neatly written API using Express and Mongo (^3.2) to serve as the basi
 1. [Node.js](https://nodejs.org/en/download/)
 2. [MongoDB](https://docs.mongodb.com/manual/installation/)
 3. `mongod` service running in your shell/background.
+4. [Nodemon](https://www.npmjs.com/package/nodemon)
 
 * #### Installing
 

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "postinstall": "cp config/config.sample.js config/config.js",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "Saksham Saxena",
   "license": "MIT",
