@@ -3,7 +3,7 @@
 */
 var info = {
 	'MasterKey': 'key-to-append',
-	'MongoURL': 'mongo-db-url'
+	'MongoURL': 'mongodb://localhost:27017/uzay'
 };
 
 module.exports = info;
