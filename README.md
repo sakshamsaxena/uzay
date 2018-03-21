@@ -2,6 +2,10 @@
 
 Uzay is a neatly written API using Express and Mongo (^3.2) to serve as the basic backend for a blog.
 
+Uzay is centered around serving a perfectly neutral content which supports both favourable and unfavourable thoughts and content for a user. It encourages a user to browse a personalised feed rather than being served a feed according to their personal comfortable preference. This behaviour has proved to be fairly unhealthy and partisan promoting, which was never the true intent of the Internet.
+
+Public feeds are much more carefully served to highlight the under-rated content in a subtle way, which would ideally promote an excellent variety of thoughts.
+
 ### Installation
 
 * #### Prerequisites

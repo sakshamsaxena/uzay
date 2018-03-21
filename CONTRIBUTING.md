@@ -26,12 +26,9 @@ That's it!
 
 ## Understanding Architecture
 
-This section aims to elaborate on two major topics : 
+### Prerequisites
 
-1. How does the code function as a whole ?
-2. Why was this developed in this specific way ?
-
-To understand the discussion which follows, you must be familiar with the following concepts :
+To understand the discussion which follows, as well as to be able to smoothly contribute to the project, you must be familiar with the following concepts :
 
 1. Non-Relational Data Representation in MongoDB.
 2. Concept of Modules in Node and Modular Pattern.
@@ -42,6 +39,12 @@ To understand the discussion which follows, you must be familiar with the follow
 	3. Static and Dynamic Resources
 5. REST Architecture
 6. TDD/BDD
+
+### Request/Response Cycle
+
+TBD
+
+### Design Philosophy
 
 TBD
 
