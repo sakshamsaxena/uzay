@@ -2,9 +2,6 @@
 	Testing Suite
 */
 
-var request = require('supertest');
-var app = require('../index.js');
-
 /*
 	Blog Tests
 */
@@ -25,8 +22,8 @@ describe('Blog Tests', function() {
 	User Tests
 */
 
-describe('User Tests', function () {
-	
+describe('User Tests', function() {
+
 	it('should be able to login');
 
 	it('should reject bad credentials');
@@ -54,5 +51,5 @@ describe('User Tests', function () {
 	it('should be able to view posts disliked by self/user');
 
 	it('should get all posts for a personalised feed');
-	
+
 });

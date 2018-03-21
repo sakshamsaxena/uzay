@@ -6,6 +6,7 @@ var m = require('mongoose');
 var express = require('express');
 var config = require('../config/config.js');
 var UserModel = require('../models/UserModel.js');
+var PayloadGenerator = require('../util/PayloadGenerator.js');
 
 var User = express.Router();
 var Resources = express.Router({mergeParams: true});
@@ -34,7 +35,7 @@ User.get('/:alias', function(req, res) {
 		.then(function(userData) {
 
 			// Generate Payload from data
-			Payload = UserModel.GenerateUserInfoPayload(userData);
+			Payload = PayloadGenerator.GenerateUserInfoPayload(userData);
 
 			// Close connection (important!)
 			m.connection.close();
