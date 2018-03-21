@@ -23,6 +23,8 @@ describe('Blog Tests', function() {
 */
 
 describe('User Tests', function() {
+	
+	it('should be able to register');
 
 	it('should be able to login');
 
