@@ -11,7 +11,7 @@ Grunt is configured to run style checks and code linting. Before committing, alw
 Contributors are requested to work only on their own forked clones of `sakshamsaxena/uzay`, and submit neat PRs after developing features or applying fixes. Here is a step by step guide on how to do that :
 
 1. Fork `sakshamsaxena/uzay`. Now you've your own clone at `YOUR_USERNAME/uzay`.
-2. Clone it locally by `git clone https://github.com/YOUR_USERNAME/uzay.git --branch WIP_v1.0`
+2. Clone it locally by `git clone https://github.com/YOUR_USERNAME/uzay.git`
 3. `npm install` to get all dependencies.
 4. Import database collections as mentioned in README.
 5. Add an `upstream` remote in your repository by `git remote add upstream https://github.com/sakshamsaxena/uzay.git`. 
@@ -19,7 +19,7 @@ Contributors are requested to work only on their own forked clones of `sakshamsa
 7. Hack away!
 8. Write tests if it's a new feature! Run tests with `npm test` or `mocha`.
 9. Right before committing changes, run `grunt` to check code quality.
-10. Also, to stay up to date with my changes, you can do so by `git pull upstream WIP_v1.0`. 
+10. Also, to stay up to date with my changes, you can do so by `git pull upstream master`. 
 11. If `grunt` didn't point out any issues, commit away! Keep your feature branch synced to GitHub. 
 12. When the feature is complete, open a PR!
 
@@ -47,7 +47,7 @@ Uzay (_uzz-aye_) is built on Node.js with Express as the bare framework, and Mog
 
 MongoDB was chosen over Relational Databases like MySQL due to it's natural compatibility with Node.js as well as it's trait of allwing to use a structure which the application gels with most. Even though in our current design, it is fairly normalised like Relational Databases, yet, it is performed to the extent necessary to keep the application, which is aimed to be highly configurable, flow as smooth as possible. Due to this inherent flexibility of the application, MongoDB was used to utilise advantages of both NoSQL DBs as well as that of RDBMSs practices.
 
-Mongoose follows a convention to represent a MongoDB Collection as a Schema. Mongoose Models are then created using this Schema which creates an interface to interact with that Collection. Uzay contains it's own set of "Models" which defines custom operations which are performed on each Collection.
+Mongoose follows a convention to represent a MongoDB Collection as a Schema. Mongoose Models are then created using this Schema which creates an interface to interact with that Collection. Uzay contains it's own set of "Models" which defines custom operations which are performed on each Collection. These are, again, inherently amazing as Mongoose Models use ES6 Promises for these async operations.
 
 All API endpoints are designed to be RESTful and represent resources in semantic URLs. All the endpoints use Models to obtain the necessary data as is. This is then consumed by a "Payload Generator" which uses this raw data from database and return a presentable JSON response, which is finally sent to the client.
 
