@@ -1,12 +1,15 @@
 /*
-	Generate Payload from ResultSets
+	Generate User Payload from ResultSets
 */
 
-const UserPayload = require('../payload/UserPayload.js');
-const ErrorPayload = require('../payload/ErrorPayload.js');
+const UserPayload = require('../layouts/UserPayload.js');
+const ErrorPayload = require('../layouts/ErrorPayload.js');
+
 var GeneratePayload = {};
 
-GeneratePayload.GenerateUserInfoPayload = function (user) {
+// TODO : Add helpers here instead.
+
+GeneratePayload.GenerateUserInfoPayload = function(user) {
 
 	let Payload = {};
 

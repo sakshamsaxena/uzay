@@ -21,10 +21,10 @@ Once you've cloned this/your forked repo, follow the steps below.
 
 ```
 npm install
-mongoimport --db uzay --collection blogposts --file samples/blogposts.json
-mongoimport --db uzay --collection commentposts --file samples/commentposts.json
-mongoimport --db uzay --collection users --file samples/users.json
-mongoimport --db uzay --collection tags --file samples/tags.json
+mongoimport --db uzay --drop --collection blogposts --file samples/blogposts.json
+mongoimport --db uzay --drop --collection commentposts --file samples/commentposts.json
+mongoimport --db uzay --drop --collection users --file samples/users.json
+mongoimport --db uzay --drop --collection tags --file samples/tags.json
 ```
 
 For Windows Users, `mongod` or `mongoimport` won't be added to the PATH by default. So, instead, you may have to mention full path to the executable, like `"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"`. Argument patterns would remain exactly the same.

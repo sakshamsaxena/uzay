@@ -6,7 +6,7 @@ var m = require('mongoose');
 var express = require('express');
 var config = require('../config/config.js');
 var UserModel = require('../models/UserModel.js');
-var PayloadGenerator = require('../util/PayloadGenerator.js');
+var PayloadGenerator = require('../payload/generators/User.js');
 
 var User = express.Router();
 var Resources = express.Router({mergeParams: true});

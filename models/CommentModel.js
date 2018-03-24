@@ -2,12 +2,19 @@
 	Comment Model
 */
 
-let config = require('../config/config.js');
 let mongoose = require('mongoose');
 let commentSchema = require('../schema/CommentSchema.js');
 
-mongoose.connect(config.MongoURL);
+let Comment = mongoose.model('CommentPost', commentSchema);
+let CommentModel = {};
 
-let CommentModel = mongoose.model('CommentPost', commentSchema);
+/**
+	Public Functions
+*/
+
+CommentModel.GetChildComments = function(parentID) {
+
+	return Comment.find({}).exec();
+};
 
 module.exports = CommentModel;
