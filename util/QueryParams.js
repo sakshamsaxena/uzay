@@ -1,16 +1,10 @@
 /*
-	Query Parameters Object
+	Query Parameters Generator Object
 */
 
-function DefaultParameters() {
-	this.includeComments = false;
-	this.startDate = new Date('2018-01-01');
-	this.endDate = new Date();
-	this.limit = 20;
-	this.offset = 0;
-	this.orderBy = 'date';
-	this.direction = 'D';
-};
+/*
+	Helper Functions
+*/
 
 function GetCommentsSwitch(includeComments) {
 
@@ -61,39 +55,45 @@ function GetSortingOrder(dir) {
 	}
 }
 
-function GetParameters(query) {
+/*
+	Constructor
+*/
+
+function DefaultParameters() {
+	this.includeComments = false;
+	this.startDate = new Date('2018-01-01');
+	this.endDate = new Date();
+	this.limit = 20;
+	this.offset = 0;
+	this.orderBy = 'date';
+	this.direction = 'D';
+};
+
+module.exports = function (query) {
 
 	var params = new DefaultParameters();
 
 	if (undefined !== query.includeComments) {
 		params.includeComments = GetCommentsSwitch(query.includeComments);
 	}
-
 	if (undefined !== query.startDate) {
 		params.startDate = GetFormattedDate(query.startDate);
 	}
-
 	if (undefined !== query.endDate) {
 		params.endDate = GetFormattedDate(query.endDate);
 	}
-
 	if (undefined !== query.limit) {
 		params.limit = GetFormattedNumber(query.limit, 'limit');
 	}
-
 	if (undefined !== query.offset) {
 		params.offset = GetFormattedNumber(query.offset, 'offset');
 	}
-
 	if (undefined !== query.orderBy) {
 		params.orderBy = GetSortingIndex(query.orderBy);
 	}
-
 	if (undefined !== query.direction) {
 		params.direction = GetSortingOrder(query.direction);
 	}
 
 	return params;
 }
-
-module.exports = GetParameters;

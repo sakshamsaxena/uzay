@@ -24,18 +24,20 @@ User.get('/:alias', function(req, res) {
 	// Prepare parameters
 	var alias = req.params.alias;
 
-	// Variables to persist Data
-	var Payload = null;
+	// Variable to persist Data
+	var Payload = {};
 
 	// Connect here
 	m.connect(config.MongoURL);
 
 	// Run Queries
 	UserModel.GetUserByAlias(alias)
-		.then(function(userData) {
+		.then(function(user) {
 
 			// Generate Payload from data
-			Payload = PayloadGenerator.GenerateUserInfoPayload(userData);
+			Payload.user = user
+
+			// TODO : Plug in gen here
 
 			// Close connection (important!)
 			m.connection.close();

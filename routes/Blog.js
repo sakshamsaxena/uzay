@@ -29,7 +29,7 @@ BlogPost.get('/id/:id', function(req, res) {
 	var id = req.params.id;
 	var opts = QueryParams(req.query);
 
-	// Variables to persist Data
+	// Variable to persist Data
 	var Payload = {};
 
 	// Connect here
@@ -55,8 +55,7 @@ BlogPost.get('/id/:id', function(req, res) {
 			// Got the comment data (or empty object)
 			Payload.comments = commentData;
 
-			// Generate Payload from data
-			Payload = PayloadGenerator.GenerateBlogPostPayload(Payload);
+			// TODO : Plug in gen here
 
 			// Close connection (important!)
 			m.connection.close();
