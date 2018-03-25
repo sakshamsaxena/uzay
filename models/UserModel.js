@@ -18,4 +18,10 @@ UserModel.GetUserByAlias = function(alias) {
 
 };
 
+UserModel.GetUserByID = function(id) {
+
+	return User.findById(id).exec();
+
+};
+
 module.exports = UserModel;

@@ -2,14 +2,14 @@
 	Query Parameters Object
 */
 
-var DefaultParameters = {
-	includeComments: false,
-	startDate: new Date('2018-01-01'),
-	endDate: new Date(),
-	limit: 20,
-	offset: 0,
-	orderBy: 'date',
-	direction: 'D'
+function DefaultParameters() {
+	this.includeComments = false;
+	this.startDate = new Date('2018-01-01');
+	this.endDate = new Date();
+	this.limit = 20;
+	this.offset = 0;
+	this.orderBy = 'date';
+	this.direction = 'D';
 };
 
 function GetCommentsSwitch(includeComments) {
@@ -63,35 +63,37 @@ function GetSortingOrder(dir) {
 
 function GetParameters(query) {
 
+	var params = new DefaultParameters();
+
 	if (undefined !== query.includeComments) {
-		DefaultParameters.includeComments = GetCommentsSwitch(query.includeComments);
+		params.includeComments = GetCommentsSwitch(query.includeComments);
 	}
 
 	if (undefined !== query.startDate) {
-		DefaultParameters.startDate = GetFormattedDate(query.startDate);
+		params.startDate = GetFormattedDate(query.startDate);
 	}
 
 	if (undefined !== query.endDate) {
-		DefaultParameters.endDate = GetFormattedDate(query.endDate);
+		params.endDate = GetFormattedDate(query.endDate);
 	}
 
 	if (undefined !== query.limit) {
-		DefaultParameters.limit = GetFormattedNumber(query.limit, 'limit');
+		params.limit = GetFormattedNumber(query.limit, 'limit');
 	}
 
 	if (undefined !== query.offset) {
-		DefaultParameters.offset = GetFormattedNumber(query.offset, 'offset');
+		params.offset = GetFormattedNumber(query.offset, 'offset');
 	}
 
 	if (undefined !== query.orderBy) {
-		DefaultParameters.orderBy = GetSortingIndex(query.orderBy);
+		params.orderBy = GetSortingIndex(query.orderBy);
 	}
 
 	if (undefined !== query.direction) {
-		DefaultParameters.direction = GetSortingOrder(query.direction);
+		params.direction = GetSortingOrder(query.direction);
 	}
 
-	return DefaultParameters;
+	return params;
 }
 
 module.exports = GetParameters;

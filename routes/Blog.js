@@ -3,11 +3,13 @@
 */
 
 var express = require('express');
-var mongoose = require('mongoose');
+var m = require('mongoose');
 var config = require('../config/config.js');
-var BlogPostModel = require('../models/BlogModel.js');
 var UserModel = require('../models/UserModel.js');
+var BlogPostModel = require('../models/BlogModel.js');
 var CommentModel = require('../models/CommentModel.js');
+var QueryParams = require('../util/QueryParams.js');
+var PayloadGenerator = require('../payload/generators/Blog.js');
 
 var BlogPost = express.Router();
 
@@ -18,42 +20,50 @@ var BlogPost = express.Router();
 	- includeComments
 		Default: true
 		Format: String
-		Options: true|false
+		Possible Values: true|false
 */
 
 BlogPost.get('/id/:id', function(req, res) {
 
 	// Prepare Parameters
 	var id = req.params.id;
-	var includeComments = true;
-
-	if (req.query.includeComments === 'false') {
-		includeComments = false;
-	}
+	var opts = QueryParams(req.query);
 
 	// Variables to persist Data
-	var resultSet = {};
+	var Payload = {};
 
 	// Connect here
-	mongoose.connect(config.MongoURL);
+	m.connect(config.MongoURL);
 
 	// Run Queries
 	BlogPostModel.GetBlogPostByID(id)
-		.then(function(blogData) {
-			resultSet.blog = blogData;
-			return UserModel.GetUserByID(blogData.UserID);
+		.then(function(blog) {
+			// Got the blog post data
+			Payload.blog = blog;
+
+			// Query the user data
+			return UserModel.GetUserByID(blog.UserID);
 		})
-		.then(function(userData) {
-			resultSet.user = userData;
-			return CommentModel.GetCommentsByPostID(id, includeComments);
+		.then(function(user) {
+			// Got the user data
+			Payload.user = user;
+
+			// Query the comment data
+			return CommentModel.GetCommentsByPostID(id, opts.includeComments);
 		})
 		.then(function(commentData) {
-			resultSet.comments = commentData;
-			mongoose.connection.close();
-			var json = BlogPostModel.GeneratePayload(resultSet);
-			res.send(json);
-		})
-		.end();
+			// Got the comment data (or empty object)
+			Payload.comments = commentData;
+
+			// Generate Payload from data
+			Payload = PayloadGenerator.GenerateBlogPostPayload(Payload);
+
+			// Close connection (important!)
+			m.connection.close();
+
+			// Send response
+			res.send(Payload);
+		});
 });
 
 /**
@@ -63,7 +73,7 @@ BlogPost.get('/id/:id', function(req, res) {
 	- includeComments
 		Default: false
 		Format: String
-		Options: true|false
+		Possible Values: true|false
 	- startDate
 		Default: 01012018
 		Format: YYYYMMDD
@@ -79,11 +89,11 @@ BlogPost.get('/id/:id', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 BlogPost.get('/tag/:tag', function(req, res) {

@@ -14,7 +14,7 @@ let BlogPostModel = {};
 
 BlogPostModel.GetBlogPostByID = function(id) {
 
-	return BlogPost.findById(id).exec();
+	return BlogPost.findOne({_id: id}).exec();
 
 };
 

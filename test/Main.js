@@ -8,7 +8,7 @@
 
 describe('Public Blog API', function() {
 
-	it('should get a particular post');
+	it('should get a single post by ID');
 
 	it('should get all posts by a user');
 
