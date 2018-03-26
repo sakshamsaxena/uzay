@@ -5,11 +5,8 @@
 var express = require('express');
 var m = require('mongoose');
 var config = require('../config/config.js');
-var UserModel = require('../models/UserModel.js');
-var BlogPostModel = require('../models/BlogModel.js');
-var CommentModel = require('../models/CommentModel.js');
 var QueryParams = require('../util/QueryParams.js');
-var PayloadGenerator = require('../payload/generators/Blog.js');
+var Logic = require('../logic/Blog.js');
 
 var BlogPost = express.Router();
 
@@ -29,40 +26,27 @@ BlogPost.get('/id/:id', function(req, res) {
 	var id = req.params.id;
 	var opts = QueryParams(req.query);
 
-	// Variable to persist Data
+	// Presentation Variable
 	var Payload = {};
 
 	// Connect here
 	m.connect(config.MongoURL);
 
-	// Run Queries
-	BlogPostModel.GetBlogPostByID(id)
-		.then(function(blog) {
-			// Got the blog post data
-			Payload.blog = blog;
-
-			// Query the user data
-			return UserModel.GetUserByID(blog.UserID);
-		})
-		.then(function(user) {
-			// Got the user data
-			Payload.user = user;
-
-			// Query the comment data
-			return CommentModel.GetCommentsByPostID(id, opts.includeComments);
-		})
-		.then(function(commentData) {
-			// Got the comment data (or empty object)
-			Payload.comments = commentData;
-
-			// TODO : Plug in gen here
+	// Process Logic
+	Logic.GetBlogPostById(id, opts)
+		.then(function(payload) {
+			// TODO : Process Presentation
+			Payload = payload;
 
 			// Close connection (important!)
 			m.connection.close();
 
 			// Send response
 			res.send(Payload);
-		});
+		})
+		.catch(function(err) {
+			res.status(404).send("Error in Logic :\n" + error);
+		})
 });
 
 /**

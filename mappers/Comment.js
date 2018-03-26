@@ -1,23 +1,23 @@
 /*
-	Comment Model
+	Comment Mapper
 */
 
 let mongoose = require('mongoose');
 let commentSchema = require('../schema/CommentSchema.js');
 
 let Comment = mongoose.model('CommentPost', commentSchema);
-let CommentModel = {};
+let CommentMapper = {};
 
 /**
 	Public Functions
 */
 
-CommentModel.GetChildComments = function(parentID) {
+CommentMapper.GetChildComments = function(parentID) {
 
 	return Comment.find({}).exec();
 };
 
-CommentModel.GetCommentsByPostID = function(id, includeComments) {
+CommentMapper.GetCommentsByPostID = function(id, includeComments) {
 
 	if (includeComments) {
 		return Comment.find({PostID: id}).exec();
@@ -28,4 +28,4 @@ CommentModel.GetCommentsByPostID = function(id, includeComments) {
 	}
 };
 
-module.exports = CommentModel;
+module.exports = CommentMapper;

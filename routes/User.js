@@ -5,8 +5,8 @@
 var m = require('mongoose');
 var express = require('express');
 var config = require('../config/config.js');
-var UserModel = require('../models/UserModel.js');
-var PayloadGenerator = require('../payload/generators/User.js');
+var QueryParams = require('../util/QueryParams.js');
+var Logic = require('../logic/User.js');
 
 var User = express.Router();
 var Resources = express.Router({mergeParams: true});
@@ -24,26 +24,26 @@ User.get('/:alias', function(req, res) {
 	// Prepare parameters
 	var alias = req.params.alias;
 
-	// Variable to persist Data
+	// Presentation Variable
 	var Payload = {};
 
 	// Connect here
 	m.connect(config.MongoURL);
 
-	// Run Queries
-	UserModel.GetUserByAlias(alias)
-		.then(function(user) {
-
-			// Generate Payload from data
-			Payload.user = user
-
-			// TODO : Plug in gen here
+	// Process Logic
+	Logic.GetUserInfo(alias)
+		.then(function(payload) {
+			// TODO : Process Presentation
+			Payload = payload;
 
 			// Close connection (important!)
 			m.connection.close();
 
 			// Send response
 			res.send(Payload);
+		})
+		.catch(function(error) {
+			res.status(404).send("Error in Logic :\n" + error);
 		});
 });
 

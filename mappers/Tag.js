@@ -1,20 +1,20 @@
 /*
-	Tags Model
+	Tags Mapper
 */
 
 let mongoose = require('mongoose');
 let tagsSchema = require('../schema/TagsSchema.js');
 
 let Tag = mongoose.model('Tag', tagsSchema);
-let TagModel = {};
+let TagMapper = {};
 
 /**
 	Public Functions
 */
 
-TagModel.GetBlogPostsByTag = function(tag) {
+TagMapper.GetBlogPostsByTag = function(tag) {
 
 	return Tag.find({}).exec();
 };
 
-module.exports = TagModel;
+module.exports = TagMapper;
