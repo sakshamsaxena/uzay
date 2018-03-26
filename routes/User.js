@@ -66,11 +66,11 @@ User.get('/:alias', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/liked', function(req, res) {
@@ -96,11 +96,11 @@ Resources.get('/liked', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/liked/posts', function(req, res) {
@@ -126,11 +126,11 @@ Resources.get('/liked/posts', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/liked/comments', function(req, res) {
@@ -156,11 +156,11 @@ Resources.get('/liked/comments', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/disliked', function(req, res) {
@@ -186,11 +186,11 @@ Resources.get('/disliked', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/disliked/posts', function(req, res) {
@@ -216,11 +216,11 @@ Resources.get('/disliked/posts', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/disliked/comments', function(req, res) {
@@ -246,11 +246,11 @@ Resources.get('/disliked/comments', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/posts', function(req, res) {
@@ -276,11 +276,11 @@ Resources.get('/posts', function(req, res) {
 	- orderBy
 		Default: Date
 		Format: String
-		Options: Date|Likes|Dislikes|Views|CommentCount
+		Possible Values: Date|Likes|Dislikes|Views|CommentCount
 	- direction
 		Default: D
 		Format: String
-		Options: D|A
+		Possible Values: D|A
 */
 
 Resources.get('/comments', function(req, res) {
