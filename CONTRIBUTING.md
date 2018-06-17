@@ -47,9 +47,9 @@ Uzay (_uzz-aye_) is built on Node.js with Express as the bare framework, and Mog
 
 MongoDB was chosen over Relational Databases like MySQL due to it's natural compatibility with Node.js as well as it's trait of allwing to use a structure which the application gels with most. Even though in our current design, it is fairly normalised like Relational Databases, yet, it is performed to the extent necessary to keep the application, which is aimed to be highly configurable, flow as smooth as possible. Due to this inherent flexibility of the application, MongoDB was used to utilise advantages of both NoSQL DBs as well as that of RDBMSs practices.
 
-Mongoose follows a convention to represent a MongoDB Collection as a Schema. Mongoose Models are then created using this Schema which creates an interface to interact with that Collection. Uzay contains it's own set of "Models" which defines custom operations which are performed on each Collection. These are, again, inherently amazing as Mongoose Models use ES6 Promises for these async operations.
+Mongoose follows a convention to represent a MongoDB Collection as a Schema. Mongoose Models are then created using this Schema which creates an interface to interact with that Collection. Uzay contains it's own set of "Mappers" which defines custom operations which are performed on each Collection. These are, again, inherently amazing as Mongoose Models use ES6 Promises for these async operations.
 
-All API endpoints are designed to be RESTful and represent resources in semantic URLs. All the endpoints use Models to obtain the necessary data as is. This is then consumed by a "Payload Generator" which uses this raw data from database and return a presentable JSON response, which is finally sent to the client.
+All API endpoints are designed to be RESTful and represent resources in semantic URLs. All the endpoints use respective business logic classes to obtain the necessary data as is. This is then consumed by a "Payload Generator" which uses this raw data from database and return a presentable JSON response, which is finally sent to the client.
 
 Security layer can be easily plugged in via "middlewares" to each endpoint, as per case.
 
@@ -59,7 +59,6 @@ Finally, best practices in development process ensures least TTM (Time To Market
 
 ## 3. Roadmap
 
-* Provide internal structure to Models
 * Provide internal structure to Payload Generators
 * Write Pending Routes as per TDD
 * Set up a CI
