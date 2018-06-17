@@ -15,7 +15,7 @@ var BlogPost = express.Router();
 
 	Public route to fetch a resource by id. Options are :
 	- includeComments
-		Default: true
+		Default: false
 		Format: String
 		Possible Values: true|false
 */
@@ -45,7 +45,7 @@ BlogPost.get('/id/:id', function(req, res) {
 			res.send(Payload);
 		})
 		.catch(function(err) {
-			res.status(404).send("Error in Logic :\n" + error);
+			res.status(404).send("Error in Logic :\n" + err);
 		})
 });
 
@@ -80,7 +80,7 @@ BlogPost.get('/id/:id', function(req, res) {
 */
 
 BlogPost.get('/tag/:tag', function(req, res) {
-
+	res.send('/Blog' + req.url);
 });
 
 /**
