@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 /* Require Routes */
 const blog = require('./routes/Blog.js');
 const user = require('./routes/User.js');
+const comment = require('./routes/Comment.js');
 
 /* Our App! */
 const app = express();
