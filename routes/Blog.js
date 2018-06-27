@@ -125,11 +125,11 @@ BlogPost.patch('/id/:id/dislike', function(req, res) {
 	res.send('/Blog' + req.url);
 });
 
-BlogPost.patch('/id/:id/comment/like', function(req, res) {
+BlogPost.patch('/id/:id/comment/:cid/like', function(req, res) {
 	res.send('/Blog' + req.url);
 });
 
-BlogPost.patch('/id/:id/comment/dislike', function(req, res) {
+BlogPost.patch('/id/:id/comment/:cid/dislike', function(req, res) {
 	res.send('/Blog' + req.url);
 });
 
