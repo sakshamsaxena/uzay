@@ -125,9 +125,21 @@ BlogPost.patch('/id/:id/dislike', function(req, res) {
 	res.send('/Blog' + req.url);
 });
 
+/**
+	PATCH /id/:id/comment/:cid/like
+ 
+	Increments a like on the blog post comment with ID :id and CID :cid.
+*/
+
 BlogPost.patch('/id/:id/comment/:cid/like', function(req, res) {
 	res.send('/Blog' + req.url);
 });
+
+/**
+	PATCH /id/:id/comment/:cid/dislike
+
+	Increments a dislike on the blog post comment with ID :id and CID :cid.
+*/
 
 BlogPost.patch('/id/:id/comment/:cid/dislike', function(req, res) {
 	res.send('/Blog' + req.url);
