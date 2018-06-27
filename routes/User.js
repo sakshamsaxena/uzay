@@ -5,7 +5,6 @@
 var m = require('mongoose');
 var express = require('express');
 var config = require('../config/config.js');
-var QueryParams = require('../util/QueryParams.js');
 var Logic = require('../logic/User.js');
 
 var User = express.Router();
@@ -43,7 +42,7 @@ User.get('/:alias', function(req, res) {
 			res.send(Payload);
 		})
 		.catch(function(error) {
-			res.status(404).send("Error in Logic :\n" + error);
+			res.status(404).send('Error in Logic :\n' + error);
 		});
 });
 

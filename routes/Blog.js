@@ -45,8 +45,8 @@ BlogPost.get('/id/:id', function(req, res) {
 			res.send(Payload);
 		})
 		.catch(function(err) {
-			res.status(404).send("Error in Logic :\n" + err);
-		})
+			res.status(404).send('Error in Logic :\n' + err);
+		});
 });
 
 /**
@@ -127,7 +127,7 @@ BlogPost.patch('/id/:id/dislike', function(req, res) {
 
 /**
 	PATCH /id/:id/comment/:cid/like
- 
+
 	Increments a like on the blog post comment with ID :id and CID :cid.
 */
 

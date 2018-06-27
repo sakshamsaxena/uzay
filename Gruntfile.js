@@ -7,7 +7,6 @@ module.exports = function(grunt) {
 				reporter: require('jshint-stylish')
 			},
 			target: [
-				'payload/**/*.js',
 				'config/config.sample.js',
 				'routes/**/*.js',
 				'models/**/*.js',
@@ -18,7 +17,6 @@ module.exports = function(grunt) {
 		},
 		jscs: {
 			src: [
-				'payload/**/*.js',
 				'config/config.sample.js',
 				'routes/**/*.js',
 				'models/**/*.js',
