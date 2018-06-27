@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 /* Require Routes */
 const blog = require('./routes/Blog.js');
 const user = require('./routes/User.js');
-const comment = require('./routes/Comment.js');
 
 /* Our App! */
 const app = express();
@@ -27,7 +26,6 @@ app.use(function(req, res, next) {
 // Application Routes
 app.use('/Blog', blog);
 app.use('/User', user);
-app.use('/Comment' , comment);
 
 // Render any other route than the ones defined anywhere in app as HTTP 404
 app.use(function(req, res) {

@@ -125,4 +125,12 @@ BlogPost.patch('/id/:id/dislike', function(req, res) {
 	res.send('/Blog' + req.url);
 });
 
+BlogPost.patch('/id/:id/comment/like', function(req, res) {
+	res.send('/Blog' + req.url);
+});
+
+BlogPost.patch('/id/:id/comment/dislike', function(req, res) {
+	res.send('/Blog' + req.url);
+});
+
 module.exports = BlogPost;
