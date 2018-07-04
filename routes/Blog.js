@@ -7,6 +7,7 @@ var m = require('mongoose');
 var config = require('../config/config.js');
 var QueryParams = require('../util/QueryParams.js');
 var Logic = require('../logic/Blog.js');
+var auth = require('../config/auth.js');
 
 var BlogPost = express.Router();
 
@@ -21,32 +22,37 @@ var BlogPost = express.Router();
 */
 
 BlogPost.get('/id/:id', function(req, res) {
+	// Authenticate
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		// Prepare Parameters
+		var id = req.params.id;
+		var opts = QueryParams(req.query);
 
-	// Prepare Parameters
-	var id = req.params.id;
-	var opts = QueryParams(req.query);
+		// Presentation Variable
+		var Payload = {};
 
-	// Presentation Variable
-	var Payload = {};
+		// Connect here
+		m.connect(config.MongoURL);
 
-	// Connect here
-	m.connect(config.MongoURL);
+		// Process Logic
+		Logic.GetBlogPostById(id, opts)
+			.then(function(payload) {
+				// TODO : Process Presentation
+				Payload = payload;
 
-	// Process Logic
-	Logic.GetBlogPostById(id, opts)
-		.then(function(payload) {
-			// TODO : Process Presentation
-			Payload = payload;
+				// Close connection (important!)
+				m.connection.close();
 
-			// Close connection (important!)
-			m.connection.close();
-
-			// Send response
-			res.send(Payload);
-		})
-		.catch(function(err) {
-			res.status(404).send('Error in Logic :\n' + err);
-		});
+				// Send response
+				res.send(Payload);
+			})
+			.catch(function(err) {
+				res.status(404).send('Error in Logic :\n' + err);
+			});
+		} else {
+			res.status(403).send('Token expired! Login again.');
+		}
 });
 
 /**
@@ -80,7 +86,12 @@ BlogPost.get('/id/:id', function(req, res) {
 */
 
 BlogPost.get('/tag/:tag', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
@@ -90,7 +101,12 @@ BlogPost.get('/tag/:tag', function(req, res) {
 */
 
 BlogPost.get('/id/:id/comment/:cid', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
@@ -102,7 +118,12 @@ BlogPost.get('/id/:id/comment/:cid', function(req, res) {
 */
 
 BlogPost.post('/id/:id/comment', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
@@ -112,7 +133,12 @@ BlogPost.post('/id/:id/comment', function(req, res) {
 */
 
 BlogPost.patch('/id/:id/like', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
@@ -122,7 +148,12 @@ BlogPost.patch('/id/:id/like', function(req, res) {
 */
 
 BlogPost.patch('/id/:id/dislike', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
@@ -132,7 +163,12 @@ BlogPost.patch('/id/:id/dislike', function(req, res) {
 */
 
 BlogPost.patch('/id/:id/comment/:cid/like', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
@@ -142,7 +178,12 @@ BlogPost.patch('/id/:id/comment/:cid/like', function(req, res) {
 */
 
 BlogPost.patch('/id/:id/comment/:cid/dislike', function(req, res) {
-	res.send('/Blog' + req.url);
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		res.send('/Blog' + req.url);
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 module.exports = BlogPost;

@@ -6,6 +6,7 @@ var m = require('mongoose');
 var express = require('express');
 var config = require('../config/config.js');
 var Logic = require('../logic/User.js');
+var auth = require('../config/auth.js');
 
 var User = express.Router();
 var Resources = express.Router({mergeParams: true});
@@ -19,31 +20,35 @@ User.use('/:alias', Resources);
 */
 
 User.get('/:alias', function(req, res) {
+	var user_token = req.get('AuthToken');
+	if (auth.allow(user_token)) {
+		// Prepare parameters
+		var alias = req.params.alias;
 
-	// Prepare parameters
-	var alias = req.params.alias;
+		// Presentation Variable
+		var Payload = {};
 
-	// Presentation Variable
-	var Payload = {};
+		// Connect here
+		m.connect(config.MongoURL);
 
-	// Connect here
-	m.connect(config.MongoURL);
+		// Process Logic
+		Logic.GetUserInfo(alias)
+			.then(function(payload) {
+				// TODO : Process Presentation
+				Payload = payload;
 
-	// Process Logic
-	Logic.GetUserInfo(alias)
-		.then(function(payload) {
-			// TODO : Process Presentation
-			Payload = payload;
+				// Close connection (important!)
+				m.connection.close();
 
-			// Close connection (important!)
-			m.connection.close();
-
-			// Send response
-			res.send(Payload);
-		})
-		.catch(function(error) {
-			res.status(404).send('Error in Logic :\n' + error);
-		});
+				// Send response
+				res.send(Payload);
+			})
+			.catch(function(error) {
+				res.status(404).send('Error in Logic :\n' + error);
+			});
+	} else {
+		res.status(403).send('Token expired! Login again.');
+	}
 });
 
 /**
