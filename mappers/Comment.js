@@ -28,4 +28,17 @@ CommentMapper.GetCommentsByPostID = function(id, includeComments) {
 	}
 };
 
+CommentMapper.createComment = function(properties) {
+	let comment = new Comment(properties);
+	return comment.save();
+};
+
+CommentMapper.updateComment = function(properties) {
+	return Comment.updateOne({_id: properties.id}, properties).exec();
+};
+
+CommentMapper.deleteComment = function(id) {
+	return Comment.deleteOne({_id: id}).exec();
+};
+
 module.exports = CommentMapper;
