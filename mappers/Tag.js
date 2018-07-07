@@ -18,11 +18,11 @@ TagMapper.GetBlogPostsByTag = function(tag) {
 
 TagMapper.createTag = function(properties) {
 	let tag = new Tag(properties);
-	tag.save();
+	return tag.save();
 };
 
 TagMapper.updateTag = function(properties) {
-	Comment.updateOne({Tag: properties.Tag}, properties).exec();
+	return Comment.updateOne({Tag: properties.Tag}, properties).exec();
 };
 
 module.exports = TagMapper;

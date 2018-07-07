@@ -30,15 +30,15 @@ CommentMapper.GetCommentsByPostID = function(id, includeComments) {
 
 CommentMapper.createComment = function(properties) {
 	let comment = new Comment(properties);
-	comment.save();
+	return comment.save();
 };
 
 CommentMapper.updateComment = function(properties) {
-	Comment.updateOne({_id: properties.id}, properties).exec();
+	return Comment.updateOne({_id: properties.id}, properties).exec();
 };
 
 CommentMapper.deleteComment = function(id) {
-	Comment.deleteOne({_id: id}).exec();
+	return Comment.deleteOne({_id: id}).exec();
 };
 
 module.exports = CommentMapper;

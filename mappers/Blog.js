@@ -27,15 +27,15 @@ BlogPostMapper.GetBlogByID = function(id) {
 
 BlogPostMapper.createBlogPost = function(properties) {
 	let post = new BlogPost(properties);
-	post.save();
+	return post.save();
 };
 
 BlogPostMapper.updateBlogPost = function(properties) {
-	BlogPost.updateOne({_id: properties.id}, properties).exec();
+	return BlogPost.updateOne({_id: properties.id}, properties).exec();
 };
 
 BlogPostMapper.deleteBlogPost = function(id) {
-	BlogPost.deleteOne({_id: id}).exec();
+	return BlogPost.deleteOne({_id: id}).exec();
 }
 
 module.exports = BlogPostMapper;
