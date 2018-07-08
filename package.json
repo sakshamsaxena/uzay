@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "postinstall": "cp config/config.sample.js config/config.js",
     "start": "nodemon index.js"
   },
   "author": "Saksham Saxena",
@@ -24,7 +25,8 @@
     "moment": "^2.22.2",
     "mongodb": "^2.2.11",
     "mongoose": "^5.0.6",
-    "mongoose-plugin-autoinc": "^1.1.9"
+    "mongoose-plugin-autoinc": "^1.1.9",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "grunt": "^1.0.2",
