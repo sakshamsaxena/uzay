@@ -2,23 +2,22 @@
 
 const fs = require('fs')
 const path = require('path')
+const util = require('util');
 
-try{
-var sample_config_file = fs.readFileSync(path.join(__dirname, 'config.sample.js'), 'utf8');
-} catch (err) {
-    if (err.code === 'ENOENT') {
-        console.log('Sample configuration file not found!');
-        throw err;
-      } else {
-        throw err;
-      }
-      
-}
-try{
-fs.writeFileSync(path.join(__dirname, 'config.js'),sample_config_file,'utf8');
-} catch (err) {
-    console.log('Cannot write sample configuratio file.')
-    throw err;
-}
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
 
-console.log('Copied sample configuration.');
+readFile(path.join(__dirname, 'config.sample.js'))
+    .then((content) => {
+       writeFile(path.join(__dirname, 'config.js'), content)
+            .then(() => {
+                console.log('Sample configuration sucessfully copied.');
+            })
+            .catch((err) => {
+                console.log('Error writing sample configuration file.', err)
+            });
+    })
+    .catch((err) => {
+        console.log('Error reading sample configuration file.', err);
+    });
+
