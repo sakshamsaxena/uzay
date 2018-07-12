@@ -19,7 +19,6 @@ User.use('/:alias', Resources);
 */
 
 User.get('/:alias', function(req, res) {
-
 	// Prepare parameters
 	var alias = req.params.alias;
 
@@ -27,7 +26,7 @@ User.get('/:alias', function(req, res) {
 	var Payload = {};
 
 	// Connect here
-	m.connect(config.MongoURL);
+	m.connect(config.MongoURL, {useNewUrlParser: true});
 
 	// Process Logic
 	Logic.GetUserInfo(alias)

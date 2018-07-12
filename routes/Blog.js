@@ -21,7 +21,6 @@ var BlogPost = express.Router();
 */
 
 BlogPost.get('/id/:id', function(req, res) {
-
 	// Prepare Parameters
 	var id = req.params.id;
 	var opts = QueryParams(req.query);
@@ -30,7 +29,7 @@ BlogPost.get('/id/:id', function(req, res) {
 	var Payload = {};
 
 	// Connect here
-	m.connect(config.MongoURL);
+	m.connect(config.MongoURL, {useNewUrlParser: true});
 
 	// Process Logic
 	Logic.GetBlogPostById(id, opts)

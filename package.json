@@ -16,12 +16,16 @@
   },
   "dependencies": {
     "base-64": "^0.1.0",
+    "bcrypt": "^2.0.1",
     "blueimp-md5": "^2.5.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.22.2",
     "mongodb": "^2.2.11",
     "mongoose": "^5.0.6",
-    "mongoose-plugin-autoinc": "^1.1.9"
+    "mongoose-plugin-autoinc": "^1.1.9",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "grunt": "^1.0.2",
