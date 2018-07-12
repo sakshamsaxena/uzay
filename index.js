@@ -27,25 +27,9 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.all("/" + "*", (req, res, next) => {
-  if (req.path == '/Auth' || req.path == '/Auth/login' || req.path == '/Auth/signup') {
-    return next();
-  }
-	else if (req.get('AuthToken') === undefined) {
-		res.status(403).json({message: "AuthToken not found! Resend request with AuthToken!"})
-	} else {
-	  let token = authenticate.allow(req.get('AuthToken'))
-	  if (token) {
-			next();
-	  } else {
-			res.status(403).send('Token expired! Login again.');
-		}
-	}
-})
-
 // Application Routes
-app.use('/Blog', blog);
-app.use('/User', user);
+app.use('/Blog', authenticate.allow, blog);
+app.use('/User', authenticate.allow, user);
 app.use('/Auth', auth);
 
 // Render any other route than the ones defined anywhere in app as HTTP 404

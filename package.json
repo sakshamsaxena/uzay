@@ -20,7 +20,6 @@
     "blueimp-md5": "^2.5.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "grunt-cli": "^1.2.0",
     "jwt-simple": "^0.5.1",
     "moment": "^2.22.2",
     "mongodb": "^2.2.11",
