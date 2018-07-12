@@ -22,7 +22,7 @@ TagMapper.createTag = function(properties) {
 };
 
 TagMapper.updateTag = function(properties) {
-	return Comment.updateOne({Tag: properties.Tag}, properties).exec();
+	return Tag.updateOne({Tag: properties.Tag}, properties).exec();
 };
 
 module.exports = TagMapper;

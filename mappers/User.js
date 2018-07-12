@@ -26,11 +26,11 @@ UserMapper.GetUserById = function(id) {
 
 UserMapper.createUser = function(properties) {
 	let user = new User(properties);
-	return tag.save();
+	return user.save();
 };
 
 UserMapper.updateUser = function(properties) {
-	return Comment.updateOne({email: properties.email}, properties).exec();
+	return User.updateOne({email: properties.email}, properties).exec();
 };
 
 module.exports = UserMapper;

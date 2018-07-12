@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "postinstall": "cp config/config.sample.js config/config.js",
+    "postinstall": "node config/copyConfig.js",
     "start": "nodemon index.js"
   },
   "author": "Saksham Saxena",
