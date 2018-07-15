@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 /* Require Routes */
 const blog = require('./routes/Blog.js');
 const user = require('./routes/User.js');
+const authenticate = require('./logic/Authentication.js');
 
 /* Our App! */
 const app = express();
@@ -24,8 +25,8 @@ app.use(function(req, res, next) {
 });
 
 // Application Routes
-app.use('/Blog', blog);
-app.use('/User', user);
+app.use('/Blog', authenticate.allow, blog);
+app.use('/User', authenticate.allow, user);
 
 // Render any other route than the ones defined anywhere in app as HTTP 404
 app.use(function(req, res) {
