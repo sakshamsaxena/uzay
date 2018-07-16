@@ -16,13 +16,15 @@
   },
   "dependencies": {
     "base-64": "^0.1.0",
+    "bcrypt": "^3.0.0",
     "blueimp-md5": "^2.5.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jsonwebtoken": "^8.3.0",
     "mongodb": "^2.2.11",
     "mongoose": "^5.0.6",
-    "mongoose-plugin-autoinc": "^1.1.9"
+    "mongoose-plugin-autoinc": "^1.1.9",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "grunt": "^1.0.2",
