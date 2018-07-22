@@ -4,7 +4,7 @@
 
 ### Code Consistency
 
-Grunt is configured to run style checks and code linting. Before committing, always make sure that you've run `grunt` once. If you've not used it before, you might need to install `grunt-cli` globally via NPM using `npm i -g grunt-cli`.
+Standard is used to run style checks and code linting. Before committing, always make sure that you've run `npm test` once.
 
 ### Workflow
 
@@ -18,9 +18,9 @@ Contributors are requested to work only on their own forked clones of `sakshamsa
 6. Checkout a new feature branch by `git checkout -b FEATURE_NAME`.
 7. Hack away!
 8. Write tests if it's a new feature! Run tests with `npm test` or `mocha`.
-9. Right before committing changes, run `grunt` to check code quality.
+9. Right before committing changes, run `npm test` to check code quality.
 10. Also, to stay up to date with my changes, you can do so by `git pull upstream master`. 
-11. If `grunt` didn't point out any issues, commit away! Keep your feature branch synced to GitHub. 
+11. If `npm test` didn't point out any issues, commit away! Keep your feature branch synced to GitHub. 
 12. When the feature is complete, open a PR!
 
 That's it!
@@ -56,10 +56,3 @@ Security layer can be easily plugged in via "middlewares" to each endpoint, as p
 As a simple blog engine, Uzay can still scale well horizontally, mainly due to it's inheritance from Node.js and MongoDB's scaling capabilities. Further, since security layer is a "pluggable" service, it can scale independently without affecting existing architecture. MongoDB's Collections are normalised enough to act as the source of truth for any extra new analytics services with a different set of database, which still won't affect the core application's performance.
 
 Finally, best practices in development process ensures least TTM (Time To Market) with quality code.
-
-## 3. Roadmap
-
-* Provide internal structure to Payload Generators
-* Write Pending Routes as per TDD
-* Set up a CI
-* Write a security layer
