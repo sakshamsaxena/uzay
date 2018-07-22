@@ -2,7 +2,7 @@
     Auth.js
 */
 var express = require('express')
-var Logic = require('../logic/Registration.js')
+var Logic = require('../logic/Authentication.js')
 
 var Auth = express.Router()
 
