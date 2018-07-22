@@ -61,7 +61,7 @@ let register = {
           });
         } else {
           UserCredential.update(
-            {_id: data.id},
+            {VerificationToken: req.params.verificationtoken},
             {$set: {Verified: true}}
           ).then(result => {
             res.status(200).json({
