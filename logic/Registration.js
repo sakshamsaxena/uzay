@@ -1,15 +1,13 @@
-const bcrypt = require('bcrypt');
-const jsonparser = require('body-parser').json()
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const uuid = require('uuid/v4');
-const config = require('../config/config');
-const UserSchema = require('../schema/UserSchema');
-const UserCredential = mongoose.model('User', UserSchema);
+const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
+const uuid = require('uuid/v4')
+const config = require('../config/config')
+const UserSchema = require('../schema/UserSchema')
+const UserCredential = mongoose.model('User', UserSchema)
 
 let register = {
   user_signup: (req, res) => {
-    mongoose.connect(config.MongoURL, {useNewUrlParser: true});
+    mongoose.connect(config.MongoURL, {useNewUrlParser: true})
     UserCredential.find({$or: [
       {Email: req.body.Email},
       {Alias: req.body.Alias}
@@ -24,33 +22,33 @@ let register = {
             Country: req.body.Country,
             VerificationToken: uuid(),
             Verified: false
-          });
+          })
           console.log(userdata)
           userdata.save().then(result => {
             res.status(200).json({
               message: 'Signup successful! Proceed to verification.',
               AuthToken: userdata.VerificationToken
-            });
-          });
-        });
+            })
+          })
+        })
       } else {
         if (data[0].Alias === req.body.Alias) {
           res.status(401).json({
             message: 'Alias already taken! Try another alias.'
-          });
+          })
         } else {
           res.status(401).json({
             message: 'Email already exists! Try another email!'
-          });
+          })
         }
       }
     }).catch(err => {
-      res.status(500).json({message: 'Server error!'});
-    });
+      res.status(500).json({message: 'Server error : \n' + err})
+    })
   },
 
   verify: (req, res) => {
-    mongoose.connect(config.MongoURL, {useNewUrlParser: true});
+    mongoose.connect(config.MongoURL, {useNewUrlParser: true})
     UserCredential.findOne({
       VerificationToken: req.params.verificationtoken
     }).exec().then(data => {
@@ -58,7 +56,7 @@ let register = {
         if (data.Verified === true) {
           res.status(200).json({
             message: 'Already verified!'
-          });
+          })
         } else {
           UserCredential.update(
             {VerificationToken: req.params.verificationtoken},
@@ -66,18 +64,18 @@ let register = {
           ).then(result => {
             res.status(200).json({
               message: 'Verification successful!'
-            });
-          });
+            })
+          })
         }
       } else {
         res.status(401).json({
           message: 'Invalid verification token!'
-        });
+        })
       }
     }).catch(err => {
-      res.status(500).json({message: 'Server error!'});
-    });
+      res.status(500).json({message: 'Server error : \n' + err})
+    })
   }
-};
+}
 
-module.exports = register;
+module.exports = register

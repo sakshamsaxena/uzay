@@ -1,6 +1,8 @@
 /*
-	Generate User Payload from ResultSets
+  Generate User Payload from ResultSets
 */
 
-const UserPayload = require('../layouts/UserPayload.js');
-const ErrorPayload = require('../layouts/ErrorPayload.js');
+/* TODO
+const UserPayload = require('../layouts/UserPayload.js')
+const ErrorPayload = require('../layouts/ErrorPayload.js')
+*/

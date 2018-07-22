@@ -1,10 +1,10 @@
 /*
-	JSON Payload for bad routes
+  JSON Payload for bad routes
 */
 
 const Payload = {
-	Message: '',
-	DocsURL: 'DocsURL'
-};
+  Message: '',
+  DocsURL: 'DocsURL'
+}
 
-module.exports = Payload;
+module.exports = Payload
