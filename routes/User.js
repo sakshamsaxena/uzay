@@ -4,11 +4,17 @@
 
 var m = require('mongoose')
 var express = require('express')
-var config = require('../config/config.js')
 var Logic = require('../logic/User.js')
+var config = require('../config/config.js')
 
 var User = express.Router()
 var Resources = express.Router({mergeParams: true})
+
+/**
+    GET[|POST] /:alias[/liked|disliked|posts|comments][/posts/comments/new]
+
+    User Resources Routes. Post creation and all content of a user is accessed here.
+*/
 
 User.use('/:alias', Resources)
 
@@ -26,7 +32,7 @@ User.get('/:alias', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL)
+  m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
   Logic.GetUserInfo(alias)
@@ -41,7 +47,10 @@ User.get('/:alias', function (req, res) {
       res.send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send('Error in Logic :\n' + error)
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
     })
 })
 

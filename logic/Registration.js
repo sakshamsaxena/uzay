@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const uuid = require('uuid/v4')
-const config = require('../config/config')
-const UserSchema = require('../schema/UserSchema')
+const config = require('../config/config.js')
+const UserSchema = require('../schema/UserSchema.js')
 const UserCredential = mongoose.model('User', UserSchema)
 
 let register = {
-  user_signup: (req, res) => {
+  SignUp: (req, res) => {
     mongoose.connect(config.MongoURL, {useNewUrlParser: true})
     UserCredential.find({$or: [
       {Email: req.body.Email},
@@ -47,7 +47,7 @@ let register = {
     })
   },
 
-  verify: (req, res) => {
+  Verify: (req, res) => {
     mongoose.connect(config.MongoURL, {useNewUrlParser: true})
     UserCredential.findOne({
       VerificationToken: req.params.verificationtoken

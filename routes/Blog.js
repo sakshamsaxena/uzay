@@ -29,7 +29,7 @@ BlogPost.get('/id/:id', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL)
+  m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
   Logic.GetBlogPostById(id, opts)
@@ -43,8 +43,11 @@ BlogPost.get('/id/:id', function (req, res) {
       // Send response
       res.send(Payload)
     })
-    .catch(function (err) {
-      res.status(404).send('Error in Logic :\n' + err)
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
     })
 })
 
