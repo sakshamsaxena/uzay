@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/standard && mocha",
+    "precommit": "npm test",
     "postinstall": "node config/copyConfig.js",
     "start": "nodemon index.js"
   },
@@ -27,6 +28,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "mocha": "^3.1.2",
     "should": "^11.1.1",
     "standard": "^11.0.1",
