@@ -58,6 +58,10 @@ User.get('/:alias', function (req, res) {
     GET  /:alias/liked[?params=value]
 
     Public route to fetch all liked content by a user. Filters are :
+    - type
+        Default: All
+        Format: String
+        Possible Values: All|Posts|Comments
     - startDate
         Default: 01012018
         Format: YYYYMMDD
@@ -85,69 +89,13 @@ Resources.get('/liked', function (req, res) {
 })
 
 /**
-    GET  /:alias/liked/posts[?params=value]
-
-    Public route to fetch all liked blog posts by a user. Filters are :
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
-*/
-
-Resources.get('/liked/posts', function (req, res) {
-
-})
-
-/**
-    GET  /:alias/liked/comments[?params=value]
-
-    Public route to fetch all liked comments by a user. Filters are :
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
-*/
-
-Resources.get('/liked/comments', function (req, res) {
-
-})
-
-/**
     GET  /:alias/disliked[?params=value]
 
     Public route to fetch all disliked content by a user. Filters are :
+    - type
+        Default: All
+        Format: String
+        Possible Values: All|Posts|Comments
     - startDate
         Default: 01012018
         Format: YYYYMMDD
@@ -171,66 +119,6 @@ Resources.get('/liked/comments', function (req, res) {
 */
 
 Resources.get('/disliked', function (req, res) {
-
-})
-
-/**
-    GET  /:alias/disliked/posts[?params=value]
-
-    Public route to fetch all disliked blog posts by a user. Filters are :
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
-*/
-
-Resources.get('/disliked/posts', function (req, res) {
-
-})
-
-/**
-    GET  /:alias/disliked/comments[?params=value]
-
-    Public route to fetch all disliked comments by a user. Filters are :
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
-*/
-
-Resources.get('/disliked/comments', function (req, res) {
 
 })
 
