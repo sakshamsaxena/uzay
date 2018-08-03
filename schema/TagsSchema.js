@@ -7,7 +7,10 @@ let Schema = mongoose.Schema
 let ObjectId = mongoose.Schema.Types.ObjectId
 
 let tagsSchema = {
-  _id: ObjectId,
+  _id: {
+    type: ObjectId,
+    ref: 'BlogPost'
+  },
   Tag: String,
   Posts: [{type: Number}]
 }
