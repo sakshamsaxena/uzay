@@ -23,19 +23,19 @@ let userSchema = {
     default: Date.now
   },
   LikedPosts: [{
-    type: mongoose.Schema.Types.Number,
+    type: Number,
     ref: 'BlogPost'
   }],
   DislikedPosts: [{
-    type: mongoose.Schema.Types.Number,
+    type: Number,
     ref: 'BlogPost'
   }],
   LikedComments: [{
-    type: mongoose.Schema.Types.Number,
+    type: Number,
     ref: 'BlogPost'
   }],
   DislikedComments: [{
-    type: mongoose.Schema.Types.Number,
+    type: Number,
     ref: 'BlogPost'
   }]
 }

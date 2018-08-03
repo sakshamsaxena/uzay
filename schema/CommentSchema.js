@@ -8,11 +8,11 @@ let ObjectId = mongoose.Schema.Types.ObjectId
 
 let commentSchema = {
   _id: {
-    type: ObjectId,
+    type: Number,
     refPath: 'commentSchema._id'
   },
   PostID: Number,
-  UserID: Number,
+  UserID: ObjectId,
   ParentCommentID: {
     type: Number,
     default: null
