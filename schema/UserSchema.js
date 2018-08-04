@@ -23,16 +23,20 @@ let userSchema = {
     default: Date.now
   },
   LikedPosts: [{
-    type: Number
+    type: Number,
+    ref: 'BlogPost'
   }],
   DislikedPosts: [{
-    type: Number
+    type: Number,
+    ref: 'BlogPost'
   }],
   LikedComments: [{
-    type: Number
+    type: Number,
+    ref: 'CommentPost'
   }],
   DislikedComments: [{
-    type: Number
+    type: Number,
+    ref: 'CommentPost'
   }]
 }
 

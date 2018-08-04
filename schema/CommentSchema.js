@@ -7,11 +7,14 @@ let Schema = mongoose.Schema
 let ObjectId = mongoose.Schema.Types.ObjectId
 
 let commentSchema = {
-  _id: ObjectId,
+  _id: Number,
   PostID: Number,
-  UserID: ObjectId,
-  ParentCommentID: {
+  UserID: {
     type: ObjectId,
+    ref: 'User'
+  },
+  ParentCommentID: {
+    type: Number,
     default: null
   },
   Children: {

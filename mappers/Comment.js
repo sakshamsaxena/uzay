@@ -4,6 +4,10 @@
 
 let mongoose = require('mongoose')
 let commentSchema = require('../schema/CommentSchema.js')
+let autoIncrement = require('mongoose-plugin-autoinc')
+
+// Add autoincrement plugin
+commentSchema.plugin(autoIncrement.plugin, 'CommentPost')
 
 let Comment = mongoose.model('CommentPost', commentSchema)
 let CommentMapper = {}

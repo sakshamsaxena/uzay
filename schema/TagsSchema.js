@@ -9,7 +9,11 @@ let ObjectId = mongoose.Schema.Types.ObjectId
 let tagsSchema = {
   _id: ObjectId,
   Tag: String,
-  Posts: [{type: Number}]
+  Posts: [{
+    type: Number,
+    ref: 'BlogPost'
+  }
+  ]
 }
 
 module.exports = new Schema(tagsSchema)

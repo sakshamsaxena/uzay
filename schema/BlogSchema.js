@@ -8,7 +8,10 @@ let ObjectId = mongoose.Schema.Types.ObjectId
 
 let blogSchema = {
   _id: Number,
-  UserID: ObjectId,
+  UserID: {
+    type: ObjectId,
+    ref: 'User'
+  },
   Title: String,
   Tags: [{
     type: String
