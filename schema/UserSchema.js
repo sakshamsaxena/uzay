@@ -24,11 +24,11 @@ let userSchema = {
   },
   LikedPosts: [{
     type: Number,
-    ref: 'CommentPost'
+    ref: 'BlogPost'
   }],
   DislikedPosts: [{
     type: Number,
-    ref: 'CommentPost'
+    ref: 'BlogPost'
   }],
   LikedComments: [{
     type: Number,
