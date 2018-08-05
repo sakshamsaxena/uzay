@@ -18,7 +18,7 @@ var Authentication = {
       {Alias: req.body.Alias}
     ]}).exec().then(data => {
       if (data.length === 0) {
-        bcrypt.hash(req.body.Password, config.SALT_ROUNDS).then(passhash => {
+        bcrypt.hash(req.body.Password, config.SaltRounds).then(passhash => {
           var userdata = new UserCredential({
             Alias: req.body.Alias,
             Email: req.body.Email,
@@ -86,7 +86,7 @@ var Authentication = {
       Email: email,
       Password: password
     }
-    jwt.sign(payload, config.JWT_SECRET, (err, token) => {
+    jwt.sign(payload, config.JWTSecret, (err, token) => {
       if (err) {
         cb(err, null)
       } else {
@@ -102,7 +102,7 @@ var Authentication = {
         message: 'AuthToken header not found! Resend request with AuthToken header'
       })
     } else {
-      jwt.verify(token, config.JWT_SECRET, (err, payload) => {
+      jwt.verify(token, config.JWTSecret, (err, payload) => {
         if (err) {
           res.status(401).json({
             message: 'Verification failed!',

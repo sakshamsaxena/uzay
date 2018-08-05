@@ -1,10 +1,6 @@
 /* eslint-env mocha */
 
 /*
-  Testing Suite
-*/
-
-/*
   Blog Tests
 */
 

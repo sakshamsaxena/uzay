@@ -1,5 +1,6 @@
-*.js text
-*.md text
-*.opts text
+*.js    text
+*.md    text
+*.opts  text
+*.json  text
 
 * text eol=lf

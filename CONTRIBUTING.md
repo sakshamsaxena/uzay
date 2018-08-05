@@ -4,7 +4,7 @@
 
 ### Code Consistency
 
-Standard is used to run style checks and code linting. Before committing, always make sure that you've run `npm test` once.
+Standard is used to run style checks and code linting.
 
 ### Workflow
 
@@ -18,10 +18,9 @@ Contributors are requested to work only on their own forked clones of `sakshamsa
 6. Checkout a new feature branch by `git checkout -b FEATURE_NAME`.
 7. Hack away!
 8. Write tests if it's a new feature! Run tests with `npm test` or `mocha`.
-9. Right before committing changes, run `npm test` to check code quality.
-10. Also, to stay up to date with my changes, you can do so by `git pull upstream master`. 
-11. If `npm test` didn't point out any issues, commit away! Keep your feature branch synced to GitHub. 
-12. When the feature is complete, open a PR!
+9. When the feature is complete, open a PR!
+
+To stay up to date with the main project, you can `git pull upstream master` to get the latest changes. It's preferred to do it ***before*** you start working on your feature branch.
 
 That's it!
 

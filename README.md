@@ -1,6 +1,8 @@
 # Uzay
 
-Uzay is a neatly written API using Express and Mongo (^3.2) to serve as the basic backend for a blog.
+[![Build Status](https://travis-ci.com/sakshamsaxena/uzay.svg?branch=master)](https://travis-ci.com/sakshamsaxena/uzay) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+Uzay is a neatly written API using Express and Mongo to serve as the basic backend for a blog.
 
 When complete, Uzay will be centered around serving perfectly neutral content which supports both favourable and unfavourable thoughts and content for a user. It encourages a user to browse a personalised feed rather than being served a feed according to their personal comfortable preference. This behaviour has proved to be fairly unhealthy and partisan promoting, which was never the true intent of the Internet.
 
@@ -10,8 +12,8 @@ Public feeds are much more carefully served to highlight the under-rated content
 
 * #### Prerequisites
 
-1. [Node.js v8 or more](https://nodejs.org/en/download/)
-2. [MongoDB v3 or more](https://docs.mongodb.com/manual/installation/)
+1. [Node.js 8 or more](https://nodejs.org/en/download/)
+2. [MongoDB 3](https://docs.mongodb.com/manual/installation/)
 3. `mongod` service running in your shell/background.
 4. [Nodemon](https://www.npmjs.com/package/nodemon)
 
