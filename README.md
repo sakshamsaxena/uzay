@@ -14,8 +14,6 @@ Public feeds are much more carefully served to highlight the under-rated content
 
 1. [Node.js 8 or more](https://nodejs.org/en/download/)
 2. [MongoDB 3](https://docs.mongodb.com/manual/installation/)
-3. `mongod` service running in your shell/background.
-4. [Nodemon](https://www.npmjs.com/package/nodemon)
 
 * #### Installing
 
@@ -28,10 +26,6 @@ mongoimport --db uzay --drop --collection commentposts --file samples/commentpos
 mongoimport --db uzay --drop --collection users --file samples/users.json
 mongoimport --db uzay --drop --collection tags --file samples/tags.json
 ```
-
-For Windows Users, `mongod` or `mongoimport` won't be added to the PATH by default. So, instead, you may have to mention full path to the executable, like `"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"`. Argument patterns would remain exactly the same.
-
-Once installed, edit the ```config.js``` suitably. 
 
 Run the server with ```npm start```.
 
