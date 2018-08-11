@@ -17,20 +17,20 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.0",
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
+    "body-parser": "~1.18.3",
+    "express": "~4.16.3",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.0.6",
-    "mongoose-plugin-autoinc": "^1.1.9",
-    "morgan": "^1.9.0",
-    "uuid": "^3.3.2"
+    "mongoose": "~5.2.7",
+    "mongoose-plugin-autoinc": "~1.1.9",
+    "morgan": "~1.9.0",
+    "uuid": "~3.3.2"
   },
   "devDependencies": {
-    "husky": "^0.14.3",
+    "husky": "~0.14.3",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
     "should": "^11.1.1",
     "standard": "^11.0.1",
-    "supertest": "^2.0.1"
+    "supertest": "~3.1.0"
   }
 }
