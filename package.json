@@ -4,16 +4,20 @@
   "description": "Uzay is a Node.js and MongoDB based modern blog engine.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha",
+    "docs": "./node_modules/.bin/apidoc -i ./routes -o ./docs",
     "precommit": "npm test",
     "postinstall": "node config/copyConfig.js",
-    "start": "./node_modules/.bin/nodemon index.js"
+    "start": "./node_modules/.bin/nodemon index.js",
+    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha"
   },
   "author": "Saksham Saxena",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/sakshamsaxena/uzay.git"
+  },
+  "apidoc": {
+    "title": "Uzay"
   },
   "dependencies": {
     "bcrypt": "3.0.0",
@@ -26,6 +30,7 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
+    "apidoc": "^0.17.6",
     "husky": "0.14.3",
     "mocha": "5.2.0",
     "nodemon": "1.18.3",

@@ -11,13 +11,13 @@ var Logic = require('../logic/Blog.js')
 var BlogPost = express.Router()
 
 /**
-    GET  /id/:id[?params=value]
+ * @api {get} blog/id/:id Public route to fetch a Blog Post by ID
+ * @apiName GetBlogPostByID
+ * @apiGroup Blog
 
-    Public route to fetch a resource by id. Options are :
-    - includeComments
-        Default: false
-        Format: String
-        Possible Values: true|false
+ * @apiParam (URL Parameters) {Number} id Blog Post ID
+ * @apiParam (Query String) {String=true,false} [includeComments=false]
+ * Option to specifiy whether to include comments in the payload or not.
 */
 
 BlogPost.get('/id/:id', function (req, res) {
