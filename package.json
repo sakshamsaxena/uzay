@@ -1,6 +1,6 @@
 {
   "name": "uzay",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Uzay is a Node.js and MongoDB based modern blog engine.",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,10 @@
   "apidoc": {
     "title": "Uzay"
   },
+  "standard": {
+    "ignore": [
+      "docs"
+  ]},
   "dependencies": {
     "bcrypt": "3.0.0",
     "body-parser": "1.18.3",
