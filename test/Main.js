@@ -1,15 +1,34 @@
 /* eslint-env mocha */
-
+const request = require('supertest')
+const app = require('../index')
 /*
   Blog Tests
 */
 
 describe('Public Blog API', function () {
-  it('should get a single post by ID')
+  it('should get a single post by ID', function (done) {
+    request(app)
+      .get('/Blog/id/:id')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, done)
+  })
 
-  it('should get all posts by a user')
+  it('should get all posts by a user', function (done) {
+    request(app)
+      .get('/User/:alias/posts')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, done)
+  })
 
-  it('should get all posts under a tag')
+  it('should get all posts under a tag', function (done) {
+    request(app)
+      .get('/Blog/tag/:tag')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, done)
+  })
 
   it('should get all posts for a public feed')
 })
