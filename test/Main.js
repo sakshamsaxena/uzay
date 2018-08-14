@@ -39,31 +39,91 @@ describe('Public Blog API', function () {
 
 describe('User who wants to', function () {
   describe('create content', function () {
-    it('should be able to create a post')
+    it('should be able to create a post', function (done) {
+      request(app)
+        .post('/User/JohnMayer/posts/new')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to create a comment')
+    it('should be able to create a comment', function (done) {
+      request(app)
+        .post('Blog/id/1/comment')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
   })
 
   describe('interact with content', function () {
-    it('should be able to like a post')
+    it('should be able to like a post', function (done) {
+      request(app)
+        .patch('/Blog/id/1/like')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to dislike a post')
+    it('should be able to dislike a post', function (done) {
+      request(app)
+        .patch('/Blog/id/1/dislike')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to like a comment')
+    it('should be able to like a comment', function (done) {
+      request(app)
+        .patch('Blog/id/1/comment/:cid/like')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to dislike a comment')
+    it('should be able to dislike a comment', function (done) {
+      request(app)
+        .patch('Blog/id/1/comment/:cid/dislike')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
   })
 
   describe('view content', function () {
     it('should be able to view a profile page')
 
-    it('should be able to view posts by self')
+    it('should be able to view posts by self', function (done) {
+      request(app)
+        .get('/User/JohnMayer/posts')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to view comments by self')
+    it('should be able to view comments by self', function (done) {
+      request(app)
+        .get('/User/JohnMayer/comments')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to view posts liked by self/user')
+    it('should be able to view posts liked by self/user', function (done) {
+      request(app)
+        .get('/User/JohnMayer/liked')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
-    it('should be able to view posts disliked by self/user')
+    it('should be able to view posts disliked by self/user', function (done) {
+      request(app)
+        .get('/User/JohnMayer/disliked')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
 
     it('should be able to view posts for a personalised feed')
   })
