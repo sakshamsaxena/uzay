@@ -8,7 +8,7 @@ const app = require('../index')
 describe('Public Blog API', function () {
   it('should get a single post by ID', function (done) {
     request(app)
-      .get('/Blog/id/:id')
+      .get('/Blog/id/1')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done)
@@ -16,7 +16,7 @@ describe('Public Blog API', function () {
 
   it('should get all posts by a user', function (done) {
     request(app)
-      .get('/User/:alias/posts')
+      .get('/User/JohnMayer/posts')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done)
@@ -24,7 +24,7 @@ describe('Public Blog API', function () {
 
   it('should get all posts under a tag', function (done) {
     request(app)
-      .get('/Blog/tag/:tag')
+      .get('/Blog/tag/4')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done)
