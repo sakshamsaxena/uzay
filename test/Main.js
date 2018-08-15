@@ -136,3 +136,43 @@ describe('User who wants to', function () {
     it('should be rejected on bad credentials')
   })
 })
+
+describe('Public Blog API', function () {
+  it('should return page not found', function (done) {
+    request(app)
+      .get('/')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+})
+
+/* describe('Public Blog API', function () {
+  it('should get a single post by ID', function (done) {
+    request(app)
+      .get('/blog/id/1')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+})
+
+describe('Public Blog API', function () {
+  it('should get a single post by ID', function (done) {
+    request(app)
+      .get('/blog/id/1')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+})
+
+describe('Public Blog API', function () {
+  it('should get a single post by ID', function (done) {
+    request(app)
+      .get('/blog/id/1')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+}) */
