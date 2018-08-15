@@ -8,7 +8,7 @@ const app = require('../index')
 describe('Public Blog API', function () {
   it('should get a single post by ID', function (done) {
     request(app)
-      .get('/Blog/id/1')
+      .get('/blog/id/1')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done)
@@ -16,7 +16,7 @@ describe('Public Blog API', function () {
 
   it('should get all posts by a user', function (done) {
     request(app)
-      .get('/User/JohnMayer/posts')
+      .get('/user/johnmayer/posts')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done)
@@ -24,7 +24,7 @@ describe('Public Blog API', function () {
 
   it('should get all posts under a tag', function (done) {
     request(app)
-      .get('/Blog/tag/4')
+      .get('/blog/tag/tag_01')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done)
@@ -41,7 +41,7 @@ describe('User who wants to', function () {
   describe('create content', function () {
     it('should be able to create a post', function (done) {
       request(app)
-        .post('/User/JohnMayer/posts/new')
+        .post('/user/johnmayer/posts/new')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -49,7 +49,7 @@ describe('User who wants to', function () {
 
     it('should be able to create a comment', function (done) {
       request(app)
-        .post('Blog/id/1/comment')
+        .post('blog/id/1/comment')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -59,7 +59,7 @@ describe('User who wants to', function () {
   describe('interact with content', function () {
     it('should be able to like a post', function (done) {
       request(app)
-        .patch('/Blog/id/1/like')
+        .patch('/blog/id/1/like')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -67,7 +67,7 @@ describe('User who wants to', function () {
 
     it('should be able to dislike a post', function (done) {
       request(app)
-        .patch('/Blog/id/1/dislike')
+        .patch('/blog/id/1/dislike')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -75,7 +75,7 @@ describe('User who wants to', function () {
 
     it('should be able to like a comment', function (done) {
       request(app)
-        .patch('Blog/id/1/comment/:cid/like')
+        .patch('/blog/id/1/comment/1/like')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -83,7 +83,7 @@ describe('User who wants to', function () {
 
     it('should be able to dislike a comment', function (done) {
       request(app)
-        .patch('Blog/id/1/comment/:cid/dislike')
+        .patch('/blog/id/1/comment/1/dislike')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -95,7 +95,7 @@ describe('User who wants to', function () {
 
     it('should be able to view posts by self', function (done) {
       request(app)
-        .get('/User/JohnMayer/posts')
+        .get('/user/johnmayer/posts')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -103,7 +103,7 @@ describe('User who wants to', function () {
 
     it('should be able to view comments by self', function (done) {
       request(app)
-        .get('/User/JohnMayer/comments')
+        .get('/user/johnmayer/comments')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -111,7 +111,7 @@ describe('User who wants to', function () {
 
     it('should be able to view posts liked by self/user', function (done) {
       request(app)
-        .get('/User/JohnMayer/liked')
+        .get('/user/johnmayer/liked')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -119,7 +119,7 @@ describe('User who wants to', function () {
 
     it('should be able to view posts disliked by self/user', function (done) {
       request(app)
-        .get('/User/JohnMayer/disliked')
+        .get('/user/johnmayer/disliked')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
