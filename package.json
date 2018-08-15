@@ -17,12 +17,23 @@
     "url": "https://github.com/sakshamsaxena/uzay.git"
   },
   "apidoc": {
-    "title": "Uzay"
+    "title": "Uzay",
+    "order": [
+      "GetBlogPostByID",
+      "GetBlogPostsByTagName",
+      "GetCommentByID",
+      "PostCommentToBlogPost",
+      "PatchLikeOnBlogPost",
+      "PatchDislikeOnBlogPost",
+      "PatchLikeOnBlogPostComment",
+      "PatchDislikeOnBlogPostComment"
+    ]
   },
   "standard": {
     "ignore": [
       "docs"
-  ]},
+    ]
+  },
   "dependencies": {
     "bcrypt": "3.0.0",
     "body-parser": "1.18.3",

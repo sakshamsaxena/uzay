@@ -11,11 +11,14 @@ var Logic = require('../logic/Blog.js')
 var BlogPost = express.Router()
 
 /**
- * @api {get} blog/id/:id Fetch a Blog Post by ID
+ * @api {get} /blog/id/:id Fetch a particular blog post
  * @apiName GetBlogPostByID
+
  * @apiGroup Blog
  * @apiPermission Public
+
  * @apiParam (URL Parameters) {Number} id Blog Post ID
+
  * @apiParam (Query String) {String=true,false} [includeComments=false]
  * Option to specifiy whether to include comments in the payload or not.
 */
@@ -52,33 +55,28 @@ BlogPost.get('/id/:id', function (req, res) {
 })
 
 /**
-    GET  /tag/:tag[?params=value]
+ * @api {get} /blog/tag/:tag Fetch all Blog Posts by Tag Name
+ * @apiName GetBlogPostsByTagName
 
-    Public route to fetch all posts by a tag. Filters are :
-    - includeComments
-        Default: false
-        Format: String
-        Possible Values: true|false
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
+ * @apiGroup Blog
+ * @apiPermission Public
+
+ * @apiParam (URL Parameters) {String} tag Tag Name
+
+ * @apiParam (Query String) {String=true,false} [includeComments=false]
+ * Option to specifiy whether to include comments in the payload or not.
+ * @apiParam (Query String) {Number=YYYYMMDD} [startDate]
+ * Option to specifiy the date from when the blog posts should be searched.
+ * @apiParam (Query String) {Number=YYYYMMDD} [endDate]
+ * Option to specifiy the date till when the blog posts should be searched.
+ * @apiParam (Query String) {Number=1-100} [limit=20]
+ * Option to specifiy how many results should be returned in one request.
+ * @apiParam (Query String) {Number} [offset=0]
+ * Option to specifiy which page of results to return.
+ * @apiParam (Query String) {String=date,likes,dislikes,views,commentcount} [orderby=date]
+ * Option to specifiy the order basis of the returned posts.
+ * @apiParam (Query String) {String=d,a} [direction=d]
+ * Option to specifiy whether to display results in increasing or decreasing order of order basis.
 */
 
 BlogPost.get('/tag/:tag', function (req, res) {
@@ -86,9 +84,14 @@ BlogPost.get('/tag/:tag', function (req, res) {
 })
 
 /**
-    GET /id/:id/comment/:cid
+ * @api {get} /blog/id/:id/comment/:cid Fetch a particular comment of a particular blog post
+ * @apiName GetCommentByID
 
-    Gets a comment with ID :cid of the blog post with ID :id.
+ * @apiGroup Blog
+ * @apiPermission Public
+
+ * @apiParam (URL Parameter) {Number} id Blog Post ID
+ * @apiParam (URL Parameter) {Number} cid Comment ID
 */
 
 BlogPost.get('/id/:id/comment/:cid', function (req, res) {
@@ -96,11 +99,13 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
 })
 
 /**
-    POST /id/:id/comment
+ * @api {post} /blog/id/:id/comment Post a comment to a particular blog post
+ * @apiName PostCommentToBlogPost
 
-    Posts a comment to the blog post with ID :id. Data Fields are :
-    - Content
-        Format: String
+ * @apiGroup Blog
+ * @apiPermission Needs Authentication
+
+ * @apiParam (URL Parameter) {Number} id Blog Post ID
 */
 
 BlogPost.post('/id/:id/comment', function (req, res) {
@@ -108,9 +113,13 @@ BlogPost.post('/id/:id/comment', function (req, res) {
 })
 
 /**
-    PATCH /id/:id/like
+ * @api {patch} /blog/id/:id/like Like a particular blog post
+ * @apiName PatchLikeOnBlogPost
 
-    Increments a like on the blog post with ID :id.
+ * @apiGroup Blog
+ * @apiPermission Needs Authentication
+
+ * @apiParam (URL Parameter) {Number} id Blog Post ID
 */
 
 BlogPost.patch('/id/:id/like', function (req, res) {
@@ -118,9 +127,13 @@ BlogPost.patch('/id/:id/like', function (req, res) {
 })
 
 /**
-    PATCH /id/:id/dislike
+ * @api {patch} /blog/id/:id/dislike Dislike a particular blog post
+ * @apiName PatchDislikeOnBlogPost
 
-    Increments a dislike on the blog post with ID :id.
+ * @apiGroup Blog
+ * @apiPermission Needs Authentication
+
+ * @apiParam (URL Parameter) {Number} id Blog Post ID
 */
 
 BlogPost.patch('/id/:id/dislike', function (req, res) {
@@ -128,9 +141,14 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
 })
 
 /**
-    PATCH /id/:id/comment/:cid/like
+ * @api {patch} /blog/id/:id/comment/:cid/like Like a particular comment on a particular blog post
+ * @apiName PatchLikeOnBlogPostComment
 
-    Increments a like on the blog post comment with ID :id and CID :cid.
+ * @apiGroup Blog
+ * @apiPermission Needs Authentication
+
+ * @apiParam (URL Parameter) {Number} id Blog Post ID
+ * @apiParam (URL Parameter) {Number} cid Comment ID
 */
 
 BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
@@ -138,9 +156,14 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
 })
 
 /**
-    PATCH /id/:id/comment/:cid/dislike
+ * @api {patch} /blog/id/:id/comment/:cid/dislike Dislike a particular comment on a particular blog post
+ * @apiName PatchDislikeOnBlogPostComment
 
-    Increments a dislike on the blog post comment with ID :id and CID :cid.
+ * @apiGroup Blog
+ * @apiPermission Needs Authentication
+
+ * @apiParam (URL Parameter) {Number} id Blog Post ID
+ * @apiParam (URL Parameter) {Number} cid Comment ID
 */
 
 BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
