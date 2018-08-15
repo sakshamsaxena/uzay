@@ -147,17 +147,17 @@ describe('Public Blog API', function () {
   })
 })
 
-/* describe('Public Blog API', function () {
-  it('should get a single post by ID', function (done) {
+describe('User', function () {
+  it('should get error when accessing self posts without authentication', function (done) {
     request(app)
-      .get('/blog/id/1')
+      .get('/posts')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404, done)
   })
 })
 
-describe('Public Blog API', function () {
+/* describe('Public Blog API', function () {
   it('should get a single post by ID', function (done) {
     request(app)
       .get('/blog/id/1')
