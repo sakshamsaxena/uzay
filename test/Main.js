@@ -49,7 +49,7 @@ describe('User who wants to', function () {
 
     it('should be able to create a comment', function (done) {
       request(app)
-        .post('blog/id/1/comment')
+        .post('/blog/id/1/comment')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
