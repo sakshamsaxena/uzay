@@ -71,7 +71,7 @@ BlogPost.get('/id/:id', function (req, res) {
  * Option to specifiy the date till when the blog posts should be searched.
  * @apiParam (Query String) {Number=1-100} [limit=20]
  * Option to specifiy how many results should be returned in one request.
- * @apiParam (Query String) {Number} [offset=0]
+ * @apiParam (Query String) {Number=1-100} [offset=0]
  * Option to specifiy which page of results to return.
  * @apiParam (Query String) {String=date,likes,dislikes,views,commentcount} [orderby=date]
  * Option to specifiy the order basis of the returned posts.
