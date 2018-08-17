@@ -11,7 +11,7 @@ var Logic = require('../logic/Blog.js')
 var BlogPost = express.Router()
 
 /**
- * @api {get} /blog/id/:id Fetch a particular blog post
+ * @api {get} /blog/id/:id Get a Blog Post
  * @apiName GetBlogPostByID
 
  * @apiGroup Blog
@@ -21,6 +21,17 @@ var BlogPost = express.Router()
 
  * @apiParam (Query String) {String=true,false} [includeComments=false]
  * Option to specifiy whether to include comments in the payload or not.
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.get('/id/:id', function (req, res) {
@@ -55,7 +66,7 @@ BlogPost.get('/id/:id', function (req, res) {
 })
 
 /**
- * @api {get} /blog/tag/:tag Fetch all Blog Posts by Tag Name
+ * @api {get} /blog/tag/:tag Get Posts By Tag Name
  * @apiName GetBlogPostsByTagName
 
  * @apiGroup Blog
@@ -77,6 +88,17 @@ BlogPost.get('/id/:id', function (req, res) {
  * Option to specifiy the order basis of the returned posts.
  * @apiParam (Query String) {String=d,a} [direction=d]
  * Option to specifiy whether to display results in increasing or decreasing order of order basis.
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.get('/tag/:tag', function (req, res) {
@@ -84,7 +106,7 @@ BlogPost.get('/tag/:tag', function (req, res) {
 })
 
 /**
- * @api {get} /blog/id/:id/comment/:cid Fetch a particular comment of a particular blog post
+ * @api {get} /blog/id/:id/comment/:cid Get a Comment
  * @apiName GetCommentByID
 
  * @apiGroup Blog
@@ -92,6 +114,17 @@ BlogPost.get('/tag/:tag', function (req, res) {
 
  * @apiParam (URL Parameter) {Number} id Blog Post ID
  * @apiParam (URL Parameter) {Number} cid Comment ID
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.get('/id/:id/comment/:cid', function (req, res) {
@@ -99,13 +132,27 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
 })
 
 /**
- * @api {post} /blog/id/:id/comment Post a comment to a particular blog post
+ * @api {post} /blog/id/:id/comment Post a New Comment
  * @apiName PostCommentToBlogPost
 
  * @apiGroup Blog
  * @apiPermission Needs Authentication
 
+ * @apiHeader (Headers) {String} Autorization:Bearer
+ * Example : `Autorization: Bearer TOKEN`, where TOKEN is your Bearer Token
+
  * @apiParam (URL Parameter) {Number} id Blog Post ID
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.post('/id/:id/comment', function (req, res) {
@@ -113,13 +160,27 @@ BlogPost.post('/id/:id/comment', function (req, res) {
 })
 
 /**
- * @api {patch} /blog/id/:id/like Like a particular blog post
+ * @api {patch} /blog/id/:id/like Like a Blog Post
  * @apiName PatchLikeOnBlogPost
 
  * @apiGroup Blog
  * @apiPermission Needs Authentication
 
+ * @apiHeader (Headers) {String} Autorization:Bearer
+ * Example : `Autorization: Bearer TOKEN`, where TOKEN is your Bearer Token
+
  * @apiParam (URL Parameter) {Number} id Blog Post ID
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.patch('/id/:id/like', function (req, res) {
@@ -127,13 +188,27 @@ BlogPost.patch('/id/:id/like', function (req, res) {
 })
 
 /**
- * @api {patch} /blog/id/:id/dislike Dislike a particular blog post
+ * @api {patch} /blog/id/:id/dislike Dislike a Blog Post
  * @apiName PatchDislikeOnBlogPost
 
  * @apiGroup Blog
  * @apiPermission Needs Authentication
 
+ * @apiHeader (Headers) {String} Autorization:Bearer
+ * Example : `Autorization: Bearer TOKEN`, where TOKEN is your Bearer Token
+
  * @apiParam (URL Parameter) {Number} id Blog Post ID
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.patch('/id/:id/dislike', function (req, res) {
@@ -141,14 +216,28 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
 })
 
 /**
- * @api {patch} /blog/id/:id/comment/:cid/like Like a particular comment on a particular blog post
+ * @api {patch} /blog/id/:id/comment/:cid/like Like a Comment
  * @apiName PatchLikeOnBlogPostComment
 
  * @apiGroup Blog
  * @apiPermission Needs Authentication
 
+ * @apiHeader (Headers) {String} Autorization:Bearer
+ * Example : `Autorization: Bearer TOKEN`, where TOKEN is your Bearer Token
+
  * @apiParam (URL Parameter) {Number} id Blog Post ID
  * @apiParam (URL Parameter) {Number} cid Comment ID
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
@@ -156,14 +245,28 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
 })
 
 /**
- * @api {patch} /blog/id/:id/comment/:cid/dislike Dislike a particular comment on a particular blog post
+ * @api {patch} /blog/id/:id/comment/:cid/dislike Dislike a Comment
  * @apiName PatchDislikeOnBlogPostComment
 
  * @apiGroup Blog
  * @apiPermission Needs Authentication
 
+ * @apiHeader (Headers) {String} Autorization:Bearer
+ * Example : `Autorization: Bearer TOKEN`, where TOKEN is your Bearer Token
+
  * @apiParam (URL Parameter) {Number} id Blog Post ID
  * @apiParam (URL Parameter) {Number} cid Comment ID
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {

@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/blog/id/:id",
-    "title": "Fetch a particular blog post",
+    "title": "Get a Blog Post",
     "name": "GetBlogPostByID",
     "group": "Blog",
     "permission": [
@@ -37,6 +37,24 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
     "groupTitle": "Blog"
@@ -44,7 +62,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/blog/tag/:tag",
-    "title": "Fetch all Blog Posts by Tag Name",
+    "title": "Get Posts By Tag Name",
     "name": "GetBlogPostsByTagName",
     "group": "Blog",
     "permission": [
@@ -110,6 +128,9 @@ define({ "api": [
           {
             "group": "Query String",
             "type": "Number",
+            "allowedValues": [
+              "1-100"
+            ],
             "optional": true,
             "field": "offset",
             "defaultValue": "0",
@@ -145,6 +166,24 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
     "groupTitle": "Blog"
@@ -152,7 +191,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/blog/id/:id/comment/:cid",
-    "title": "Fetch a particular comment of a particular blog post",
+    "title": "Get a Comment",
     "name": "GetCommentByID",
     "group": "Blog",
     "permission": [
@@ -180,6 +219,24 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
     "groupTitle": "Blog"
@@ -187,7 +244,7 @@ define({ "api": [
   {
     "type": "patch",
     "url": "/blog/id/:id/dislike",
-    "title": "Dislike on a particular blog post",
+    "title": "Dislike a Blog Post",
     "name": "PatchDislikeOnBlogPost",
     "group": "Blog",
     "permission": [
@@ -195,6 +252,19 @@ define({ "api": [
         "name": "Needs Authentication"
       }
     ],
+    "header": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Autorization:Bearer",
+            "description": "<p>Example : <code>Autorization: Bearer TOKEN</code>, where TOKEN is your Bearer Token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "URL Parameter": [
@@ -207,6 +277,24 @@ define({ "api": [
           }
         ]
       }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
@@ -215,7 +303,7 @@ define({ "api": [
   {
     "type": "patch",
     "url": "/blog/id/:id/comment/:cid/dislike",
-    "title": "Dislike on a particular comment on a particular blog post",
+    "title": "Dislike a Comment",
     "name": "PatchDislikeOnBlogPostComment",
     "group": "Blog",
     "permission": [
@@ -223,6 +311,19 @@ define({ "api": [
         "name": "Needs Authentication"
       }
     ],
+    "header": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Autorization:Bearer",
+            "description": "<p>Example : <code>Autorization: Bearer TOKEN</code>, where TOKEN is your Bearer Token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "URL Parameter": [
@@ -242,6 +343,24 @@ define({ "api": [
           }
         ]
       }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
@@ -250,7 +369,7 @@ define({ "api": [
   {
     "type": "patch",
     "url": "/blog/id/:id/like",
-    "title": "Like on a particular blog post",
+    "title": "Like a Blog Post",
     "name": "PatchLikeOnBlogPost",
     "group": "Blog",
     "permission": [
@@ -258,6 +377,19 @@ define({ "api": [
         "name": "Needs Authentication"
       }
     ],
+    "header": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Autorization:Bearer",
+            "description": "<p>Example : <code>Autorization: Bearer TOKEN</code>, where TOKEN is your Bearer Token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "URL Parameter": [
@@ -271,6 +403,24 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
     "groupTitle": "Blog"
@@ -278,7 +428,7 @@ define({ "api": [
   {
     "type": "patch",
     "url": "/blog/id/:id/comment/:cid/like",
-    "title": "Like on a particular comment on a particular blog post",
+    "title": "Like a Comment",
     "name": "PatchLikeOnBlogPostComment",
     "group": "Blog",
     "permission": [
@@ -286,6 +436,19 @@ define({ "api": [
         "name": "Needs Authentication"
       }
     ],
+    "header": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Autorization:Bearer",
+            "description": "<p>Example : <code>Autorization: Bearer TOKEN</code>, where TOKEN is your Bearer Token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "URL Parameter": [
@@ -306,6 +469,24 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
     "groupTitle": "Blog"
@@ -313,7 +494,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/blog/id/:id/comment",
-    "title": "Post a comment to a particular blog post",
+    "title": "Post a New Comment",
     "name": "PostCommentToBlogPost",
     "group": "Blog",
     "permission": [
@@ -321,6 +502,19 @@ define({ "api": [
         "name": "Needs Authentication"
       }
     ],
+    "header": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Autorization:Bearer",
+            "description": "<p>Example : <code>Autorization: Bearer TOKEN</code>, where TOKEN is your Bearer Token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "URL Parameter": [
@@ -333,6 +527,24 @@ define({ "api": [
           }
         ]
       }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP /1.1 200 OK\n{\n  \"sample\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP /1.1 404 NOT FOUND\n{\n  \"sample\": false\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "routes/Blog.js",
