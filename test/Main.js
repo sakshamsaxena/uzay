@@ -137,18 +137,8 @@ describe('User who wants to', function () {
   })
 })
 
-describe('Public Blog API', function () {
-  it('should return page not found', function (done) {
-    request(app)
-      .get('/')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
-  })
-})
-
 describe('User', function () {
-  it('should get error when accessing self posts without authentication', function (done) {
+  it('cannot access self posts without authentication', function (done) {
     request(app)
       .get('/posts')
       .set('Accept', 'application/json')
@@ -157,22 +147,32 @@ describe('User', function () {
   })
 })
 
-/* describe('Public Blog API', function () {
-  it('should get a single post by ID', function (done) {
+describe('User', function () {
+  it('cannot comment to a post without authentication', function (done) {
     request(app)
-      .get('/blog/id/1')
+      .post('Blog/id/:id/comment')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404, done)
   })
 })
 
-describe('Public Blog API', function () {
-  it('should get a single post by ID', function (done) {
+describe('User', function () {
+  it('cannot like a post without authentication', function (done) {
     request(app)
-      .get('/blog/id/1')
+      .patch('/id/:id/like')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404, done)
   })
-}) */
+})
+
+describe('User', function () {
+  it('cannot create a post without authentication', function (done) {
+    request(app)
+      .post('/id/:id/like')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+})
