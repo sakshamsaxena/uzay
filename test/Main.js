@@ -138,7 +138,33 @@ describe('User who wants to', function () {
 })
 
 describe('User', function () {
-  it('cannot access self posts without authentication', function (done) {
+  it('cannot comment to a post without authentication', function (done) {
+    request(app)
+      .post('/id/:id/comment')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+
+  it('should not be able to like a post without authentication', function (done) {
+    request(app)
+      .patch('/id/:id/like')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+
+  it('cannot create a post without authentication', function (done) {
+    request(app)
+      .post('/posts/new')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(404, done)
+  })
+})
+
+describe('Public Blog API', function () {
+  it('should not return posts by user without being authenticated', function (done) {
     request(app)
       .get('/posts')
       .set('Accept', 'application/json')
@@ -147,32 +173,16 @@ describe('User', function () {
   })
 })
 
-describe('User', function () {
-  it('cannot comment to a post without authentication', function (done) {
-    request(app)
-      .post('Blog/id/:id/comment')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
+/*
+describe('', function () {
+  it('', function (done) {
+
   })
 })
 
-describe('User', function () {
-  it('cannot like a post without authentication', function (done) {
-    request(app)
-      .patch('/id/:id/like')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
-  })
-})
+describe('', function () {
+  it('', function (done) {
 
-describe('User', function () {
-  it('cannot create a post without authentication', function (done) {
-    request(app)
-      .post('/id/:id/like')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
   })
 })
+*/
