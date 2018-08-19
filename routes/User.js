@@ -10,18 +10,27 @@ var config = require('../config/config.js')
 var User = express.Router()
 var Resources = express.Router({mergeParams: true})
 
-/**
-    GET[|POST] /:alias[/liked|disliked|posts|comments][/posts/comments/new]
-
-    User Resources Routes. Post creation and all content of a user is accessed here.
-*/
-
 User.use('/:alias', Resources)
 
 /**
-    GET /:alias
+ * @api {get} /user/:alias Get User Information
+ * @apiName GetUserInfo
 
-    Public route to get user information.
+ * @apiGroup User
+ * @apiPermission Public
+
+ * @apiParam (URL Parameters) {String} alias User Alias
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 User.get('/:alias', function (req, res) {
@@ -55,33 +64,39 @@ User.get('/:alias', function (req, res) {
 })
 
 /**
-    GET  /:alias/liked[?params=value]
+ * @api {get} /user/:alias/liked Get User's Liked Content
+ * @apiName GetAllLikedContentByUser
 
-    Public route to fetch all liked content by a user. Filters are :
-    - type
-        Default: All
-        Format: String
-        Possible Values: All|Posts|Comments
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
+ * @apiGroup User
+ * @apiPermission Public
+
+ * @apiParam (URL Parameters) {String} alias User Alias
+
+ * @apiParam (Query String) {String=all,posts,comments} [type=all]
+ * Option to specifiy whether to include comments in the payload or not.
+ * @apiParam (Query String) {Number=YYYYMMDD} [startDate]
+ * Option to specifiy the date from when the blog posts should be searched.
+ * @apiParam (Query String) {Number=YYYYMMDD} [endDate]
+ * Option to specifiy the date till when the blog posts should be searched.
+ * @apiParam (Query String) {Number=1-100} [limit=20]
+ * Option to specifiy how many results should be returned in one request.
+ * @apiParam (Query String) {Number=1-100} [offset=0]
+ * Option to specifiy which page of results to return.
+ * @apiParam (Query String) {String=date,likes,dislikes,views,commentcount} [orderby=date]
+ * Option to specifiy the order basis of the returned posts.
+ * @apiParam (Query String) {String=d,a} [direction=d]
+ * Option to specifiy whether to display results in increasing or decreasing order of order basis.
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 Resources.get('/liked', function (req, res) {
@@ -89,33 +104,39 @@ Resources.get('/liked', function (req, res) {
 })
 
 /**
-    GET  /:alias/disliked[?params=value]
+ * @api {get} /user/:alias/disliked Get User's Disliked Content
+ * @apiName GetAllDislikedContentByUser
 
-    Public route to fetch all disliked content by a user. Filters are :
-    - type
-        Default: All
-        Format: String
-        Possible Values: All|Posts|Comments
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
+ * @apiGroup User
+ * @apiPermission Public
+
+ * @apiParam (URL Parameters) {String} alias User Alias
+
+ * @apiParam (Query String) {String=all,posts,comments} [type=all]
+ * Option to specifiy whether to include comments in the payload or not.
+ * @apiParam (Query String) {Number=YYYYMMDD} [startDate]
+ * Option to specifiy the date from when the blog posts should be searched.
+ * @apiParam (Query String) {Number=YYYYMMDD} [endDate]
+ * Option to specifiy the date till when the blog posts should be searched.
+ * @apiParam (Query String) {Number=1-100} [limit=20]
+ * Option to specifiy how many results should be returned in one request.
+ * @apiParam (Query String) {Number=1-100} [offset=0]
+ * Option to specifiy which page of results to return.
+ * @apiParam (Query String) {String=date,likes,dislikes,views,commentcount} [orderby=date]
+ * Option to specifiy the order basis of the returned posts.
+ * @apiParam (Query String) {String=d,a} [direction=d]
+ * Option to specifiy whether to display results in increasing or decreasing order of order basis.
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 Resources.get('/disliked', function (req, res) {
@@ -123,29 +144,37 @@ Resources.get('/disliked', function (req, res) {
 })
 
 /**
-    GET  /:alias/posts[?params=value]
+ * @api {get} /user/:alias/posts Get User's Authored Posts
+ * @apiName GetAllPostsByUser
 
-    Public route to fetch all blog posts authored by a user. Filters are :
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
+ * @apiGroup User
+ * @apiPermission Public
+
+ * @apiParam (URL Parameters) {String} alias User Alias
+
+ * @apiParam (Query String) {Number=YYYYMMDD} [startDate]
+ * Option to specifiy the date from when the blog posts should be searched.
+ * @apiParam (Query String) {Number=YYYYMMDD} [endDate]
+ * Option to specifiy the date till when the blog posts should be searched.
+ * @apiParam (Query String) {Number=1-100} [limit=20]
+ * Option to specifiy how many results should be returned in one request.
+ * @apiParam (Query String) {Number=1-100} [offset=0]
+ * Option to specifiy which page of results to return.
+ * @apiParam (Query String) {String=date,likes,dislikes,views,commentcount} [orderby=date]
+ * Option to specifiy the order basis of the returned posts.
+ * @apiParam (Query String) {String=d,a} [direction=d]
+ * Option to specifiy whether to display results in increasing or decreasing order of order basis.
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 Resources.get('/posts', function (req, res) {
@@ -153,29 +182,37 @@ Resources.get('/posts', function (req, res) {
 })
 
 /**
-    GET  /:alias/comments[?params=value]
+ * @api {get} /user/:alias/comments Get User's Authored Comments
+ * @apiName GetAllCommentsByUser
 
-    Public route to fetch all comments authored by a user. Filters are :
-    - startDate
-        Default: 01012018
-        Format: YYYYMMDD
-    - endDate
-        Default: Current Date
-        Format: YYYYMMDD
-    - limit
-        Default: 20
-        Format: Number
-    - offset
-        Default: 0
-        Format: Number
-    - orderBy
-        Default: Date
-        Format: String
-        Possible Values: Date|Likes|Dislikes|Views|CommentCount
-    - direction
-        Default: D
-        Format: String
-        Possible Values: D|A
+ * @apiGroup User
+ * @apiPermission Public
+
+ * @apiParam (URL Parameters) {String} alias User Alias
+
+ * @apiParam (Query String) {Number=YYYYMMDD} [startDate]
+ * Option to specifiy the date from when the blog posts should be searched.
+ * @apiParam (Query String) {Number=YYYYMMDD} [endDate]
+ * Option to specifiy the date till when the blog posts should be searched.
+ * @apiParam (Query String) {Number=1-100} [limit=20]
+ * Option to specifiy how many results should be returned in one request.
+ * @apiParam (Query String) {Number=1-100} [offset=0]
+ * Option to specifiy which page of results to return.
+ * @apiParam (Query String) {String=date,likes,dislikes,views,commentcount} [orderby=date]
+ * Option to specifiy the order basis of the returned posts.
+ * @apiParam (Query String) {String=d,a} [direction=d]
+ * Option to specifiy whether to display results in increasing or decreasing order of order basis.
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 Resources.get('/comments', function (req, res) {
@@ -183,15 +220,35 @@ Resources.get('/comments', function (req, res) {
 })
 
 /**
-    POST  /:alias/posts/new
+ * @api {post} /user/:alias/posts/new Author A Post
+ * @apiName PostNewPostByUser
 
-    Protected route to create a blog post authored by a user. Data fields are :
-    - Title
-        Format: String
-    - Content
-        Format: String
-    - Tags
-        Format: String
+ * @apiGroup User
+ * @apiPermission Needs Authentication
+
+ * @apiHeader (Headers) {String} Autorization:Bearer
+ * Example : `Autorization: Bearer TOKEN`, where TOKEN is your Bearer Token
+
+ * @apiParam (URL Parameters) {String} alias User Alias
+
+ * @apiParam (POST Parameters) {String=true,false} [includeComments=false]
+ * Option to specifiy whether to include comments in the payload or not.
+
+ * @apiExample {json} Sample POST Payload
+ *    {
+ *      "foo": "bar"
+ *    }
+
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP /1.1 200 OK
+ *    {
+ *      "sample": true
+ *    }
+ * @apiErrorExample {json} Error-Response:
+ *    HTTP /1.1 404 NOT FOUND
+ *    {
+ *      "sample": false
+ *    }
 */
 
 Resources.post('/posts/new', function (req, res) {

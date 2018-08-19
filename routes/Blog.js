@@ -143,6 +143,14 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
 
  * @apiParam (URL Parameter) {Number} id Blog Post ID
 
+ * @apiParam (POST Parameters) {String=true,false} [includeComments=false]
+ * Option to specifiy whether to include comments in the payload or not.
+
+ * @apiExample {json} Sample POST Payload
+ *    {
+ *      "foo": "bar"
+ *    }
+
  * @apiSuccessExample {json} Success-Response:
  *    HTTP /1.1 200 OK
  *    {
