@@ -42,6 +42,7 @@ describe('User who wants to', function () {
     it('should be able to create a post', function (done) {
       request(app)
         .post('/user/johnmayer/posts/new')
+        .set('Authentication: Bearer TEST_TOKEN')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -50,6 +51,7 @@ describe('User who wants to', function () {
     it('should be able to create a comment', function (done) {
       request(app)
         .post('/blog/id/1/comment')
+        .set('Authentication: Bearer TEST_TOKEN')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -61,6 +63,7 @@ describe('User who wants to', function () {
       request(app)
         .patch('/blog/id/1/like')
         .set('Accept', 'application/json')
+        .set('Authentication: Bearer TEST_TOKEN')
         .expect('Content-Type', /json/)
         .expect(200, done)
     })
@@ -69,6 +72,7 @@ describe('User who wants to', function () {
       request(app)
         .patch('/blog/id/1/dislike')
         .set('Accept', 'application/json')
+        .set('Authentication: Bearer TEST_TOKEN')
         .expect('Content-Type', /json/)
         .expect(200, done)
     })
@@ -77,6 +81,7 @@ describe('User who wants to', function () {
       request(app)
         .patch('/blog/id/1/comment/1/like')
         .set('Accept', 'application/json')
+        .set('Authentication: Bearer TEST_TOKEN')
         .expect('Content-Type', /json/)
         .expect(200, done)
     })
@@ -85,6 +90,7 @@ describe('User who wants to', function () {
       request(app)
         .patch('/blog/id/1/comment/1/dislike')
         .set('Accept', 'application/json')
+        .set('Authentication: Bearer TEST_TOKEN')
         .expect('Content-Type', /json/)
         .expect(200, done)
     })
@@ -135,54 +141,60 @@ describe('User who wants to', function () {
 
     it('should be rejected on bad credentials')
   })
+
+  describe('without authentication', function () {
+    it('cannot comment to a post', function (done) {
+      request(app)
+        .post('/id/1/comment')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+
+    it('should not be able to like a post', function (done) {
+      request(app)
+        .patch('/id/1/like')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+
+    it('cannot create a post', function (done) {
+      request(app)
+        .post('/posts/new')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+  })
+
+  describe('Blog Post', function () {
+    it('should return error when fetching a blog post by invalid id', function (done) {
+      request(app)
+        .get('/id/abc')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+  })
+
+  describe('User', function () {
+    it('should return error when username is not valid', function (done) {
+      request(app)
+        .get('/abc')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+  })
+
+  describe('Blog Post', function () {
+    it('should return error when posting comment to invalid blog id', function (done) {
+      request(app)
+        .post('/id/abc/comment')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+  })
 })
-
-describe('User', function () {
-  it('cannot comment to a post without authentication', function (done) {
-    request(app)
-      .post('/id/:id/comment')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
-  })
-
-  it('should not be able to like a post without authentication', function (done) {
-    request(app)
-      .patch('/id/:id/like')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
-  })
-
-  it('cannot create a post without authentication', function (done) {
-    request(app)
-      .post('/posts/new')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
-  })
-})
-
-describe('Public Blog API', function () {
-  it('should not return posts by user without being authenticated', function (done) {
-    request(app)
-      .get('/posts')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404, done)
-  })
-})
-
-/*
-describe('', function () {
-  it('', function (done) {
-
-  })
-})
-
-describe('', function () {
-  it('', function (done) {
-
-  })
-})
-*/
