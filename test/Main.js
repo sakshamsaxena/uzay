@@ -177,7 +177,7 @@ describe('User who wants to', function () {
         .expect(404, done)
     })
 
-    it('should return error when posting comment to invalid blog id', function (done) {
+    it('should return error when posting comment to invalid id', function (done) {
       request(app)
         .post('/blog/id/abc/comment')
         .set('Accept', 'application/json')
@@ -188,6 +188,26 @@ describe('User who wants to', function () {
     it('should return error when username is not valid', function (done) {
       request(app)
         .get('/user/abc')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+  })
+
+  describe('User', function () {
+    it('cannot access the posts with invalid params value', function (done) {
+      request(app)
+        .post('/user/johnmayer/posts?params="abc"')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404, done)
+    })
+  })
+
+  describe('Blog Post API', function () {
+    it('should not return anything for missplled words', function (done) {
+      request(app)
+        .post('/blog/coments')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(404, done)
