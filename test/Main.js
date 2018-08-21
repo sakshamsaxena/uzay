@@ -152,7 +152,7 @@ describe('User who wants to', function () {
   describe('without authentication', function () {
     it('user cannot comment to a post', function (done) {
       request(app)
-        .post('/auth/verify/INVALID_TOKEN')
+        .post('/blog/id/1/comment')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(404, done)
@@ -160,7 +160,7 @@ describe('User who wants to', function () {
 
     it('user should not be able to like a post', function (done) {
       request(app)
-        .patch('/auth/verify/INVALID_TOKEN')
+        .patch('/blog/id/1/like')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(404, done)
@@ -168,7 +168,7 @@ describe('User who wants to', function () {
 
     it('user cannot create a post', function (done) {
       request(app)
-        .post('/auth/verify/INVALID_TOKEN')
+        .post('/user/posts/new')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(404, done)
