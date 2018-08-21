@@ -7,7 +7,9 @@
 */
 
 function GetCommentsSwitch (includeComments) {
-  if (includeComments === 'true') {
+  var flag = includeComments.toLowerCase()
+
+  if (flag === 'true') {
     return true
   } else {
     return false
@@ -15,35 +17,49 @@ function GetCommentsSwitch (includeComments) {
 }
 
 function GetFormattedDate (date) {
-  var sD = date
-  sD = sD.substr(0, 4) + '-' + sD.substr(4, 2) + '-' + sD.substr(6, 2)
-  return new Date(sD)
+  var fD = date
+  var dateRegEx = new RegExp(/^[2]{1}[0-9]{3}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}$/, 'g')
+
+  if (dateRegEx.test(fD)) {
+    fD = fD.substr(0, 4) + '-' + fD.substr(4, 2) + '-' + fD.substr(6, 2)
+    return new Date(fD)
+  } else {
+    console.error('Received bad date parameter. Using Default.')
+    return null
+  }
 }
 
 function GetFormattedNumber (num, type) {
-  if (isNaN(parseInt(num))) {
+  var n = parseInt(num)
+
+  if (isNaN(n) === false && n >= 1 && n <= 100) {
+    return n
+  } else {
+    console.error(`Received bad ${type} parameter. Using Default.`, type)
     if (type === 'limit') {
       return 20
     } else {
       return 0
     }
-  } else {
-    return parseInt(num)
   }
 }
 
 function GetSortingIndex (index) {
   var i = index.toLowerCase()
+
   if (i !== 'date' || i !== 'likes' || i !== 'dislikes' || i !== 'views' || i !== 'commentcount') {
+    console.error('Received bad order basis parameter. Using Default.')
     return 'date'
   } else {
     return i
   }
 }
 
-function GetSortingOrder (dir) {
-  var d = dir.toLowerCase()
+function GetSortingOrder (direction) {
+  var d = direction.toLowerCase()
+
   if (d !== 'd' || d !== 'a') {
+    console.error('Received bad order direction parameter. Using Default.')
     return 'd'
   } else {
     return d
@@ -70,10 +86,10 @@ module.exports = function (query) {
   if (undefined !== query.includeComments) {
     params.includeComments = GetCommentsSwitch(query.includeComments)
   }
-  if (undefined !== query.startDate) {
+  if (undefined !== query.startDate && GetFormattedDate(query.startDate)) {
     params.startDate = GetFormattedDate(query.startDate)
   }
-  if (undefined !== query.endDate) {
+  if (undefined !== query.endDate && GetFormattedDate(query.endDate)) {
     params.endDate = GetFormattedDate(query.endDate)
   }
   if (undefined !== query.limit) {
