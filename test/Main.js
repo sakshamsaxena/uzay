@@ -168,7 +168,7 @@ describe('User who wants to', function () {
 
     it('user cannot create a post', function (done) {
       request(app)
-        .post('/user/posts/new')
+        .post('/user/johnmayer/posts/new')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(404, done)
