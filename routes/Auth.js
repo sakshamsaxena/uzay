@@ -71,7 +71,10 @@ Auth.get('/verify/:verificationToken', function (req, res) {
   var Token = req.params.verificationToken
 
   // Verify Token
-  Logic.Verify(Token)
+  // Logic.Verify(Token)
+  res.send({
+    'Token': Token
+  })
 })
 
 module.exports = Auth

@@ -14,22 +14,23 @@ let BlogPostMapper = {}
 
 /**
   Public Functions
+  Assume Sanitized Parameters
 */
 
-BlogPostMapper.GetBlogByID = function (id) {
+BlogPostMapper.GetBlogPostByID = function (id) {
   return BlogPost.findOne({_id: id}).exec()
 }
 
-BlogPostMapper.createBlogPost = function (properties) {
+BlogPostMapper.CreateBlogPost = function (properties) {
   let post = new BlogPost(properties)
   return post.save()
 }
 
-BlogPostMapper.updateBlogPost = function (properties) {
+BlogPostMapper.UpdateBlogPost = function (properties) {
   return BlogPost.updateOne({_id: properties.id}, properties).exec()
 }
 
-BlogPostMapper.deleteBlogPost = function (id) {
+BlogPostMapper.DeleteBlogPost = function (id) {
   return BlogPost.deleteOne({_id: id}).exec()
 }
 

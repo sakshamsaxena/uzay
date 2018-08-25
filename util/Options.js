@@ -1,5 +1,6 @@
 /*
   Query Parameters Generator Object
+  Contains all the possible options and populates the valid ones
 */
 
 /*
@@ -70,40 +71,40 @@ function GetSortingOrder (direction) {
   Constructor
 */
 
-function DefaultParameters () {
-  this.includeComments = false
-  this.startDate = new Date('2018-01-01')
-  this.endDate = new Date()
-  this.limit = 20
-  this.offset = 0
-  this.orderBy = 'date'
-  this.direction = 'D'
+function Options () {
+  this.IncludeComments = false
+  this.StartDate = new Date('2018-01-01')
+  this.EndDate = new Date()
+  this.Limit = 20
+  this.Offset = 0
+  this.OrderBy = 'date'
+  this.Direction = 'D'
 };
 
 module.exports = function (query) {
-  var params = new DefaultParameters()
+  var options = new Options()
 
-  if (undefined !== query.includeComments) {
-    params.includeComments = GetCommentsSwitch(query.includeComments)
+  if (undefined !== query.IncludeComments) {
+    options.IncludeComments = GetCommentsSwitch(query.IncludeComments)
   }
-  if (undefined !== query.startDate && GetFormattedDate(query.startDate)) {
-    params.startDate = GetFormattedDate(query.startDate)
+  if (undefined !== query.StartDate && GetFormattedDate(query.StartDate)) {
+    options.StartDate = GetFormattedDate(query.StartDate)
   }
-  if (undefined !== query.endDate && GetFormattedDate(query.endDate)) {
-    params.endDate = GetFormattedDate(query.endDate)
+  if (undefined !== query.EndDate && GetFormattedDate(query.EndDate)) {
+    options.EndDate = GetFormattedDate(query.EndDate)
   }
-  if (undefined !== query.limit) {
-    params.limit = GetFormattedNumber(query.limit, 'limit')
+  if (undefined !== query.Limit) {
+    options.Limit = GetFormattedNumber(query.Limit, 'limit')
   }
-  if (undefined !== query.offset) {
-    params.offset = GetFormattedNumber(query.offset, 'offset')
+  if (undefined !== query.Offset) {
+    options.Offset = GetFormattedNumber(query.Offset, 'offset')
   }
-  if (undefined !== query.orderBy) {
-    params.orderBy = GetSortingIndex(query.orderBy)
+  if (undefined !== query.OrderBy) {
+    options.OrderBy = GetSortingIndex(query.OrderBy)
   }
-  if (undefined !== query.direction) {
-    params.direction = GetSortingOrder(query.direction)
+  if (undefined !== query.Direction) {
+    options.Direction = GetSortingOrder(query.Direction)
   }
 
-  return params
+  return options
 }

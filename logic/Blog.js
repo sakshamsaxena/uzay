@@ -8,8 +8,8 @@ var CommentMapper = require('../mappers/Comment.js')
 
 var Logic = {}
 
-Logic.GetBlogPostById = function (id, opts) {
-  var ID = id
+Logic.GetBlogPostById = function (params, opts) {
+  var ID = params.BlogPostID
   var options = opts
   var result = {}
 

@@ -5,7 +5,8 @@
 var express = require('express')
 var m = require('mongoose')
 var config = require('../config/config.js')
-var QueryParams = require('../util/QueryParams.js')
+var Options = require('../util/Options.js')
+var Parameters = require('../util/Parameters.js')
 var Logic = require('../logic/Blog.js')
 
 var BlogPost = express.Router()
@@ -36,8 +37,8 @@ var BlogPost = express.Router()
 
 BlogPost.get('/id/:id', function (req, res) {
   // Prepare Parameters
-  var id = req.params.id
-  var opts = QueryParams(req.query)
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
 
   // Presentation Variable
   var Payload = {}
@@ -46,7 +47,7 @@ BlogPost.get('/id/:id', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.GetBlogPostById(id, opts)
+  Logic.GetBlogPostById(params, opts)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
