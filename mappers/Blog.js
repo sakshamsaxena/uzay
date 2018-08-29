@@ -18,16 +18,20 @@ let BlogPostMapper = {}
 */
 
 BlogPostMapper.GetBlogPostByID = function (id) {
-  return BlogPost.findOne({_id: id}).exec()
+  return BlogPost.findById(id).exec()
 }
 
-BlogPostMapper.CreateBlogPost = function (properties) {
-  let post = new BlogPost(properties)
+BlogPostMapper.GetBlogPostByTag = function (tag, opts) {
+  return BlogPost.find({'Tag': tag}).exec()
+}
+
+BlogPostMapper.CreateBlogPost = function (data) {
+  let post = new BlogPost(data)
   return post.save()
 }
 
-BlogPostMapper.UpdateBlogPost = function (properties) {
-  return BlogPost.updateOne({_id: properties.id}, properties).exec()
+BlogPostMapper.UpdateBlogPost = function (id, data) {
+  return BlogPost.updateOne({_id: id}, data).exec()
 }
 
 BlogPostMapper.DeleteBlogPost = function (id) {

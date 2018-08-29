@@ -7,7 +7,6 @@ let Schema = mongoose.Schema
 let ObjectId = mongoose.Schema.Types.ObjectId
 
 let commentSchema = {
-  _id: Number,
   PostID: Number,
   UserID: {
     type: ObjectId,

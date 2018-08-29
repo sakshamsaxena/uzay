@@ -7,7 +7,6 @@ let Schema = mongoose.Schema
 let ObjectId = mongoose.Schema.Types.ObjectId
 
 let blogSchema = {
-  _id: Number,
   UserID: {
     type: ObjectId,
     ref: 'User'
