@@ -23,7 +23,7 @@ describe('Blog API', function () {
 
     it('all posts under a tag', function (done) {
       request(app)
-        .get('/blog/tag/tag_01')
+        .get('/blog/tag/testingWithMocha')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, done)
@@ -69,7 +69,7 @@ describe('User API', function () {
           .set('Authentication', 'Bearer TEST_TOKEN')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200, done)
+          .expect(201, done)
       })
     })
     describe('should not be able to', function () {})
@@ -117,26 +117,10 @@ describe('User API', function () {
   })
 
   describe('for viewing content', function () {
-    describe('should be able to', function () {
-      it('view a profile page')
+    describe('should be able to view', function () {
+      it('a profile page')
 
-      it('view posts by self', function (done) {
-        request(app)
-          .get('/user/JohnMayer/posts')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200, done)
-      })
-
-      it('view comments by self', function (done) {
-        request(app)
-          .get('/user/JohnMayer/comments')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200, done)
-      })
-
-      it('view posts liked by self/user', function (done) {
+      it('liked content by user', function (done) {
         request(app)
           .get('/user/JohnMayer/liked')
           .set('Accept', 'application/json')
@@ -144,7 +128,7 @@ describe('User API', function () {
           .expect(200, done)
       })
 
-      it('view posts disliked by self/user', function (done) {
+      it('disliked content by user', function (done) {
         request(app)
           .get('/user/JohnMayer/disliked')
           .set('Accept', 'application/json')
@@ -152,7 +136,7 @@ describe('User API', function () {
           .expect(200, done)
       })
 
-      it('view posts for a personalised feed')
+      it('posts for a personalised feed')
     })
     describe('should not be able to', function () {})
   })
@@ -183,7 +167,7 @@ describe('User API', function () {
           .post('/blog/id/1/comment')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(404, done)
+          .expect(403, done)
       })
 
       it('like a post', function (done) {
@@ -191,7 +175,7 @@ describe('User API', function () {
           .patch('/blog/id/1/like')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(404, done)
+          .expect(403, done)
       })
 
       it('create a post', function (done) {
@@ -199,7 +183,7 @@ describe('User API', function () {
           .post('/user/JohnMayer/posts/new')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(404, done)
+          .expect(403, done)
       })
     })
   })
