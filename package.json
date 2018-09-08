@@ -8,7 +8,7 @@
     "postinstall": "node config/copyConfig.js",
     "precommit": "npm test",
     "start": "npx nodemon index.js",
-    "test": "npx standard"
+    "test": "npx standard && npx mocha --exit"
   },
   "author": "Saksham Saxena",
   "license": "MIT",

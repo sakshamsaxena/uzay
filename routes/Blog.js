@@ -47,7 +47,7 @@ BlogPost.get('/id/:id', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.GetBlogPostById(params, opts)
+  Logic.GetBlogPostByID(params, opts)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -103,7 +103,34 @@ BlogPost.get('/id/:id', function (req, res) {
 */
 
 BlogPost.get('/tag/:tag', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.GetBlogPostsByTagName(params, opts)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -129,7 +156,34 @@ BlogPost.get('/tag/:tag', function (req, res) {
 */
 
 BlogPost.get('/id/:id/comment/:cid', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.GetCommentByID(params, opts)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -165,7 +219,35 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
 */
 
 BlogPost.post('/id/:id/comment', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var body = req.body
+  var headers = req.headers
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.PostCommentToBlogPost(params, body, headers)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.status(201).send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -193,7 +275,36 @@ BlogPost.post('/id/:id/comment', function (req, res) {
 */
 
 BlogPost.patch('/id/:id/like', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var body = req.body
+  var headers = req.headers
+  var vote = 'like'
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.PatchVoteOnBlogPost(params, body, headers, vote)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -221,7 +332,36 @@ BlogPost.patch('/id/:id/like', function (req, res) {
 */
 
 BlogPost.patch('/id/:id/dislike', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var body = req.body
+  var headers = req.headers
+  var vote = 'dislike'
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.PatchVoteOnBlogPost(params, body, headers, vote)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -250,7 +390,36 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
 */
 
 BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var body = req.body
+  var headers = req.headers
+  var vote = 'like'
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.PatchVoteOnBlogPostComment(params, body, headers, vote)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -279,7 +448,36 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
 */
 
 BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
-  res.send('/Blog' + req.url)
+  // Prepare Parameters
+  var params = Parameters(req.params)
+  var body = req.body
+  var headers = req.headers
+  var vote = 'dislike'
+
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.PatchVoteOnBlogPostComment(params, body, headers, vote)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 module.exports = BlogPost

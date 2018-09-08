@@ -14,8 +14,12 @@ const app = express()
 /* Basic Middlewares */
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(logger('dev'))
 app.set('json spaces', 4)
+
+/* Use Logging only in Dev */
+if (process.env.NODE_ENV !== 'TEST') {
+  app.use(logger('dev'))
+}
 
 /* Routes */
 

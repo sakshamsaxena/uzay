@@ -6,6 +6,8 @@ var m = require('mongoose')
 var express = require('express')
 var Logic = require('../logic/User.js')
 var config = require('../config/config.js')
+var Options = require('../util/Options.js')
+var Parameters = require('../util/Parameters.js')
 
 var User = express.Router()
 var Resources = express.Router({mergeParams: true})
@@ -35,7 +37,7 @@ User.use('/:alias', Resources)
 
 User.get('/:alias', function (req, res) {
   // Prepare parameters
-  var alias = req.params.alias
+  var params = Parameters(req.params)
 
   // Presentation Variable
   var Payload = {}
@@ -44,7 +46,7 @@ User.get('/:alias', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.GetUserInfo(alias)
+  Logic.GetUserInfo(params)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -100,7 +102,35 @@ User.get('/:alias', function (req, res) {
 */
 
 Resources.get('/liked', function (req, res) {
+  // Prepare parameters
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
+  var vote = 'like'
 
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.GetVotedContent(params, opts, vote)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -140,7 +170,35 @@ Resources.get('/liked', function (req, res) {
 */
 
 Resources.get('/disliked', function (req, res) {
+  // Prepare parameters
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
+  var vote = 'dislike'
 
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.GetVotedContent(params, opts, vote)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -178,7 +236,34 @@ Resources.get('/disliked', function (req, res) {
 */
 
 Resources.get('/posts', function (req, res) {
+  // Prepare parameters
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
 
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.GetAllPostsByUser(params, opts)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -216,7 +301,34 @@ Resources.get('/posts', function (req, res) {
 */
 
 Resources.get('/comments', function (req, res) {
+  // Prepare parameters
+  var params = Parameters(req.params)
+  var opts = Options(req.query)
 
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.GetAllCommentsByUser(params, opts)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 /**
@@ -252,7 +364,35 @@ Resources.get('/comments', function (req, res) {
 */
 
 Resources.post('/posts/new', function (req, res) {
+  // Prepare parameters
+  var params = Parameters(req.params)
+  var body = req.body
+  var headers = req.headers
 
+  // Presentation Variable
+  var Payload = {}
+
+  // Connect here
+  m.connect(config.MongoURL, {useNewUrlParser: true})
+
+  // Process Logic
+  Logic.CreateNewPost(params, body, headers)
+    .then(function (payload) {
+      // TODO : Process Presentation
+      Payload = payload
+
+      // Close connection (important!)
+      m.connection.close()
+
+      // Send response
+      res.status(201).send(Payload)
+    })
+    .catch(function (error) {
+      res.status(404).send({
+        Message: error,
+        DocsURL: 'DocsURL'
+      })
+    })
 })
 
 module.exports = User

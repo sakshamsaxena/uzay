@@ -2,34 +2,53 @@
   Function Factory to process logic for Blog Route
 */
 
-var BlogMapper = require('../mappers/Blog.js')
-var UserMapper = require('../mappers/User.js')
-var CommentMapper = require('../mappers/Comment.js')
-
 var Logic = {}
 
-Logic.GetBlogPostById = function (params, opts) {
-  var ID = params.BlogPostID
-  var options = opts
-  var result = {}
-
+Logic.GetBlogPostByID = function (params, opts) {
   return new Promise(function (resolve, reject) {
-    BlogMapper.GetBlogByID(ID)
-      .then(function (blog) {
-        result.blog = blog
-        return UserMapper.GetUserById(blog.UserID)
-      })
-      .then(function (user) {
-        result.user = user
-        return CommentMapper.GetCommentsByPostID(ID, options.includeComments)
-      })
-      .then(function (comments) {
-        result.comments = comments
-        resolve(result)
-      })
-      .catch(function (err) {
-        reject(err)
-      })
+    setTimeout(function () {
+      resolve({})
+    }, 100)
+  })
+}
+
+Logic.GetBlogPostsByTagName = function (params, opts) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve({})
+    }, 100)
+  })
+}
+
+Logic.GetCommentByID = function (params, opts) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve({})
+    }, 100)
+  })
+}
+
+Logic.PostCommentToBlogPost = function (params, body, headers) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve({})
+    }, 100)
+  })
+}
+
+Logic.PatchVoteOnBlogPost = function (params, body, headers, vote) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve({})
+    }, 100)
+  })
+}
+
+Logic.PatchVoteOnBlogPostComment = function (params, body, headers, vote) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve({})
+    }, 100)
   })
 }
 

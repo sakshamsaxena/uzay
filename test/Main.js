@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 
+process.env.NODE_ENV = 'TEST'
 const request = require('supertest')
 const app = require('../index.js')
 
@@ -33,21 +34,9 @@ describe('Blog API', function () {
   })
 
   describe('should not get', function () {
-    it('blog post by invalid id', function (done) {
-      request(app)
-        .get('/blog/id/abc')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(404, done)
-    })
+    it('blog post by invalid id')
 
-    it('comment by invalid id', function (done) {
-      request(app)
-        .get('/blog/id/abc/comment/xyz')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(404, done)
-    })
+    it('comment by invalid id')
   })
 })
 
@@ -60,7 +49,7 @@ describe('User API', function () {
           .set('Authentication', 'Bearer TEST_TOKEN')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200, done)
+          .expect(201, done)
       })
 
       it('create a comment', function (done) {
@@ -148,43 +137,18 @@ describe('User API', function () {
       it('login')
     })
     describe('should not be able to', function () {
-      it('verify account with bad credentials', function (done) {
-        request(app)
-          .get('/auth/verify/VERIFICATION_TOKEN')
-          .set('Authentication', 'Bearer INVALID_TOKEN')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(404, done)
-      })
+      it('verify account with bad credentials')
     })
   })
 
   describe('without authentication', function () {
     describe('should be able to', function () {})
     describe('should not be able to', function () {
-      it('comment to a post', function (done) {
-        request(app)
-          .post('/blog/id/1/comment')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(403, done)
-      })
+      it('comment to a post')
 
-      it('like a post', function (done) {
-        request(app)
-          .patch('/blog/id/1/like')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(403, done)
-      })
+      it('like a post')
 
-      it('create a post', function (done) {
-        request(app)
-          .post('/user/JohnMayer/posts/new')
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(403, done)
-      })
+      it('create a post')
     })
   })
 })
