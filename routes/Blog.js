@@ -2,12 +2,14 @@
     Blog.js
 */
 
-var express = require('express')
 var m = require('mongoose')
-var config = require('../config/config.js')
-var Options = require('../util/Options.js')
-var Parameters = require('../util/Parameters.js')
+var express = require('express')
 var Logic = require('../logic/Blog.js')
+var config = require('../config/config.js')
+var Body = require('../util/Body.js')
+var Options = require('../util/Options.js')
+var Headers = require('../util/Headers.js')
+var Parameters = require('../util/Parameters.js')
 
 var BlogPost = express.Router()
 
@@ -221,8 +223,8 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
 BlogPost.post('/id/:id/comment', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = req.body
-  var headers = req.headers
+  var body = Body(req.body)
+  var headers = Headers(req.headers)
 
   // Presentation Variable
   var Payload = {}
@@ -277,8 +279,8 @@ BlogPost.post('/id/:id/comment', function (req, res) {
 BlogPost.patch('/id/:id/like', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = req.body
-  var headers = req.headers
+  var body = Body(req.body)
+  var headers = Headers(req.headers)
   var vote = 'like'
 
   // Presentation Variable
@@ -334,8 +336,8 @@ BlogPost.patch('/id/:id/like', function (req, res) {
 BlogPost.patch('/id/:id/dislike', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = req.body
-  var headers = req.headers
+  var body = Body(req.body)
+  var headers = Headers(req.headers)
   var vote = 'dislike'
 
   // Presentation Variable
@@ -392,8 +394,8 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
 BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = req.body
-  var headers = req.headers
+  var body = Body(req.body)
+  var headers = Headers(req.headers)
   var vote = 'like'
 
   // Presentation Variable
@@ -450,8 +452,8 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
 BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = req.body
-  var headers = req.headers
+  var body = Body(req.body)
+  var headers = Headers(req.headers)
   var vote = 'dislike'
 
   // Presentation Variable

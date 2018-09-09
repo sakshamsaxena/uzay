@@ -6,7 +6,9 @@ var m = require('mongoose')
 var express = require('express')
 var Logic = require('../logic/User.js')
 var config = require('../config/config.js')
+var Body = require('../util/Body.js')
 var Options = require('../util/Options.js')
+var Headers = require('../util/Headers.js')
 var Parameters = require('../util/Parameters.js')
 
 var User = express.Router()
@@ -366,8 +368,8 @@ Resources.get('/comments', function (req, res) {
 Resources.post('/posts/new', function (req, res) {
   // Prepare parameters
   var params = Parameters(req.params)
-  var body = req.body
-  var headers = req.headers
+  var body = Body(req.body)
+  var headers = Headers(req.headers)
 
   // Presentation Variable
   var Payload = {}
