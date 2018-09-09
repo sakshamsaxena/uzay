@@ -279,7 +279,6 @@ BlogPost.post('/id/:id/comment', function (req, res) {
 BlogPost.patch('/id/:id/like', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = Body(req.body)
   var headers = Headers(req.headers)
   var vote = 'like'
 
@@ -290,7 +289,7 @@ BlogPost.patch('/id/:id/like', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.PatchVoteOnBlogPost(params, body, headers, vote)
+  Logic.PatchVoteOnBlogPost(params, headers, vote)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -336,7 +335,6 @@ BlogPost.patch('/id/:id/like', function (req, res) {
 BlogPost.patch('/id/:id/dislike', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = Body(req.body)
   var headers = Headers(req.headers)
   var vote = 'dislike'
 
@@ -347,7 +345,7 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.PatchVoteOnBlogPost(params, body, headers, vote)
+  Logic.PatchVoteOnBlogPost(params, headers, vote)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -394,7 +392,6 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
 BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = Body(req.body)
   var headers = Headers(req.headers)
   var vote = 'like'
 
@@ -405,7 +402,7 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.PatchVoteOnBlogPostComment(params, body, headers, vote)
+  Logic.PatchVoteOnBlogPostComment(params, headers, vote)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -452,7 +449,6 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
 BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
-  var body = Body(req.body)
   var headers = Headers(req.headers)
   var vote = 'dislike'
 
@@ -463,7 +459,7 @@ BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
   m.connect(config.MongoURL, {useNewUrlParser: true})
 
   // Process Logic
-  Logic.PatchVoteOnBlogPostComment(params, body, headers, vote)
+  Logic.PatchVoteOnBlogPostComment(params, headers, vote)
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload

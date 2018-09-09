@@ -36,7 +36,7 @@ Logic.PostCommentToBlogPost = function (params, body, headers) {
   })
 }
 
-Logic.PatchVoteOnBlogPost = function (params, body, headers, vote) {
+Logic.PatchVoteOnBlogPost = function (params, headers, vote) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
       resolve({})
@@ -44,7 +44,7 @@ Logic.PatchVoteOnBlogPost = function (params, body, headers, vote) {
   })
 }
 
-Logic.PatchVoteOnBlogPostComment = function (params, body, headers, vote) {
+Logic.PatchVoteOnBlogPostComment = function (params, headers, vote) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
       resolve({})

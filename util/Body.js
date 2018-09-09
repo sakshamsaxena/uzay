@@ -1,22 +1,27 @@
 /*
   Request Body Generator Object
-  Contains all the possible fields of interest and populates the valid ones
+  Contains all the possible fields of interest for BlogPost and Comment
 */
 
 /*
   Helper Functions
 */
 
-function GetContentType (param) {
-  // Should be only application/json
+function GetAlphaNumericString (param, start, end) {
+  // Extract Title and Tags of mentioned range
+  var string = param.toString()
+  var pattern = '^[0-9a-zA-Z]{' + start + ',' + end + '}$'
+  var regex = new RegExp(pattern, 'i')
+
+  if (regex.test(string)) {
+    return string
+  } else {
+    return ''
+  }
 }
 
-function GetContentLength (param) {
-  // Must be under X
-}
-
-function GetBearerToken (param) {
-  // Extract the Bearer Token
+function ValidateMarkdown (param) {
+  // Validate the Markdown Body
 }
 
 /*
@@ -24,22 +29,29 @@ function GetBearerToken (param) {
 */
 
 function Body () {
-  this.ContentType = 'application/json'
-  this.ContentLength = 0
-  this.BearerToken = ''
+  this.Title = ''
+  this.Tags = []
+  this.Content = ''
+  this.PublishDate = new Date()
 };
 
 module.exports = function (params) {
   var body = new Body()
 
-  if (undefined !== params['content-type']) {
-    body.ContentType = GetContentType(params['content-type'])
+  if (undefined !== params['title']) {
+    body.Title = GetAlphaNumericString(params['title'], 2, 100)
   }
-  if (undefined !== params['content-length']) {
-    body.ContentLength = GetContentLength(params['content-length'])
+  if (undefined !== params['tags']) {
+    for (var i = 0; i < params['tags'].length; i++) {
+      var e = params['tags'][i]
+      var tag = GetAlphaNumericString(e, 3, 30)
+      if (tag !== '') {
+        body.Tags.push(tag)
+      }
+    }
   }
-  if (undefined !== params['authorization']) {
-    body.BearerToken = GetBearerToken(params['authorization'])
+  if (undefined !== params['content']) {
+    body.Content = ValidateMarkdown(params['content'])
   }
 
   return body
