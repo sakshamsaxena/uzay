@@ -15,5 +15,5 @@ readFile(path.join(__dirname, 'config.sample.js'))
     console.log('Sample configuration sucessfully copied.')
   })
   .catch((err) => {
-    console.log('Error copying sample configuration file.', err)
+    console.error('Error copying sample configuration file.', err)
   })
