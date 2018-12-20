@@ -16,8 +16,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('json spaces', 4)
 
-/* Use Logging only in Dev */
-if (process.env.NODE_ENV !== 'TEST') {
+/* Use Logging only in Dev and not while running Tests */
+if (process.env.NODE_ENV !== 'TESTING') {
   app.use(logger('dev'))
 }
 
@@ -43,9 +43,11 @@ app.use(function (req, res) {
   })
 })
 
-/* Listen */
-app.listen(3000, function () {
-  console.log('Uzay live on port 3000!')
-})
+/* Listen only when not running Tests */
+if (process.env.NODE_ENV !== 'TESTING') {
+  app.listen(3000, function () {
+    console.log('Uzay live on port 3000!')
+  })
+}
 
 module.exports = app

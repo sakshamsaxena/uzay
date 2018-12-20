@@ -47,9 +47,10 @@ BlogPost.get('/id/:id', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetBlogPostByID(params, opts)
+    .then(function () {
+      // Process Logic
+      return Logic.GetBlogPostByID(params, opts)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -114,9 +115,10 @@ BlogPost.get('/tag/:tag', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetBlogPostsByTagName(params, opts)
+    .then(function () {
+      // Process Logic
+      return Logic.GetBlogPostsByTagName(params, opts)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -167,9 +169,10 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetCommentByID(params, opts)
+    .then(function () {
+      // Process Logic
+      return Logic.GetCommentByID(params, opts)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -231,9 +234,10 @@ BlogPost.post('/id/:id/comment', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.PostCommentToBlogPost(params, body, headers)
+    .then(function () {
+      // Process Logic
+      return Logic.PostCommentToBlogPost(params, body, headers)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -287,9 +291,10 @@ BlogPost.patch('/id/:id/like', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.PatchVoteOnBlogPost(params, headers, vote)
+    .then(function () {
+      // Process Logic
+      return Logic.PatchVoteOnBlogPost(params, headers, vote)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -343,9 +348,10 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.PatchVoteOnBlogPost(params, headers, vote)
+    .then(function () {
+      // Process Logic
+      return Logic.PatchVoteOnBlogPost(params, headers, vote)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -400,9 +406,10 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.PatchVoteOnBlogPostComment(params, headers, vote)
+    .then(function () {
+      // Process Logic
+      Logic.PatchVoteOnBlogPostComment(params, headers, vote)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -457,9 +464,10 @@ BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.PatchVoteOnBlogPostComment(params, headers, vote)
+    .then(function () {
+      // Process Logic
+      return Logic.PatchVoteOnBlogPostComment(params, headers, vote)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload

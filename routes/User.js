@@ -46,9 +46,10 @@ User.get('/:alias', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetUserInfo(params)
+    .then(function () {
+      // Process Logic
+      return Logic.GetUserInfo(params)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -114,9 +115,10 @@ Resources.get('/liked', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetVotedContent(params, opts, vote)
+    .then(function () {
+      // Process Logic
+      return Logic.GetVotedContent(params, opts, vote)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -182,9 +184,10 @@ Resources.get('/disliked', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetVotedContent(params, opts, vote)
+    .then(function () {
+      // Process Logic
+      return Logic.GetVotedContent(params, opts, vote)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -247,9 +250,10 @@ Resources.get('/posts', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetAllPostsByUser(params, opts)
+    .then(function () {
+      // Process Logic
+      return Logic.GetAllPostsByUser(params, opts)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -312,9 +316,10 @@ Resources.get('/comments', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.GetAllCommentsByUser(params, opts)
+    .then(function () {
+      // Process Logic
+      return Logic.GetAllCommentsByUser(params, opts)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload
@@ -376,9 +381,10 @@ Resources.post('/posts/new', function (req, res) {
 
   // Connect here
   m.connect(config.MongoURL, {useNewUrlParser: true})
-
-  // Process Logic
-  Logic.CreateNewPost(params, body, headers)
+    .then(function () {
+      // Process Logic
+      return Logic.CreateNewPost(params, body, headers)
+    })
     .then(function (payload) {
       // TODO : Process Presentation
       Payload = payload

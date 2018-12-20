@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 
-process.env.NODE_ENV = 'TEST'
+process.env.NODE_ENV = 'TESTING'
 const request = require('supertest')
 const app = require('../index.js')
 
