@@ -73,7 +73,7 @@ Auth.get('/verify/:verificationToken', function (req, res) {
   // Verify Token
   // Logic.Verify(Token)
   res.send({
-    'Token': Token
+    Token: Token
   })
 })
 

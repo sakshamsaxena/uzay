@@ -13,18 +13,23 @@ const app = express()
 
 /* Basic Middlewares */
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.set('json spaces', 4)
 
-/* Use Logging only in Dev and not while running Tests */
-if (process.env.NODE_ENV !== 'TESTING') {
+/* Use Logging */
+const validEnvForLogger = [
+  'DEBUG',
+  'STAGING',
+  'PRODUCTION'
+]
+if (validEnvForLogger.indexOf(process.env.NODE_ENV) !== -1) {
   app.use(logger('dev'))
 }
 
 /* Routes */
 
 // Enable CORS, Set Response Type as JSON
-app.use(function (req, res, next) {
+app.use(function (_req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Content-Type', 'application/json; charset=utf-8')
   next()
@@ -36,7 +41,7 @@ app.use('/Blog', blog)
 app.use('/User', user)
 
 // Render any other route than the ones defined anywhere in app as HTTP 404
-app.use(function (req, res) {
+app.use(function (_req, res) {
   res.status(404).send({
     Message: '',
     DocsURL: 'DocsURL'

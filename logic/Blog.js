@@ -1,14 +1,25 @@
 /*
   Function Factory to process logic for Blog Route
 */
-
+var blog = require('../mappers/Blog')
+var user = require('../mappers/User')
 var Logic = {}
 
 Logic.GetBlogPostByID = function (params, opts) {
+  var blogPost = {}
   return new Promise(function (resolve, reject) {
-    setTimeout(function () {
-      resolve({})
-    }, 100)
+    blog.GetBlogPostByID(params.BlogPostID, opts)
+      .then(function (result) {
+        blogPost = result
+        return user.GetUserById(result.User)
+      })
+      .then(function (result) {
+        blogPost.User = result.Alias
+        resolve(blogPost)
+      })
+      .catch(function (err) {
+        reject(err)
+      })
   })
 }
 

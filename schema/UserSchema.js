@@ -2,10 +2,10 @@
   User Schema
 */
 
-let mongoose = require('mongoose')
-let Schema = mongoose.Schema
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-let userSchema = {
+const userSchema = {
   Alias: String,
   Passphrase: String,
   Email: String,

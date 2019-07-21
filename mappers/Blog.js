@@ -2,40 +2,40 @@
   Blog Post Mapper
 */
 
-let mongoose = require('mongoose')
-let blogSchema = require('../schema/BlogSchema.js')
-let autoIncrement = require('mongoose-plugin-autoinc')
+const mongoose = require('mongoose')
+const blogSchema = require('../schema/BlogSchema.js')
+const autoIncrement = require('mongoose-plugin-autoinc')
 
 // Add autoincrement plugin
 blogSchema.plugin(autoIncrement.plugin, 'BlogPost')
 
-let BlogPost = mongoose.model('BlogPost', blogSchema)
-let BlogPostMapper = {}
+const BlogPost = mongoose.model('BlogPost', blogSchema)
+const BlogPostMapper = {}
 
 /**
   Public Functions
   Assume Sanitized Parameters
 */
 
-BlogPostMapper.GetBlogPostByID = function (id) {
-  return BlogPost.findById(id).exec()
+BlogPostMapper.GetBlogPostByID = function (id, opts) {
+  return BlogPost.findById(id).lean().exec()
 }
 
 BlogPostMapper.GetBlogPostByTag = function (tag, opts) {
-  return BlogPost.find({'Tag': tag}).exec()
+  return BlogPost.find({ Tag: tag }).exec()
 }
 
-BlogPostMapper.CreateBlogPost = function (data) {
-  let post = new BlogPost(data)
+BlogPostMapper.CreateBlogPost = function (data, opts) {
+  const post = new BlogPost(data)
   return post.save()
 }
 
-BlogPostMapper.UpdateBlogPost = function (id, data) {
-  return BlogPost.updateOne({_id: id}, data).exec()
+BlogPostMapper.UpdateBlogPost = function (id, data, opts) {
+  return BlogPost.updateOne({ _id: id }, data).exec()
 }
 
-BlogPostMapper.DeleteBlogPost = function (id) {
-  return BlogPost.deleteOne({_id: id}).exec()
+BlogPostMapper.DeleteBlogPost = function (id, opts) {
+  return BlogPost.deleteOne({ _id: id }).exec()
 }
 
 module.exports = BlogPostMapper

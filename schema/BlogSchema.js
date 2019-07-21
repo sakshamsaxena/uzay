@@ -2,12 +2,12 @@
   Blog Post Schema
 */
 
-let mongoose = require('mongoose')
-let Schema = mongoose.Schema
-let ObjectId = mongoose.Schema.Types.ObjectId
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const ObjectId = mongoose.Schema.Types.ObjectId
 
-let blogSchema = {
-  UserID: {
+const blogSchema = {
+  User: {
     type: ObjectId,
     ref: 'User'
   },

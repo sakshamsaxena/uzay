@@ -27,7 +27,7 @@ mongoimport --db uzay --drop --collection users --file samples/users.json
 mongoimport --db uzay --drop --collection tags --file samples/tags.json
 ```
 
-Run the server with ```npm start```.
+Run the server with ```npm debug```.
 
 ### Contributing
 

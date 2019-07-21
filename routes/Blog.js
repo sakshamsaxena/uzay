@@ -6,6 +6,7 @@ var m = require('mongoose')
 var express = require('express')
 var Logic = require('../logic/Blog.js')
 var config = require('../config/config.js')
+var Errors = require('../util/Errors')
 var Body = require('../util/Body.js')
 var Options = require('../util/Options.js')
 var Headers = require('../util/Headers.js')
@@ -42,30 +43,21 @@ BlogPost.get('/id/:id', function (req, res) {
   var params = Parameters(req.params)
   var opts = Options(req.query)
 
-  // Presentation Variable
-  var Payload = {}
-
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetBlogPostByID(params, opts)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleErrors(error, res)
     })
 })
 
@@ -110,24 +102,18 @@ BlogPost.get('/tag/:tag', function (req, res) {
   var params = Parameters(req.params)
   var opts = Options(req.query)
 
-  // Presentation Variable
-  var Payload = {}
-
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetBlogPostsByTagName(params, opts)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
       res.status(404).send({
@@ -164,24 +150,18 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
   var params = Parameters(req.params)
   var opts = Options(req.query)
 
-  // Presentation Variable
-  var Payload = {}
-
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetCommentByID(params, opts)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
       res.status(404).send({
@@ -229,24 +209,18 @@ BlogPost.post('/id/:id/comment', function (req, res) {
   var body = Body(req.body)
   var headers = Headers(req.headers)
 
-  // Presentation Variable
-  var Payload = {}
-
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PostCommentToBlogPost(params, body, headers)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.status(201).send(Payload)
+      res.status(201).send(payload)
     })
     .catch(function (error) {
       res.status(404).send({
@@ -284,26 +258,20 @@ BlogPost.patch('/id/:id/like', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
   var headers = Headers(req.headers)
-  var vote = 'like'
-
-  // Presentation Variable
-  var Payload = {}
+  const vote = 'like'
 
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PatchVoteOnBlogPost(params, headers, vote)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
       res.status(404).send({
@@ -341,26 +309,20 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
   var headers = Headers(req.headers)
-  var vote = 'dislike'
-
-  // Presentation Variable
-  var Payload = {}
+  const vote = 'dislike'
 
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PatchVoteOnBlogPost(params, headers, vote)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
       res.status(404).send({
@@ -399,26 +361,20 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
   var headers = Headers(req.headers)
-  var vote = 'like'
-
-  // Presentation Variable
-  var Payload = {}
+  const vote = 'like'
 
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       Logic.PatchVoteOnBlogPostComment(params, headers, vote)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
       res.status(404).send({
@@ -457,26 +413,20 @@ BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
   // Prepare Parameters
   var params = Parameters(req.params)
   var headers = Headers(req.headers)
-  var vote = 'dislike'
-
-  // Presentation Variable
-  var Payload = {}
+  const vote = 'dislike'
 
   // Connect here
-  m.connect(config.MongoURL, {useNewUrlParser: true})
+  m.connect(config.MongoURL, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PatchVoteOnBlogPostComment(params, headers, vote)
     })
     .then(function (payload) {
-      // TODO : Process Presentation
-      Payload = payload
-
       // Close connection (important!)
       m.connection.close()
 
       // Send response
-      res.send(Payload)
+      res.send(payload)
     })
     .catch(function (error) {
       res.status(404).send({

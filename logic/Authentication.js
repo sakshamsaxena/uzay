@@ -12,11 +12,11 @@ var UserCredential = mongoose.model('User', UserSchema)
 
 var Authentication = {
   SignUp: (req, res) => {
-    mongoose.connect(config.MongoURL, {useNewUrlParser: true})
-    UserCredential.find({$or: [
-      {Email: req.body.Email},
-      {Alias: req.body.Alias}
-    ]}).exec().then(data => {
+    mongoose.connect(config.MongoURL, { useNewUrlParser: true })
+    UserCredential.find({ $or: [
+      { Email: req.body.Email },
+      { Alias: req.body.Alias }
+    ] }).exec().then(data => {
       if (data.length === 0) {
         bcrypt.hash(req.body.Password, config.SaltRounds).then(passhash => {
           var userdata = new UserCredential({
@@ -48,12 +48,12 @@ var Authentication = {
         }
       }
     }).catch(err => {
-      res.status(500).json({message: 'Server error : \n' + err})
+      res.status(500).json({ message: 'Server error : \n' + err })
     })
   },
 
   Verify: (req, res) => {
-    mongoose.connect(config.MongoURL, {useNewUrlParser: true})
+    mongoose.connect(config.MongoURL, { useNewUrlParser: true })
     UserCredential.findOne({
       VerificationToken: req.params.verificationtoken
     }).exec().then(data => {
@@ -64,8 +64,8 @@ var Authentication = {
           })
         } else {
           UserCredential.update(
-            {VerificationToken: req.params.verificationtoken},
-            {$set: {Verified: true}}
+            { VerificationToken: req.params.verificationtoken },
+            { $set: { Verified: true } }
           ).then(result => {
             res.status(200).json({
               message: 'Verification successful!'
@@ -78,7 +78,7 @@ var Authentication = {
         })
       }
     }).catch(err => {
-      res.status(500).json({message: 'Server error : \n' + err})
+      res.status(500).json({ message: 'Server error : \n' + err })
     })
   },
   generateToken: (email, password, cb) => {

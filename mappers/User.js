@@ -2,18 +2,18 @@
   User Mapper
 */
 
-let mongoose = require('mongoose')
-let userSchema = require('../schema/UserSchema.js')
+const mongoose = require('mongoose')
+const userSchema = require('../schema/UserSchema.js')
 
-let User = mongoose.model('User', userSchema)
-let UserMapper = {}
+const User = mongoose.model('User', userSchema)
+const UserMapper = {}
 
 /**
   Public Functions
 */
 
 UserMapper.GetUserByAlias = function (alias) {
-  return User.findOne({Alias: alias}).exec()
+  return User.findOne({ Alias: alias }).exec()
 }
 
 UserMapper.GetUserById = function (id) {
@@ -21,12 +21,12 @@ UserMapper.GetUserById = function (id) {
 }
 
 UserMapper.createUser = function (properties) {
-  let user = new User(properties)
+  const user = new User(properties)
   return user.save()
 }
 
 UserMapper.updateUser = function (properties) {
-  return User.updateOne({email: properties.email}, properties).exec()
+  return User.updateOne({ email: properties.email }, properties).exec()
 }
 
 module.exports = UserMapper

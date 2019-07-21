@@ -2,11 +2,11 @@
   Tags Mapper
 */
 
-let mongoose = require('mongoose')
-let tagsSchema = require('../schema/TagsSchema.js')
+const mongoose = require('mongoose')
+const tagsSchema = require('../schema/TagsSchema.js')
 
-let Tag = mongoose.model('Tag', tagsSchema)
-let TagMapper = {}
+const Tag = mongoose.model('Tag', tagsSchema)
+const TagMapper = {}
 
 /**
   Public Functions
@@ -17,12 +17,12 @@ TagMapper.GetBlogPostsByTag = function (tag) {
 }
 
 TagMapper.createTag = function (properties) {
-  let tag = new Tag(properties)
+  const tag = new Tag(properties)
   return tag.save()
 }
 
 TagMapper.updateTag = function (properties) {
-  return Tag.updateOne({Tag: properties.Tag}, properties).exec()
+  return Tag.updateOne({ Tag: properties.Tag }, properties).exec()
 }
 
 module.exports = TagMapper

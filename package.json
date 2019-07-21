@@ -7,7 +7,8 @@
     "docs": "npx apidoc -i ./routes -o ./docs",
     "postinstall": "node config/copyConfig.js",
     "precommit": "npm test",
-    "start": "npx nodemon index.js",
+    "debug": "NODE_ENV=DEBUG npx nodemon index.js",
+    "start": "NODE_ENV=PRODUCTION npx nodemon index.js",
     "test": "npx standard && npx mocha --full-trace"
   },
   "author": "Saksham Saxena",
