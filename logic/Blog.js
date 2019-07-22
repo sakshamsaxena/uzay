@@ -1,20 +1,35 @@
 /*
   Function Factory to process logic for Blog Route
 */
+
+require('../mappers/User')
+require('../mappers/UserName')
 var blog = require('../mappers/Blog')
-var user = require('../mappers/User')
+var comments = require('../mappers/Comment')
+var messages = require('../util/Messages')
+
 var Logic = {}
 
 Logic.GetBlogPostByID = function (params, opts) {
-  var blogPost = {}
   return new Promise(function (resolve, reject) {
-    blog.GetBlogPostByID(params.BlogPostID, opts)
+    // Skip running Promises if id is invalid
+    if (params.BlogPostID === -1) {
+      reject(messages.INVALID_BLOG_POST_ID)
+      return
+    }
+
+    // Fetch a single blog post
+    var blogPost = {}
+    blog.GetBlogPostByID(params.BlogPostID)
       .then(function (result) {
         blogPost = result
-        return user.GetUserById(result.User)
+        if (opts.IncludeComments) {
+          return comments.GetCommentsByPostID(blogPost._id)
+        }
+        resolve(blogPost)
       })
       .then(function (result) {
-        blogPost.User = result.Alias
+        blogPost.Comments = result
         resolve(blogPost)
       })
       .catch(function (err) {
@@ -24,10 +39,18 @@ Logic.GetBlogPostByID = function (params, opts) {
 }
 
 Logic.GetBlogPostsByTagName = function (params, opts) {
+  var blogPost = {}
   return new Promise(function (resolve, reject) {
-    setTimeout(function () {
-      resolve({})
-    }, 100)
+    blog.GetBlogPostByTag(params.TagName, opts)
+      .then(function (result) {
+        if (result) {
+          blogPost = result
+          resolve(blogPost)
+        }
+      })
+      .catch(function (err) {
+        reject(err)
+      })
   })
 }
 

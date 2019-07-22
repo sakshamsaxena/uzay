@@ -17,17 +17,11 @@ const CommentMapper = {}
 */
 
 CommentMapper.GetChildComments = function (parentID) {
-  return Comment.find({}).exec()
+  return Comment.find({ ParentCommentID: parentID }).exec()
 }
 
-CommentMapper.GetCommentsByPostID = function (id, includeComments) {
-  if (includeComments) {
-    return Comment.find({ PostID: id }).exec()
-  } else {
-    return new Promise(function (resolve, reject) {
-      resolve({})
-    })
-  }
+CommentMapper.GetCommentsByPostID = function (id) {
+  return Comment.find({ PostID: id }).lean().exec()
 }
 
 CommentMapper.createComment = function (properties) {

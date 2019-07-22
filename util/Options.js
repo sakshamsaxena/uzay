@@ -48,20 +48,20 @@ function GetFormattedNumber (num, type) {
 function GetSortingIndex (index) {
   var i = index.toLowerCase()
 
-  if (i !== 'date' || i !== 'likes' || i !== 'dislikes' || i !== 'views' || i !== 'commentcount') {
+  if (i !== 'PubishDate' || i !== 'Likes' || i !== 'Dislikes' || i !== 'Views') {
     console.error('Received bad order basis parameter. Using Default.')
-    return 'date'
+    return 'PubishDate'
   } else {
     return i
   }
 }
 
 function GetSortingOrder (direction) {
-  var d = direction.toLowerCase()
+  var d = parseInt(direction)
 
-  if (d !== 'd' || d !== 'a') {
+  if (d !== 1 || d !== -1) {
     console.error('Received bad order direction parameter. Using Default.')
-    return 'd'
+    return -1
   } else {
     return d
   }
@@ -77,8 +77,8 @@ function Options () {
   this.EndDate = new Date()
   this.Limit = 20
   this.Offset = 0
-  this.OrderBy = 'date'
-  this.Direction = 'D'
+  this.OrderBy = 'PublishDate'
+  this.Direction = -1
 };
 
 module.exports = function (query) {

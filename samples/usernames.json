@@ -1,0 +1,5 @@
+{ "_id" : { "$oid" : "5d34b78ca4fa687156b34901" }, "UserID" : { "$oid" : "5aa681be3a2eb520240cf4da" }, "Alias" : "JohnMayer" }
+{ "_id" : { "$oid" : "5d34b78ca4fa687156b34902" }, "UserID" : { "$oid" : "5aa6857aa3cdbe1900057bff" }, "Alias" : "JenniferLopez" }
+{ "_id" : { "$oid" : "5d34b78ca4fa687156b34903" }, "UserID" : { "$oid" : "5aa685dba3cdbe1900057c00" }, "Alias" : "JamesLaBrie" }
+{ "_id" : { "$oid" : "5d34b78ca4fa687156b34904" }, "UserID" : { "$oid" : "5aa685eaa3cdbe1900057c01" }, "Alias" : "JeremyClarkson" }
+{ "_id" : { "$oid" : "5d34b78ca4fa687156b34905" }, "UserID" : { "$oid" : "5aa685f2a3cdbe1900057c02" }, "Alias" : "Jetty" }

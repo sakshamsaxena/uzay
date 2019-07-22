@@ -17,12 +17,27 @@ const BlogPostMapper = {}
   Assume Sanitized Parameters
 */
 
-BlogPostMapper.GetBlogPostByID = function (id, opts) {
-  return BlogPost.findById(id).lean().exec()
+BlogPostMapper.GetBlogPostByID = function (id) {
+  return BlogPost
+    .findById(id)
+    .populate('UserName')
+    .lean()
+    .exec()
 }
 
 BlogPostMapper.GetBlogPostByTag = function (tag, opts) {
-  return BlogPost.find({ Tag: tag }).exec()
+  var sortingOrder = {}
+  sortingOrder[opts.OrderBy] = opts.Direction
+  return BlogPost
+    .find({
+      Tags: tag,
+      PublishDate: { $gte: opts.StartDate, $lte: opts.EndDate }
+    })
+    .skip(opts.Offset)
+    .limit(opts.Limit)
+    .sort(sortingOrder)
+    .lean()
+    .exec()
 }
 
 BlogPostMapper.CreateBlogPost = function (data, opts) {

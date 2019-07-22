@@ -23,8 +23,8 @@ var BlogPost = express.Router()
 
  * @apiParam (URL Parameters) {Number} id Blog Post ID
 
- * @apiParam (Query String) {String=true,false} [includeComments=false]
- * Option to specifiy whether to include comments in the payload or not.
+ * @apiParam (Query String) {String=true,false} [IncludeComments=false]
+ * Option (case sensitive) to specifiy whether to include comments in the payload or not.
 
  * @apiSuccessExample {json} Success-Response:
  *    HTTP /1.1 200 OK
@@ -39,7 +39,7 @@ var BlogPost = express.Router()
 */
 
 BlogPost.get('/id/:id', function (req, res) {
-  // Prepare Parameters
+  // Prepare Parameters and Options
   var params = Parameters(req.params)
   var opts = Options(req.query)
 
@@ -57,7 +57,7 @@ BlogPost.get('/id/:id', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      Errors.handleErrors(error, res)
+      Errors.handleRouteErrors(error, res)
     })
 })
 

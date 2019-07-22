@@ -1,12 +1,15 @@
-/**
- *
- */
+/*
+  Class of Error Wrapper Functions
+*/
 
 module.exports = {
-  handleErrors: function (error, res) {
+  handleRouteErrors: function (error, res) {
+    if (process.env.NODE_ENV === 'DEBUG') {
+      console.error(error)
+    }
     res.status(404).send({
       Message: error,
-      DocsURL: 'DocsURL'
+      DocsURL: 'https://sakshamsaxena.github.io/uzay'
     })
   }
 }

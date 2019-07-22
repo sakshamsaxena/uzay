@@ -4,7 +4,12 @@
 const config = {
   SaltRounds: 10,
   JWTSecret: 'SampleKey',
-  MongoURL: 'mongodb://localhost:27017/uzay'
+  MongoURL: 'mongodb://localhost:27017/uzay',
+  validEnvForLogger: [
+    'DEBUG',
+    'STAGING',
+    'PRODUCTION'
+  ]
 }
 
 module.exports = config

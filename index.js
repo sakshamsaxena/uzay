@@ -1,7 +1,8 @@
 /* Require Modules */
 const express = require('express')
-const bodyParser = require('body-parser')
+const bParser = require('body-parser')
 const logger = require('morgan')
+const config = require('./config/config')
 
 /* Require Routes */
 const auth = require('./routes/Auth.js')
@@ -12,19 +13,16 @@ const user = require('./routes/User.js')
 const app = express()
 
 /* Basic Middlewares */
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bParser.json())
+app.use(bParser.urlencoded({ extended: true }))
 app.set('json spaces', 4)
 
-/* Use Logging */
-const validEnvForLogger = [
-  'DEBUG',
-  'STAGING',
-  'PRODUCTION'
-]
-if (validEnvForLogger.indexOf(process.env.NODE_ENV) !== -1) {
+/* Logging */
+if (config.validEnvForLogger.indexOf(process.env.NODE_ENV) !== -1) {
   app.use(logger('dev'))
 }
+
+/* TODO : Basic Auth Middleware */
 
 /* Routes */
 
@@ -44,7 +42,7 @@ app.use('/User', user)
 app.use(function (_req, res) {
   res.status(404).send({
     Message: '',
-    DocsURL: 'DocsURL'
+    DocsURL: 'https://sakshamsaxena.github.io/uzay'
   })
 })
 
