@@ -11,6 +11,7 @@ var Body = require('../util/Body.js')
 var Options = require('../util/Options.js')
 var Headers = require('../util/Headers.js')
 var Parameters = require('../util/Parameters.js')
+var Formatter = require('../util/Formatter.js')
 
 var BlogPost = express.Router()
 
@@ -53,8 +54,9 @@ BlogPost.get('/id/:id', function (req, res) {
       // Close connection (important!)
       m.connection.close()
 
-      // Send response
-      res.send(payload)
+      // Format and Send response
+      var response = Formatter.outputBlogPostFormat(payload)
+      res.send(response)
     })
     .catch(function (error) {
       Errors.handleRouteErrors(error, res)
