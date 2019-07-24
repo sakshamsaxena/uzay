@@ -1,8 +1,11 @@
 /* eslint-env mocha */
 
-process.env.NODE_ENV = 'TESTING'
+const config = require('../config/config')
 const request = require('supertest')
-const app = require('../index.js')
+
+process.env.NODE_ENV = config.Constants.TESTING
+
+const app = require('../index')
 
 describe('Blog API', function () {
   describe('should get', function () {

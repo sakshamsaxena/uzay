@@ -18,7 +18,7 @@ app.use(bParser.urlencoded({ extended: true }))
 app.set('json spaces', 4)
 
 /* Logging */
-if (config.validEnvForLogger.indexOf(process.env.NODE_ENV) !== -1) {
+if (config.Settings.EnvVars.Logger.indexOf(process.env.NODE_ENV) !== -1) {
   app.use(logger('dev'))
 }
 
@@ -47,7 +47,7 @@ app.use(function (_req, res) {
 })
 
 /* Listen only when not running Tests */
-if (process.env.NODE_ENV !== 'TESTING') {
+if (config.Settings.EnvVars.Instance.indexOf(process.env.NODE_ENV) !== -1) {
   app.listen(3000, function () {
     console.log('Uzay live on port 3000!')
   })
