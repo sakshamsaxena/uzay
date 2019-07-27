@@ -20,12 +20,10 @@ Public feeds are much more carefully served to highlight the under-rated content
 Once you've cloned this/your forked repo, follow the steps below.
 
 ```
+# Install all dependencies
 npm install
-mongoimport --db uzay --drop --collection blogposts --file samples/blogposts.json
-mongoimport --db uzay --drop --collection commentposts --file samples/commentposts.json
-mongoimport --db uzay --drop --collection users --file samples/users.json
-mongoimport --db uzay --drop --collection usernames --file samples/usernames.json
-mongoimport --db uzay --drop --collection tags --file samples/tags.json
+# Import sample collections to mongo (make sure your mongod service is running)
+make import
 ```
 
 Run the server with ```npm run debug```.
