@@ -38,6 +38,9 @@ const config = {
       }, {
         Env: constants.PRODUCTION,
         MongoURL: 'mongodb://localhost:27017/uzay'
+      }, {
+        Env: constants.TESTING,
+        MongoURL: 'mongodb://localhost:27017/uzay'
       }]
     }
   }
