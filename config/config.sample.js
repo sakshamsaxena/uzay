@@ -2,25 +2,38 @@
   Sesitive data and keys goes here
 */
 
-const Constants = {
-  DEBUG: 'DEBUG',
-  STAGING: 'STAGING',
-  TESTING: 'TESTING',
-  PRODUCTION: 'PRODUCTION'
-}
+const constants = require('./constants')
 
 const config = {
   SaltRounds: 10,
-  JWTSecret: 'SampleKey',
-  MongoURL: 'mongodb://localhost:27017/uzay',
   Settings: {
     EnvVars: {
-      Mocha: [Constants.TESTING],
-      Logger: [Constants.DEBUG, Constants.STAGING],
-      Instance: [Constants.DEBUG, Constants.STAGING, Constants.PRODUCTION]
+      Mocha: [constants.TESTING],
+      Logger: [{
+        Env: constants.DEBUG,
+        Mode: 'dev'
+      }, {
+        Env: constants.STAGING,
+        Mode: 'common'
+      }, {
+        Env: constants.PRODUCTION,
+        Mode: 'combined'
+      }],
+      Server: [{
+        Env: constants.DEBUG,
+        JWTSecret: 'SampleKey',
+        MongoURL: 'mongodb://localhost:27017/uzay'
+      }, {
+        Env: constants.STAGING,
+        JWTSecret: 'SampleKey',
+        MongoURL: 'mongodb://localhost:27017/uzay'
+      }, {
+        Env: constants.PRODUCTION,
+        JWTSecret: 'SampleKey',
+        MongoURL: 'mongodb://localhost:27017/uzay'
+      }]
     }
-  },
-  Constants: Constants
+  }
 }
 
 module.exports = config

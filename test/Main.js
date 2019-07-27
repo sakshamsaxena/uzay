@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 
-const config = require('../config/config')
+const constants = require('../config/constants')
 const request = require('supertest')
 
-process.env.NODE_ENV = config.Constants.TESTING
+process.env.NODE_ENV = constants.TESTING
 
 const app = require('../index')
 

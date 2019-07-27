@@ -5,7 +5,6 @@
 var m = require('mongoose')
 var express = require('express')
 var Logic = require('../logic/User.js')
-var config = require('../config/config.js')
 var Body = require('../util/Body.js')
 var Options = require('../util/Options.js')
 var Headers = require('../util/Headers.js')
@@ -45,7 +44,7 @@ User.get('/:alias', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetUserInfo(params)
@@ -114,7 +113,7 @@ Resources.get('/liked', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetVotedContent(params, opts, vote)
@@ -183,7 +182,7 @@ Resources.get('/disliked', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetVotedContent(params, opts, vote)
@@ -249,7 +248,7 @@ Resources.get('/posts', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetAllPostsByUser(params, opts)
@@ -315,7 +314,7 @@ Resources.get('/comments', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetAllCommentsByUser(params, opts)
@@ -380,7 +379,7 @@ Resources.post('/posts/new', function (req, res) {
   var Payload = {}
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.CreateNewPost(params, body, headers)

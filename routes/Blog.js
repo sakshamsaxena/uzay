@@ -5,7 +5,6 @@
 var m = require('mongoose')
 var express = require('express')
 var Logic = require('../logic/Blog.js')
-var config = require('../config/config.js')
 var Errors = require('../util/Errors')
 var Body = require('../util/Body.js')
 var Options = require('../util/Options.js')
@@ -45,7 +44,7 @@ BlogPost.get('/id/:id', function (req, res) {
   var opts = Options(req.query)
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetBlogPostByID(params, opts)
@@ -105,7 +104,7 @@ BlogPost.get('/tag/:tag', function (req, res) {
   var opts = Options(req.query)
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetBlogPostsByTagName(params, opts)
@@ -153,7 +152,7 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
   var opts = Options(req.query)
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.GetCommentByID(params, opts)
@@ -212,7 +211,7 @@ BlogPost.post('/id/:id/comment', function (req, res) {
   var headers = Headers(req.headers)
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PostCommentToBlogPost(params, body, headers)
@@ -263,7 +262,7 @@ BlogPost.patch('/id/:id/like', function (req, res) {
   const vote = 'like'
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PatchVoteOnBlogPost(params, headers, vote)
@@ -314,7 +313,7 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
   const vote = 'dislike'
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PatchVoteOnBlogPost(params, headers, vote)
@@ -366,7 +365,7 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
   const vote = 'like'
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       Logic.PatchVoteOnBlogPostComment(params, headers, vote)
@@ -418,7 +417,7 @@ BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
   const vote = 'dislike'
 
   // Connect here
-  m.connect(config.MongoURL, { useNewUrlParser: true })
+  m.connect(res.locals.mongoUri, { useNewUrlParser: true })
     .then(function () {
       // Process Logic
       return Logic.PatchVoteOnBlogPostComment(params, headers, vote)

@@ -1,8 +1,8 @@
 /* Require Modules */
 const express = require('express')
 const bParser = require('body-parser')
-const logger = require('morgan')
-const config = require('./config/config')
+const morgan = require('morgan')
+const util = require('./util/Util')
 
 /* Require Routes */
 const auth = require('./routes/Auth.js')
@@ -18,11 +18,10 @@ app.use(bParser.urlencoded({ extended: true }))
 app.set('json spaces', 4)
 
 /* Logging */
-if (config.Settings.EnvVars.Logger.indexOf(process.env.NODE_ENV) !== -1) {
-  app.use(logger('dev'))
+const loggerMode = util.useLogger(process.env.NODE_ENV)
+if (loggerMode) {
+  app.use(morgan(loggerMode))
 }
-
-/* TODO : Basic Auth Middleware */
 
 /* Routes */
 
@@ -33,10 +32,16 @@ app.use(function (_req, res, next) {
   next()
 })
 
+// Attach Mongo URLs to req object
+app.use(function (_req, res, next) {
+  res.locals.mongoUri = util.getMongoUrl(process.env.NODE_ENV)
+  next()
+})
+
 // Application Routes
-app.use('/Auth', auth)
-app.use('/Blog', blog)
-app.use('/User', user)
+app.use('/auth', auth)
+app.use('/blog', blog)
+app.use('/user', user)
 
 // Render any other route than the ones defined anywhere in app as HTTP 404
 app.use(function (_req, res) {
@@ -47,7 +52,7 @@ app.use(function (_req, res) {
 })
 
 /* Listen only when not running Tests */
-if (config.Settings.EnvVars.Instance.indexOf(process.env.NODE_ENV) !== -1) {
+if (util.startServer(process.env.NODE_ENV)) {
   app.listen(3000, function () {
     console.log('Uzay live on port 3000!')
   })
