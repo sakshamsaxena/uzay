@@ -9,7 +9,7 @@ const config = {
   Settings: {
     EnvVars: {
       Mocha: [constants.TESTING],
-      Logger: [{
+      Morgan: [{
         Env: constants.DEBUG,
         Mode: 'dev'
       }, {
@@ -18,6 +18,19 @@ const config = {
       }, {
         Env: constants.PRODUCTION,
         Mode: 'combined'
+      }],
+      ErrorLog: [{
+        Env: constants.TESTING,
+        Mode: 'normal'
+      }, {
+        Env: constants.DEBUG,
+        Mode: 'normal'
+      }, {
+        Env: constants.STAGING,
+        Mode: 'normal'
+      }, {
+        Env: constants.PRODUCTION,
+        Mode: 'normal'
       }],
       Server: [{
         Env: constants.DEBUG,

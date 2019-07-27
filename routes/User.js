@@ -5,6 +5,7 @@
 var m = require('mongoose')
 var express = require('express')
 var Logic = require('../logic/User.js')
+var Errors = require('../util/Errors')
 var Body = require('../util/Body.js')
 var Options = require('../util/Options.js')
 var Headers = require('../util/Headers.js')
@@ -60,10 +61,7 @@ User.get('/:alias', function (req, res) {
       res.send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -129,10 +127,7 @@ Resources.get('/liked', function (req, res) {
       res.send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -198,10 +193,7 @@ Resources.get('/disliked', function (req, res) {
       res.send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -264,10 +256,7 @@ Resources.get('/posts', function (req, res) {
       res.send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -330,10 +319,7 @@ Resources.get('/comments', function (req, res) {
       res.send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -395,10 +381,7 @@ Resources.post('/posts/new', function (req, res) {
       res.status(201).send(Payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 

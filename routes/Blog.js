@@ -58,7 +58,7 @@ BlogPost.get('/id/:id', function (req, res) {
       res.send(response)
     })
     .catch(function (error) {
-      Errors.handleRouteErrors(error, res)
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -117,10 +117,7 @@ BlogPost.get('/tag/:tag', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -165,10 +162,7 @@ BlogPost.get('/id/:id/comment/:cid', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -224,10 +218,7 @@ BlogPost.post('/id/:id/comment', function (req, res) {
       res.status(201).send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -275,10 +266,7 @@ BlogPost.patch('/id/:id/like', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -326,10 +314,7 @@ BlogPost.patch('/id/:id/dislike', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -378,10 +363,7 @@ BlogPost.patch('/id/:id/comment/:cid/like', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 
@@ -430,10 +412,7 @@ BlogPost.patch('/id/:id/comment/:cid/dislike', function (req, res) {
       res.send(payload)
     })
     .catch(function (error) {
-      res.status(404).send({
-        Message: error,
-        DocsURL: 'DocsURL'
-      })
+      Errors.handleRouteErrors(error, res, m)
     })
 })
 

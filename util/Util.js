@@ -5,7 +5,7 @@
 const config = require('../config/config')
 
 function getMorganModeWithCheck (env) {
-  let loggerVars = config.Settings.EnvVars.Logger
+  let loggerVars = config.Settings.EnvVars.Morgan
   for (let i = 0; i < loggerVars.length; i++) {
     let envVar = loggerVars[i].Env
     if (envVar === env) {
@@ -37,8 +37,20 @@ function getServerRunMode (env) {
   return false
 }
 
+function getErrorLoggingSetting (env) {
+  let logVars = config.Settings.EnvVars.ErrorLog
+  for (let i = 0; i < logVars.length; i++) {
+    let envVar = logVars[i].Env
+    if (envVar === env) {
+      return logVars[i].Mode
+    }
+  }
+  return false
+}
+
 module.exports = {
   useLogger: getMorganModeWithCheck,
   getMongoUrl: getMongoURLFromConfig,
-  startServer: getServerRunMode
+  startServer: getServerRunMode,
+  shouldErrorLog: getErrorLoggingSetting
 }
