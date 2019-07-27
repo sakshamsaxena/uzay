@@ -16,7 +16,7 @@ function getMorganModeWithCheck (env) {
 }
 
 function getMongoURLFromConfig (env) {
-  let serverVars = config.Settings.EnvVars.Server
+  let serverVars = config.Settings.EnvVars.MongoDB
   for (let i = 0; i < serverVars.length; i++) {
     let envVar = serverVars[i].Env
     if (envVar === env) {

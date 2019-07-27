@@ -21,15 +21,22 @@ const config = {
       }],
       Server: [{
         Env: constants.DEBUG,
-        JWTSecret: 'SampleKey',
+        JWTSecret: 'SampleKey'
+      }, {
+        Env: constants.STAGING,
+        JWTSecret: 'SampleKey'
+      }, {
+        Env: constants.PRODUCTION,
+        JWTSecret: 'SampleKey'
+      }],
+      MongoDB: [{
+        Env: constants.DEBUG,
         MongoURL: 'mongodb://localhost:27017/uzay'
       }, {
         Env: constants.STAGING,
-        JWTSecret: 'SampleKey',
         MongoURL: 'mongodb://localhost:27017/uzay'
       }, {
         Env: constants.PRODUCTION,
-        JWTSecret: 'SampleKey',
         MongoURL: 'mongodb://localhost:27017/uzay'
       }]
     }
