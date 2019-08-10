@@ -9,3 +9,4 @@ before_script:
   - mongoimport --db uzay --drop --collection usernames --file samples/usernames.json
   - mongoimport --db uzay --drop --collection users --file samples/users.json
   - mongoimport --db uzay --drop --collection tags --file samples/tags.json
+  - cp config/config.sample.js config/config.js

@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo:3
+    container_name: uzay_mongodb_1
+
+  uzay:
+    container_name: uzay_core_1
+    build:
+      context: .
+      dockerfile: ./deployment/nodejs/production/Dockerfile
+    expose:
+      - "3000"
+    depends_on:
+      - mongodb

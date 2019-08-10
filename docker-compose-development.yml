@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo:3
+    container_name: uzay_mongodb_1
+    ports:
+      - "27017:27017"
+    networks:
+      - net
+
+  mongo_seed:
+    image: mongo:3
+    depends_on:
+      - mongodb
+    volumes:
+      - ./samples:/samples
+    command: /samples/import.sh
+    networks:
+      - net
+
+  uzay:
+    container_name: uzay_core_1
+    build:
+      context: .
+      dockerfile: ./deployment/nodejs/development/Dockerfile
+    networks:
+      - net
+    expose:
+      - "8000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo_seed
+
+networks:
+  net:
