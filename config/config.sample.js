@@ -44,13 +44,13 @@ const config = {
       }],
       MongoDB: [{
         Env: constants.DEBUG,
-        MongoURL: 'mongodb://localhost:27017/uzay'
+        MongoURL: 'mongodb://mongodb:27017/uzay'
       }, {
         Env: constants.STAGING,
-        MongoURL: 'mongodb://localhost:27017/uzay'
+        MongoURL: 'mongodb://mongodb:27017/uzay'
       }, {
         Env: constants.PRODUCTION,
-        MongoURL: 'mongodb://localhost:27017/uzay'
+        MongoURL: 'mongodb://mongodb:27017/uzay'
       }, {
         Env: constants.TESTING,
         MongoURL: 'mongodb://localhost:27017/uzay'

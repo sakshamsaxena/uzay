@@ -12,25 +12,18 @@ Public feeds are much more carefully served to highlight the under-rated content
 
 * #### Prerequisites
 
-1. [Node.js 8 or more](https://nodejs.org/en/download/)
-2. [MongoDB 3](https://docs.mongodb.com/manual/installation/)
+1. [Docker](https://docs.docker.com/install/)
 
 * #### Installing
 
-Once you've cloned this/your forked repo, follow the steps below.
+Once you've cloned this/your forked repo, use `docker-compose` to bootstrap the environment.
 
-```
-# Install all dependencies
-npm install
-# Import sample collections to mongo (make sure your mongod service is running)
-make import
+```sh
+# Development Version
+docker-compose -f docker-compose-development.yml up --build
 ```
 
-Run the server with ```npm run debug```.
-
-### Contributing
-
-Read the [Contributing Guide](./CONTRIBUTING.md) to get started.
+This will bootstrap your database and start Uzay.
 
 ### License
 

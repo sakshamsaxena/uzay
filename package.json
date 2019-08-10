@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "docs": "npx apidoc -i ./routes -o ./docs",
-    "postinstall": "node config/copyConfig.js",
     "precommit": "npm test",
-    "debug": "NODE_ENV=DEBUG npx nodemon index.js",
-    "start": "NODE_ENV=PRODUCTION npx nodemon index.js",
+    "dev": "NODE_ENV=DEBUG npx nodemon index.js",
+    "staging": "NODE_ENV=STAGING npx node index.js",
+    "start": "NODE_ENV=PRODUCTION npx node index.js",
     "test": "npx standard && npx mocha --full-trace"
   },
   "author": "Saksham Saxena",
@@ -44,14 +44,11 @@
     ]
   },
   "dependencies": {
-    "bcrypt": "3.0.0",
-    "body-parser": "1.18.3",
-    "express": "4.16.3",
-    "jsonwebtoken": "8.3.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0",
     "mongoose": "^5.6.5",
-    "mongoose-plugin-autoinc": "1.1.9",
-    "morgan": "^1.9.1",
-    "uuid": "3.3.2"
+    "mongoose-plugin-autoinc": "^1.1.9",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "apidoc": "^0.17.6",
